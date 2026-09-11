@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration & Enrollment – CHECKMATE Chess Academy</title>
+  <meta name="description" content="Enroll in CHECKMATE Chess Academy. Create your student account and select your training cohort today.">
+  <link rel="canonical" href="https://checkmate-academy.com/register.html">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="site-preloader">
+    <div class="preloader-king">
+      <img src="assets/images/logo-icon.png" alt="CHECKMATE Preloader" style="width: 68px; height: auto; filter: drop-shadow(0 0 16px var(--gold-primary));">
+    </div>
+    <div class="preloader-brand">
+      <img src="assets/images/logo-text.png" alt="CHECKMATE" style="height: 32px; width: auto;">
+    </div>
+    <div class="preloader-bar-bg"><div class="preloader-bar-fill"></div></div>
+  </div>
+
+  <!-- Floating Controls: Dark/Light Mode & RTL/LTR -->
+  <div style="position: fixed; top: 1.5rem; inset-inline-end: 1.5rem; z-index: 1000; display: flex; align-items: center; gap: 0.75rem;">
+    <button class="tool-btn theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme"><span class="theme-icon-slot"><i data-lucide="sun"></i></span></button>
+    <button class="tool-btn rtl-toggle-btn" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR"><i data-lucide="arrow-left-right"></i></button>
+  </div>
+
+  <main style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2.5rem 1.5rem; position: relative; background: radial-gradient(circle at center, #162035 0%, #07090e 75%);">
+    <div class="cta-chess-bg"></div>
+
+    <div style="max-width: 520px; width: 100%; background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: 3rem 2.5rem; box-shadow: var(--shadow-lg); backdrop-filter: blur(20px); position: relative; z-index: 2;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <a href="index.html" class="site-logo" style="margin-bottom: 0.75rem; display: inline-flex;">
+          <img src="assets/images/logo-icon.png" alt="CHECKMATE Logo" class="site-logo-img">
+          <img src="assets/images/logo-text.png" alt="CHECKMATE - THINK. PLAY. MASTER." class="site-brand-img">
+        </a>
+        <h1 style="font-size: 1.4rem; font-weight: 800; color: var(--text-primary);">JOIN THE ACADEMY</h1>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">Begin your structured journey to FIDE chess mastery</p>
+      </div>
+
+      <form onsubmit="handleRegisterSubmit(event)" style="display: flex; flex-direction: column; gap: 1.25rem;">
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Full Name *</label>
+          <input type="text" id="reg-name" class="newsletter-input" placeholder="e.g. Priya Sundaram" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Email Address *</label>
+            <input type="email" id="reg-email" class="newsletter-input" placeholder="priya@example.com" required>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Phone / WhatsApp *</label>
+            <input type="tel" id="reg-phone" class="newsletter-input" placeholder="+91 98765 43210" required>
+          </div>
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Target Program *</label>
+          <select id="reg-program" class="newsletter-input" style="cursor: pointer;">
+            <option value="Beginner Foundation">Beginner Foundation (₹999/mo)</option>
+            <option value="Intermediate Tactics">Intermediate Tactics (₹1,499/mo)</option>
+            <option value="Advanced Strategy" selected>Advanced Strategy (₹1,999/mo) — Popular</option>
+            <option value="Elite Masterclass">Elite Masterclass (₹3,999/mo)</option>
+          </select>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Create Password *</label>
+            <input type="password" id="reg-pass" class="newsletter-input" placeholder="••••••••••••" required>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Confirm Password *</label>
+            <input type="password" id="reg-pass-confirm" class="newsletter-input" placeholder="••••••••••••" required>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.8rem; color: var(--text-secondary);">
+          <input type="checkbox" id="terms" style="accent-color: var(--gold-primary); margin-top: 3px;" required>
+          <label for="terms">I agree to the Academy Terms & Conditions, Code of Sportsmanship, and Privacy Policy.</label>
+        </div>
+
+        <button type="submit" class="btn-primary-gold" style="justify-content: center; padding: 0.85rem; width: 100%;">
+          CREATE STUDENT ACCOUNT <i data-lucide="arrow-right" style="width: 16px;"></i>
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 2rem; font-size: 0.85rem; color: var(--text-secondary);">
+        Already have an account?<br>
+        <a href="login.html" style="color: var(--gold-light); font-weight: 700;">Sign in to your portal &rarr;</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    lucide.createIcons();
+
+    function handleRegisterSubmit(e) {
+      e.preventDefault();
+      const p1 = document.getElementById('reg-pass').value;
+      const p2 = document.getElementById('reg-pass-confirm').value;
+      if (p1 !== p2) {
+        window.showCheckmateToast('Passwords do not match! Please check again.', 'error');
+        return;
+      }
+      const name = document.getElementById('reg-name').value || 'Student Member';
+      const email = document.getElementById('reg-email').value || 'student@checkmate.academy';
+
+      const user = { name, role: 'student', email };
+      localStorage.setItem('checkmate_user', JSON.stringify(user));
+
+      window.showCheckmateToast(`Account created! Welcome to the Academy, ${name}.`, 'success');
+      setTimeout(() => {
+        window.location.href = 'student/index.html';
+      }, 1200);
+    }
+  </script>
+</body>
+</html>

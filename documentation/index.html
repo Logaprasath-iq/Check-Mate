@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation – CHECKMATE Chess Academy HTML Template</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .doc-sidebar {
+      position: sticky;
+      top: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+    }
+    .doc-sidebar a {
+      display: block;
+      padding: 0.4rem 0;
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+    }
+    .doc-sidebar a:hover {
+      color: var(--gold-primary);
+      padding-left: 0.25rem;
+    }
+    pre {
+      background: #06080d;
+      border: 1px solid var(--border-subtle);
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      margin: 1rem 0;
+    }
+    code {
+      font-family: monospace;
+      color: var(--gold-primary);
+    }
+  </style>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header style="background: var(--bg-secondary); border-bottom: 1px solid var(--border-subtle); padding: 1.25rem 0;">
+    <div class="site-container" style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="../index.html" class="site-logo" style="display: flex; align-items: center; gap: 0.6rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 38px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 26px; width: auto; object-fit: contain;">
+        <span style="font-size: 0.8rem; color: var(--gold-light); text-transform: uppercase; font-weight: 700; border: 1px solid var(--border-gold); padding: 2px 6px; border-radius: 4px;">DOCS</span>
+      </a>
+      <a href="../index.html" class="btn-primary-gold" style="padding: 0.5rem 1.25rem; font-size: 0.8rem;">
+        VIEW LIVE DEMO <i data-lucide="external-link" style="width: 14px;"></i>
+      </a>
+    </div>
+  </header>
+
+  <div class="site-container section-py">
+    <div style="display: grid; grid-template-columns: 260px 1fr; gap: 3.5rem; align-items: flex-start;">
+      <!-- Sidebar TOC -->
+      <aside class="doc-sidebar">
+        <div style="font-family: 'Sora'; font-weight: 700; font-size: 0.95rem; margin-bottom: 1rem; color: #fff;">DOCUMENTATION</div>
+        <nav style="display: flex; flex-direction: column; gap: 0.25rem;">
+          <a href="#overview">1. Overview</a>
+          <a href="#file-structure">2. File Structure</a>
+          <a href="#branding">3. Brand Colors & CSS</a>
+          <a href="#navbar">4. Navbar Navigation</a>
+          <a href="#chess-board">5. Interactive Chess Board</a>
+          <a href="#theme-rtl">6. Dark / Light & RTL</a>
+          <a href="#dashboard">7. Admin Dashboard</a>
+          <a href="#deployment">8. Deployment</a>
+        </nav>
+      </aside>
+
+      <!-- Main Docs Content -->
+      <main style="display: flex; flex-direction: column; gap: 3.5rem;">
+        <!-- 1. Overview -->
+        <section id="overview">
+          <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.75rem;">CHECKMATE – Premium Chess Academy HTML Template</h1>
+          <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem;">
+            Thank you for purchasing or using <strong>CHECKMATE</strong>. This template is crafted specifically for professional chess academies, grandmaster coaching centers, tournament organizers, and online chess SaaS platforms. It is built entirely in vanilla HTML5, CSS3, and JavaScript with 0 heavy frameworks.
+          </p>
+        </section>
+
+        <!-- 2. File Structure -->
+        <section id="file-structure">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff;">2. Directory & File Structure</h2>
+          <pre>
+checkmate/
+├── index.html            # Home 1: Traditional Chess Academy Landing
+├── home-2.html           # Home 2: Digital AI Chess Coach & EdTech
+├── about.html            # Academy Heritage, Mission, 2018-2026 Timeline
+├── gallery.html          # Filterable Media Gallery + Lightbox Modal
+├── programs.html         # Training Curricula & Syllabus Accordion
+├── tournaments.html      # Tournament Operations & Pairings Schedule
+├── pricing.html          # Monthly/Yearly Plans & Feature Comparison Matrix
+├── blog.html             # Strategy Journal Grid with Search & Tags
+├── blog-details.html     # Article View with Interactive FEN Diagram
+├── contact.html          # Validated Admissions Form & Campus Map
+├── login.html            # Dark Chess Portal Authentication
+├── register.html         # Student Registration & Program Enrollment
+├── 404.html              # Fallen King Checkmate 404
+├── coming-soon.html      # Launch Countdown & Subscription
+├── maintenance.html      # Engine Maintenance Progress View
+│
+├── admin/                # Modern SaaS Dashboard Suite (14 views)
+│   ├── index.html        # Dashboard Overview & KPI Charts
+│   ├── students.html     # Student Directory & Add Student Modal
+│   ├── coaches.html      # Grandmaster Faculty Management
+│   ├── programs.html     # Curriculum Tier Management
+│   ├── classes.html      # Live Virtual Rooms & Schedules
+│   ├── tournaments.html  # Sanctioned Swiss Tournament Operations
+│   ├── gallery.html      # Photo Curation & Media Manager
+│   ├── orders.html       # Orders & Subscriptions History
+│   ├── payments.html     # Financial Gateway & Faculty Payouts
+│   ├── messages.html     # Split Email-Style Inbox & Quick Reply
+│   ├── blog.html         # Editorial Publishing Suite
+│   ├── testimonials.html # Student Review Moderation
+│   ├── reports.html      # Deep Analytics with Chart.js
+│   └── settings.html     # Academy Localization & Security Config
+│
+├── assets/
+│   ├── css/
+│   │   ├── style.css     # Luxury variables, 3D tilt, board, dark/light & RTL
+│   │   └── admin.css     # High-density SaaS Dashboard design system
+│   ├── js/
+│   │   ├── main.js       # Sticky header, cursor, theme, RTL, lightbox, modals
+│   │   ├── chess-board.js# Playable 8x8 perspective board, eval bar, puzzles
+│   │   └── admin.js      # Admin Chart.js charts, table search, inbox logic
+│   └── images/
+│       ├── chess-hero.png# Hero Banner Artwork (King vs Black Piece)
+│       └── ...           # High-resolution photography & avatars
+│
+└── documentation/
+    └── index.html        # Comprehensive User Manual (This file)
+          </pre>
+        </section>
+
+        <!-- 3. Branding & CSS Variables -->
+        <section id="branding">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff;">3. Brand Colors & CSS System</h2>
+          <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+            Colors are controlled via CSS custom properties in <code>assets/css/style.css</code>. You can customize the championship gold palette or background navy shades simply by modifying:
+          </p>
+          <pre>
+:root {
+  /* Dark Theme (Default) */
+  --bg-primary: #080b12;
+  --bg-secondary: #0e1422;
+  --gold-primary: #d4af37;
+  --gold-light: #f6e29f;
+  --gold-dark: #aa820a;
+  --gold-gradient: linear-gradient(135deg, #f6e29f 0%, #d4af37 50%, #aa820a 100%);
+}
+          </pre>
+        </section>
+
+        <!-- 4. Navbar Navigation -->
+        <section id="navbar">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff;">4. Main Navigation Order</h2>
+          <p style="color: var(--text-secondary); line-height: 1.7;">
+            The primary navbar strictly conforms to commercial template standards with directly visible Home 1 and Home 2 links:
+          </p>
+          <pre>
+CHECKMATE (Logo)
+  HOME 1
+  HOME 2
+  ABOUT
+  GALLERY
+  PROGRAMS
+  TOURNAMENTS
+  PRICING
+  BLOG
+  CONTACT
+[Right: LOGIN | JOIN NOW]
+          </pre>
+        </section>
+
+        <!-- 5. Interactive Chess Board -->
+        <section id="chess-board">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff;">5. Interactive Chess Board & AI Evaluation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+            Both the 3D perspective board on Home 1 and the live digital board on Home 2 are powered by <code>assets/js/chess-board.js</code>. They feature scalable vector SVG pieces, coordinate labeling, legal square highlights, and move sounds.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.7;">
+            To add a playable board to any page, simply insert:
+          </p>
+          <pre>
+&lt;div class="chess-board-container interactive-chess-board" id="my-board"&gt;&lt;/div&gt;
+          </pre>
+        </section>
+
+        <!-- 6. Dark / Light Mode & RTL Support -->
+        <section id="theme-rtl">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff;">6. Dark / Light Theme & RTL System</h2>
+          <p style="color: var(--text-secondary); line-height: 1.7;">
+            The template includes persistent dark/light theme switching and Right-to-Left (RTL) mode out of the box using <code>localStorage</code>. Clicking the language or theme buttons toggles <code>data-theme="dark|light"</code> and <code>dir="ltr|rtl"</code> across public and admin pages.
+          </p>
+        </section>
+
+        <!-- 7. Deployment -->
+        <section id="deployment">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff;">7. Production Deployment</h2>
+          <p style="color: var(--text-secondary); line-height: 1.7;">
+            This is a pure static HTML template. To deploy:
+          </p>
+          <ul style="color: var(--text-secondary); padding-left: 1.5rem; line-height: 1.8;">
+            <li>Upload the <code>checkmate/</code> directory directly to any web host (Apache, Nginx, cPanel, Netlify, Vercel, or GitHub Pages).</li>
+            <li>No Node.js build step or runtime server is required.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <footer class="site-footer" style="padding: 2.5rem 0;">
+    <div class="site-container" style="text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+      &copy; 2026 CHECKMATE Academy. Designed for ThemeForest & Commercial Client Projects.
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

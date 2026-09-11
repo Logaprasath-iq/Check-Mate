@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scheduled Maintenance – CHECKMATE Chess Academy</title>
+  <meta name="robots" content="noindex, follow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+</head>
+<body style="min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; background: radial-gradient(circle at center, #151d30 0%, #080b12 80%);">
+
+  <header style="padding: 2.5rem 0;">
+    <div class="site-container" style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="index.html" class="site-logo">
+          <img src="assets/images/logo-icon.png" alt="CHECKMATE Crest Logo" class="site-logo-img">
+          <img src="assets/images/logo-text.png" alt="CHECKMATE - THINK. PLAY. MASTER." class="site-brand-img">
+        </a>
+      <span class="status-chip chip-warning" style="padding: 0.35rem 0.85rem;">System Upgrade</span>
+    </div>
+  </header>
+
+  <main style="text-align: center; padding: 2rem 1.5rem;">
+    <div class="site-container" style="max-width: 600px;">
+      <!-- King Silhouette & Board Emblem -->
+      <div style="width: 100px; height: 100px; margin: 0 auto 2rem; color: var(--gold-primary); animation: kingFloat 2s ease-in-out infinite alternate;">
+        <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11.5 2a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0Z"/>
+          <path d="M12 5v3"/>
+          <path d="M9 8h6"/>
+          <path d="M6 13 4 9l4 2 4-5 4 5 4-2-2 4Z"/>
+          <path d="M6 13v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-6"/>
+        </svg>
+      </div>
+
+      <h1 style="font-size: clamp(2.2rem, 3.8vw, 3.2rem); font-weight: 800; text-transform: uppercase; margin-bottom: 1rem;">
+        WE'RE MAKING OUR <span class="text-gold">NEXT MOVE.</span>
+      </h1>
+
+      <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2.5rem;">
+        Our chess engines and database servers are undergoing scheduled performance tuning to ensure ultra-fast pairing and real-time blunder evaluation. We'll be back in approximately 45 minutes.
+      </p>
+
+      <!-- Progress Track Indicator -->
+      <div style="background: rgba(14,20,34,0.7); border: 1px solid var(--border-gold); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2.5rem;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.75rem;">
+          <span style="color: #fff;">Server Migration & Optimization</span>
+          <span style="color: var(--gold-light);">84% Completed</span>
+        </div>
+        <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden;">
+          <div style="width: 84%; height: 100%; background: var(--gold-gradient); border-radius: 99px;"></div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 1rem;">
+        <button onclick="window.location.reload()" class="btn-primary-gold">
+          <i data-lucide="refresh-cw" style="width: 16px;"></i>
+          CHECK STATUS
+        </button>
+        <a href="contact.html" class="btn-secondary-outline">
+          CONTACT SUPPORT
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer style="padding: 2rem 0; text-align: center; border-top: 1px solid var(--border-subtle); font-size: 0.82rem; color: var(--text-muted);">
+    &copy; 2026 CHECKMATE Academy. Systematic Engine Maintenance.
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics & Reports – CHECKMATE Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+</head>
+<body class="admin-body">
+
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <span class="status-chip chip-gold" style="font-size: 0.65rem;">PRO</span>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Management</li>
+      <li class="sidebar-item"><a href="index.html"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="sidebar-item"><a href="students.html"><i data-lucide="users"></i> Students</a></li>
+      <li class="sidebar-item"><a href="coaches.html"><i data-lucide="award"></i> Coaches</a></li>
+      <li class="sidebar-item"><a href="programs.html"><i data-lucide="book-open"></i> Programs</a></li>
+      <li class="sidebar-item"><a href="classes.html"><i data-lucide="calendar"></i> Classes</a></li>
+      <li class="sidebar-item"><a href="tournaments.html"><i data-lucide="trophy"></i> Tournaments</a></li>
+      <li class="sidebar-item"><a href="gallery.html"><i data-lucide="image"></i> Gallery</a></li>
+
+      <li class="sidebar-label">Finances & Comms</li>
+      <li class="sidebar-item"><a href="orders.html"><i data-lucide="shopping-cart"></i> Orders</a></li>
+      <li class="sidebar-item"><a href="payments.html"><i data-lucide="credit-card"></i> Payments</a></li>
+      <li class="sidebar-item"><a href="messages.html"><i data-lucide="mail"></i> Messages</a></li>
+      <li class="sidebar-item"><a href="blog.html"><i data-lucide="file-text"></i> Blog Posts</a></li>
+      <li class="sidebar-item"><a href="testimonials.html"><i data-lucide="message-square"></i> Testimonials</a></li>
+
+      <li class="sidebar-label">System</li>
+      <li class="sidebar-item active"><a href="reports.html"><i data-lucide="bar-chart-3"></i> Reports</a></li>
+      <li class="sidebar-item"><a href="settings.html"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-2.jpg" alt="Admin" class="user-avatar">
+        <div>
+          <div class="user-info-name">Arjun Mehta</div>
+          <div class="user-info-role">Super Admin</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Public Site"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search analytics...">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-action-btn admin-theme-toggle"><i data-lucide="sun"></i></button>
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR"><i data-lucide="arrow-left-right"></i></button>
+        <button class="topbar-action-btn"><i data-lucide="bell"></i><span class="badge-dot"></span></button>
+      </div>
+    </header>
+
+    <main class="admin-content">
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">ACADEMY ANALYTICS & REPORTS</h1>
+          <p class="page-subheadline">Cross-cohort rating telemetry, retention cohorts, and tournament participation.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <select class="newsletter-input" style="width: 180px; padding: 0.45rem 0.85rem; font-size: 0.82rem;">
+            <option>Year to Date (2026)</option>
+            <option>Current Quarter (Q4)</option>
+            <option>Previous Quarter (Q3)</option>
+            <option>Last 30 Days</option>
+          </select>
+          <button class="btn-admin-gold" onclick="window.showCheckmateToast('Exporting Analytics PDF...', 'success')">
+            <i data-lucide="file-down" style="width: 16px;"></i> PDF EXPORT
+          </button>
+        </div>
+      </div>
+
+      <!-- Charts Grid 1 -->
+      <div class="charts-grid-2">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">Student Growth Trajectory (Monthly Active)</h2>
+            <span class="status-chip chip-gold">5,400 Projected</span>
+          </div>
+          <div style="height: 280px;">
+            <canvas id="chartStudentGrowth"></canvas>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">Program Enrollment Distribution</h2>
+            <span class="status-chip chip-success">Cohort Capacity 92%</span>
+          </div>
+          <div style="height: 280px;">
+            <canvas id="chartEnrollment"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Grid 2 -->
+      <div class="charts-grid-2">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">Gross Academy Revenue (USD)</h2>
+            <span class="status-chip chip-success">+24.2% Growth</span>
+          </div>
+          <div style="height: 280px;">
+            <canvas id="chartRevenue"></canvas>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">Student Elo Rating Progression (+ Points)</h2>
+            <span class="status-chip chip-gold">Median +320 Elo</span>
+          </div>
+          <div style="height: 280px;">
+            <canvas id="chartRatingDistribution"></canvas>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portal & Dashboard – CHECKMATE Chess Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+
+  <style>
+    /* Student-specific enhancements matching design system */
+    .chip-student {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .student-banner {
+      background: linear-gradient(135deg, rgba(14, 20, 34, 0.95) 0%, rgba(26, 39, 68, 0.85) 100%);
+      border: 1px solid var(--admin-gold);
+      border-radius: var(--admin-radius);
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    [data-theme="light"] .student-banner {
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+      border-color: rgba(184, 145, 27, 0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .student-banner-bg {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 40%;
+      background: radial-gradient(circle at right, rgba(212, 175, 55, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .puzzle-card {
+      background: rgba(212, 175, 55, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: var(--admin-radius);
+      padding: 1.5rem;
+    }
+    .progress-bar-bg {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    [data-theme="light"] .progress-bar-bg {
+      background: rgba(0, 0, 0, 0.08);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--admin-gold);
+      border-radius: 999px;
+      transition: width 0.6s ease;
+    }
+    .live-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .chessboard-preview {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      width: 100%;
+      max-width: 240px;
+      aspect-ratio: 1;
+      border: 2px solid var(--admin-gold);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 1rem auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    }
+    .chess-sq {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      user-select: none;
+    }
+    .sq-light { background: #e6dfcf; color: #222; }
+    .sq-dark { background: #4a5568; color: #fff; }
+    .sq-highlight { background: rgba(212, 175, 55, 0.75) !important; }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar Navigation -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <span class="status-chip chip-student" style="font-size: 0.65rem;">STUDENT</span>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Learning & Arena</li>
+      <li class="sidebar-item active"><a href="index.html"><i data-lucide="layout-dashboard"></i> Overview</a></li>
+      <li class="sidebar-item"><a href="#live-room" onclick="showLiveRoomModal()"><i data-lucide="video"></i> Live Classes <span class="status-chip chip-danger" style="padding: 2px 6px; font-size: 9px; margin-left: auto;">LIVE</span></a></li>
+      <li class="sidebar-item"><a href="#curriculum"><i data-lucide="book-open"></i> Curriculum & Modules</a></li>
+      <li class="sidebar-item"><a href="#puzzles"><i data-lucide="crosshair"></i> Tactics & Puzzles</a></li>
+      <li class="sidebar-item"><a href="#tournaments"><i data-lucide="trophy"></i> My Tournaments</a></li>
+      <li class="sidebar-item"><a href="#analysis"><i data-lucide="cpu"></i> Game Analysis Engine</a></li>
+
+      <li class="sidebar-label">Mentorship & Records</li>
+      <li class="sidebar-item"><a href="#feedback"><i data-lucide="message-square"></i> Coach Feedback</a></li>
+      <li class="sidebar-item"><a href="#homework"><i data-lucide="clipboard-check"></i> Homework & Studies</a></li>
+      <li class="sidebar-item"><a href="#ratings"><i data-lucide="trending-up"></i> Rating Progression</a></li>
+
+      <li class="sidebar-label">Navigation</li>
+      <li class="sidebar-item"><a href="../index.html"><i data-lucide="globe"></i> Public Website</a></li>
+      <li class="sidebar-item"><a href="#" onclick="window.checkmateLogout(); return false;" style="color: var(--admin-danger);"><i data-lucide="log-out"></i> Log Out</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-3.jpg" alt="Student Avatar" class="user-avatar">
+        <div>
+          <div class="user-info-name" id="studentSidebarName">Alex Morgan</div>
+          <div class="user-info-role">FIDE: 1685 • Elite Track</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Exit to Public Website" style="color: var(--admin-text-muted);"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <!-- Main Content Layout -->
+  <div class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle" aria-label="Toggle Navigation"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search lessons, masterclass topics, tournament pairings...">
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Live Class Indicator -->
+        <button onclick="showLiveRoomModal()" class="status-chip chip-success" style="cursor: pointer; border: 1px solid rgba(16,185,129,0.4); display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <span class="live-pulse"></span> Live Room Open (Sicilian Workshop)
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="topbar-action-btn admin-theme-toggle" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun"></i>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR">
+          <i data-lucide="arrow-left-right"></i>
+        </button>
+
+        <!-- Notifications -->
+        <button class="topbar-action-btn" title="Notifications" onclick="window.showCheckmateToast('Coach Arjun: Your Round 4 game analysis is ready!', 'success')">
+          <i data-lucide="bell"></i>
+          <span class="badge-dot"></span>
+        </button>
+
+        <!-- Logout Button -->
+        <button class="topbar-action-btn" onclick="window.checkmateLogout()" title="Log Out" style="color: #ef4444;">
+          <i data-lucide="log-out"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="admin-content">
+      
+      <!-- Student Welcome Hero Banner -->
+      <div class="student-banner">
+        <div class="student-banner-bg"></div>
+        <div style="position: relative; z-index: 2; max-width: 780px;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+            <span class="status-chip chip-gold" style="font-size: 0.72rem;"><i data-lucide="crown" style="width: 13px;"></i> FIDE CANDIDATE TRACK</span>
+            <span style="font-size: 0.8rem; color: var(--admin-text-muted);">Student ID: <strong>CM-892410</strong></span>
+          </div>
+          <h1 class="page-headline" style="margin-bottom: 0.5rem;" id="studentWelcomeHeading">
+            WELCOME BACK, ALEX MORGAN ♟️
+          </h1>
+          <p style="color: var(--admin-text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            Your next live interactive workshop with <strong>FM Arjun Mehta</strong> begins in <strong>45 minutes</strong>. Today's deep dive: <em>Navigating the 6.Bg5 Poisoned Pawn in the Najdorf</em>.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+            <button onclick="showLiveRoomModal()" class="btn-admin-gold" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.35rem;">
+              <i data-lucide="video" style="width: 16px;"></i> JOIN LIVE ROOM
+            </button>
+            <button onclick="openStudentProfileModal()" class="action-icon-btn" style="padding: 0.65rem 1.15rem; width: auto; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+              <i data-lucide="user" style="width: 16px;"></i> Edit Profile
+            </button>
+            <a href="#puzzles" class="action-icon-btn" style="padding: 0.65rem 1.15rem; width: auto; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+              <i data-lucide="crosshair" style="width: 16px;"></i> Daily Tactics Puzzle
+            </a>
+            <a href="../index.html" class="action-icon-btn" style="padding: 0.65rem 1.15rem; width: auto; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+              <i data-lucide="globe" style="width: 16px;"></i> Academy Public Site
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Core Metric Highlight Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Current Academy Rating</span>
+            <div class="metric-icon-box icon-gold"><i data-lucide="trending-up"></i></div>
+          </div>
+          <div class="metric-value">1,685 <span style="font-size: 0.9rem; font-weight: 600; color: var(--admin-success);">+55 this mo</span></div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up"><i data-lucide="arrow-up-right"></i> Top 8%</span>
+            <span>Target: 1,800 FIDE Title</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Tactical Accuracy</span>
+            <div class="metric-icon-box icon-blue"><i data-lucide="crosshair"></i></div>
+          </div>
+          <div class="metric-value">89.2%</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up"><i data-lucide="flame"></i> 12 Day Streak</span>
+            <span>184 Puzzles Solved</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Curriculum Progress</span>
+            <div class="metric-icon-box icon-purple"><i data-lucide="book-open"></i></div>
+          </div>
+          <div class="metric-value">28 / 36</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">78% Complete</span>
+            <span>Next: Rook Endgames</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Tournament Record</span>
+            <div class="metric-icon-box icon-green"><i data-lucide="award"></i></div>
+          </div>
+          <div class="metric-value">18W • 4D • 6L</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up"><i data-lucide="trophy"></i> 71% Win Rate</span>
+            <span>3 Medals Won</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Two-Column Layout -->
+      <div class="charts-grid" style="margin-top: 2rem;">
+        
+        <!-- Left: Rating Chart & Active Modules -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          
+          <!-- Rating Progression Chart -->
+          <div class="admin-card" id="ratings">
+            <div class="admin-card-header">
+              <div>
+                <h2 class="admin-card-title">Elo Rating Progression (12 Months)</h2>
+                <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Demonstrated rating growth from Foundation to Elite Candidate Master</p>
+              </div>
+              <span class="status-chip chip-gold">+265 Total Elo Gained</span>
+            </div>
+            <div style="height: 280px; position: relative;">
+              <canvas id="chartStudentRating"></canvas>
+            </div>
+          </div>
+
+          <!-- Active Enrolled Courses & Modules -->
+          <div class="admin-card" id="curriculum">
+            <div class="admin-card-header">
+              <h2 class="admin-card-title">Active Training Curriculum</h2>
+              <span style="font-size: 0.8rem; color: var(--admin-gold); font-weight: 700;">Grandmaster Track</span>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              <!-- Course 1 -->
+              <div style="padding: 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                  <div style="font-weight: 700; color: var(--admin-text);">Modern Sicilian Defense: Najdorf & Dragon Complexes</div>
+                  <span class="status-chip chip-gold">85% Complete</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%;"></div></div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted);">
+                  <span>Current Unit: 6.Bg5 Complications & Counterplay</span>
+                  <a href="#live-room" onclick="showLiveRoomModal()" style="color: var(--admin-gold); font-weight: 600;">Continue Lesson &rarr;</a>
+                </div>
+              </div>
+
+              <!-- Course 2 -->
+              <div style="padding: 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                  <div style="font-weight: 700; color: var(--admin-text);">Pawn Structures & The Carlsbad Minority Attack</div>
+                  <span class="status-chip chip-warning">60% Complete</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 60%; background: #f59e0b;"></div></div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted);">
+                  <span>Current Unit: Queenside Infiltration on the c-file</span>
+                  <span style="color: var(--admin-text-muted);">4 Lessons Remaining</span>
+                </div>
+              </div>
+
+              <!-- Course 3 -->
+              <div style="padding: 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                  <div style="font-weight: 700; color: var(--admin-text);">Essential Rook & Pawn Endgames (Lucena & Philidor)</div>
+                  <span class="status-chip chip-success">100% Certified</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%; background: #10b981;"></div></div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted);">
+                  <span>Completed on Oct 10, 2026 • Grade: Distinction</span>
+                  <a href="#" onclick="window.showCheckmateToast('Certificate downloaded: Rook Endgames', 'success'); return false;" style="color: var(--admin-success); font-weight: 600;">Download Certificate</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Games & Engine Review -->
+          <div class="admin-card" id="analysis">
+            <div class="admin-card-header">
+              <h2 class="admin-card-title">Recent Tournament Games & PGN Analysis</h2>
+              <button class="btn-admin-gold" style="padding: 0.35rem 0.85rem; font-size: 0.75rem;" onclick="openStudentAddGameModal()">
+                <i data-lucide="plus" style="width: 13px;"></i> Import PGN / Add Game
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table" id="studentGamesTable">
+                <thead>
+                  <tr>
+                    <th>Opponent</th>
+                    <th>Result</th>
+                    <th>Opening</th>
+                    <th>Accuracy</th>
+                    <th>Coach Review</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>NM Marcus Chen (1720)</strong></td>
+                    <td><span class="status-chip chip-success">1 - 0</span></td>
+                    <td>Sicilian Najdorf (B90)</td>
+                    <td><strong>94.2%</strong></td>
+                    <td><span style="color: var(--admin-success); font-size: 0.8rem;">Brilliant h7 sac</span></td>
+                    <td>
+                      <div class="action-btns-group">
+                        <button class="action-icon-btn" title="Inspect Moves"><i data-lucide="eye" style="width: 14px;"></i></button>
+                        <button class="action-icon-btn" title="Edit Game"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                        <button class="action-icon-btn" title="Delete Game"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ananya Roy (1660)</strong></td>
+                    <td><span class="status-chip chip-success">1 - 0</span></td>
+                    <td>King's Indian (E97)</td>
+                    <td><strong>88.5%</strong></td>
+                    <td><span style="color: var(--admin-text-muted); font-size: 0.8rem;">Solid f5 break</span></td>
+                    <td>
+                      <div class="action-btns-group">
+                        <button class="action-icon-btn" title="Inspect Moves"><i data-lucide="eye" style="width: 14px;"></i></button>
+                        <button class="action-icon-btn" title="Edit Game"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                        <button class="action-icon-btn" title="Delete Game"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Viktor Petrov (1740)</strong></td>
+                    <td><span class="status-chip chip-warning">½ - ½</span></td>
+                    <td>Ruy Lopez Berlin (C67)</td>
+                    <td><strong>91.0%</strong></td>
+                    <td><span style="color: var(--admin-text-muted); font-size: 0.8rem;">Accurate rook draw</span></td>
+                    <td>
+                      <div class="action-btns-group">
+                        <button class="action-icon-btn" title="Inspect Moves"><i data-lucide="eye" style="width: 14px;"></i></button>
+                        <button class="action-icon-btn" title="Edit Game"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                        <button class="action-icon-btn" title="Delete Game"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Daily Puzzle, Next Live Class, Coach Notes -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          
+          <!-- Next Live Class Card -->
+          <div class="admin-card" style="border-left: 4px solid var(--admin-success);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <span class="status-chip chip-success"><span class="live-pulse"></span> STARTING SOON</span>
+              <span style="font-size: 0.8rem; color: var(--admin-gold); font-weight: 700;">6:30 PM IST</span>
+            </div>
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--admin-text); margin-bottom: 0.35rem;">
+              Masterclass: The 6.Bg5 Najdorf Attack
+            </h3>
+            <p style="font-size: 0.85rem; color: var(--admin-text-muted); margin-bottom: 1rem;">
+              Led by <strong>FM Arjun Mehta</strong>. Interactive digital board, live audio discussion, and peer sparring.
+            </p>
+            <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); margin-bottom: 1rem;">
+              <img src="../assets/images/coach-2.jpg" alt="FM Arjun" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover;">
+              <div>
+                <div style="font-size: 0.85rem; font-weight: 700; color: var(--admin-text);">FM Arjun Mehta</div>
+                <div style="font-size: 0.75rem; color: var(--admin-gold);">Lead Faculty • 24 Students Attending</div>
+              </div>
+            </div>
+            <button onclick="showLiveRoomModal()" class="btn-admin-gold" style="width: 100%; justify-content: center; padding: 0.75rem;">
+              <i data-lucide="video" style="width: 16px;"></i> JOIN LIVE CLASSROOM
+            </button>
+          </div>
+
+          <!-- Daily Tactics Puzzle -->
+          <div class="admin-card" id="puzzles">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="admin-card-title">Tactics Arena: Daily Puzzle</h3>
+                <p style="font-size: 0.78rem; color: var(--admin-text-muted);">Puzzle #1042 • Mate in 3 (White to Move)</p>
+              </div>
+              <span class="status-chip chip-gold">1,820 Elo</span>
+            </div>
+
+            <!-- Mini Chess Board Visualization -->
+            <div class="chessboard-preview" id="puzzleBoard">
+              <!-- Row 8 -->
+              <div class="chess-sq sq-light">♜</div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light">♚</div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark">♜</div>
+              <!-- Row 7 -->
+              <div class="chess-sq sq-dark">♟</div><div class="chess-sq sq-light">♟</div><div class="chess-sq sq-dark">♟</div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light">♟</div><div class="chess-sq sq-dark sq-highlight">♟</div><div class="chess-sq sq-light"></div>
+              <!-- Row 6 -->
+              <div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light">♞</div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div>
+              <!-- Row 5 -->
+              <div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light">♟</div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div>
+              <!-- Row 4 -->
+              <div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark">♙</div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div>
+              <!-- Row 3 -->
+              <div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark">♘</div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light">♖</div>
+              <!-- Row 2 -->
+              <div class="chess-sq sq-light">♙</div><div class="chess-sq sq-dark">♙</div><div class="chess-sq sq-light">♙</div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark">♙</div><div class="chess-sq sq-light">♙</div><div class="chess-sq sq-dark">♙</div>
+              <!-- Row 1 -->
+              <div class="chess-sq sq-dark">♖</div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark">♔</div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark sq-highlight">♕</div><div class="chess-sq sq-light"></div>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 0.75rem;">
+              <span style="font-size: 0.85rem; color: var(--admin-gold); font-weight: 700;">Find the winning queen sacrifice sequence!</span>
+            </div>
+
+            <div style="display: flex; gap: 0.5rem;">
+              <button onclick="solvePuzzle()" class="btn-admin-gold" style="flex: 1; justify-content: center; padding: 0.65rem;">
+                <i data-lucide="check-circle" style="width: 15px;"></i> Verify Qxh7+
+              </button>
+              <button onclick="showSolution()" class="action-icon-btn" title="View Full Solution" style="width: auto; padding: 0.65rem 1rem;">
+                Hint
+              </button>
+            </div>
+            <div id="puzzleFeedback" style="display: none; margin-top: 0.75rem; padding: 0.65rem; border-radius: var(--admin-radius); font-size: 0.82rem; text-align: center;"></div>
+          </div>
+
+          <!-- Coach Feedback & Homework -->
+          <div class="admin-card" id="feedback">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Mentor Feedback & Assigned Studies</h3>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <button onclick="openStudentAddHwModal()" class="btn-admin-gold" style="padding: 0.3rem 0.65rem; font-size: 0.72rem;">
+                  <i data-lucide="plus" style="width: 13px;"></i> Add Task
+                </button>
+                <span class="status-chip chip-gold">FM Arjun</span>
+              </div>
+            </div>
+            <blockquote style="font-size: 0.85rem; color: var(--admin-text); font-style: italic; line-height: 1.6; border-left: 3px solid var(--admin-gold); padding-left: 0.85rem; margin-bottom: 1rem;">
+              "Alex, your transition into the endgame in Round 4 was masterclass-grade. Be mindful not to rush moves when down under 1 minute. Focus on the f4 pawn break timing."
+            </blockquote>
+            
+            <div id="studentHomeworkContainer" style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <!-- Item 1 -->
+              <div class="admin-card hw-item" style="padding: 0.75rem 0.85rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border); margin: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                  <div style="display: flex; align-items: center; gap: 0.65rem;">
+                    <input type="checkbox" class="hw-checkbox" style="width: 16px; height: 16px; accent-color: var(--admin-gold); cursor: pointer;" onchange="toggleHomeworkItem(this)">
+                    <span class="hw-title" style="font-size: 0.84rem; font-weight: 700; color: var(--admin-text);">Solve 15 Dvoretsky Rook Endgames Studies</span>
+                  </div>
+                  <div class="action-btns-group">
+                    <button class="action-icon-btn" title="Edit Task" onclick="editHomeworkItem(this)"><i data-lucide="edit-3" style="width: 13px;"></i></button>
+                    <button class="action-icon-btn" title="Delete Task" onclick="deleteHomeworkItem(this)"><i data-lucide="trash-2" style="width: 13px;"></i></button>
+                  </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--admin-text-muted); padding-left: 1.65rem;">
+                  <span class="hw-due">Due: In 2 days</span>
+                  <span class="hw-progress status-chip chip-warning" style="font-size: 0.65rem;">11 / 15 Solved</span>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="admin-card hw-item" style="padding: 0.75rem 0.85rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border); margin: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                  <div style="display: flex; align-items: center; gap: 0.65rem;">
+                    <input type="checkbox" class="hw-checkbox" style="width: 16px; height: 16px; accent-color: var(--admin-gold); cursor: pointer;" onchange="toggleHomeworkItem(this)">
+                    <span class="hw-title" style="font-size: 0.84rem; font-weight: 700; color: var(--admin-text);">Analyze Round 3 Loss in King's Indian</span>
+                  </div>
+                  <div class="action-btns-group">
+                    <button class="action-icon-btn" title="Edit Task" onclick="editHomeworkItem(this)"><i data-lucide="edit-3" style="width: 13px;"></i></button>
+                    <button class="action-icon-btn" title="Delete Task" onclick="deleteHomeworkItem(this)"><i data-lucide="trash-2" style="width: 13px;"></i></button>
+                  </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--admin-text-muted); padding-left: 1.65rem;">
+                  <span class="hw-due">Due: Tomorrow 20:00</span>
+                  <span class="hw-progress status-chip chip-gold" style="font-size: 0.65rem;">In Progress</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Tournaments -->
+          <div class="admin-card" id="tournaments">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">My Registered Tournaments</h3>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <button onclick="openStudentRegisterTournamentModal()" class="btn-admin-gold" style="padding: 0.3rem 0.65rem; font-size: 0.72rem;">
+                  <i data-lucide="plus" style="width: 13px;"></i> Register Event
+                </button>
+                <a href="../tournaments.html" style="font-size: 0.78rem; color: var(--admin-gold); font-weight: 700;">Calendar &rarr;</a>
+              </div>
+            </div>
+            <div id="studentTournamentContainer" style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div class="admin-card tourney-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border); margin: 0;">
+                <div>
+                  <div class="tourney-name" style="font-size: 0.88rem; font-weight: 700; color: var(--admin-text);">Sunday Blitz Grand Prix</div>
+                  <div class="tourney-details" style="font-size: 0.75rem; color: var(--admin-text-muted);">Oct 18 • 9 Rounds • ₹25,000 Fund</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <span class="status-chip chip-success">Registered</span>
+                  <button class="action-icon-btn" title="Withdraw / Delete" onclick="withdrawTournament(this)"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+                </div>
+              </div>
+
+              <div class="admin-card tourney-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border); margin: 0;">
+                <div>
+                  <div class="tourney-name" style="font-size: 0.88rem; font-weight: 700; color: var(--admin-text);">National Junior Classical Open</div>
+                  <div class="tourney-details" style="font-size: 0.75rem; color: var(--admin-text-muted);">Nov 04 - 08 • FIDE Rated • 7 Rounds</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <span class="status-chip chip-gold">Confirmed</span>
+                  <button class="action-icon-btn" title="Withdraw / Delete" onclick="withdrawTournament(this)"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Live Classroom Modal -->
+  <div id="liveRoomModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 99999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="max-width: 600px; width: 100%; background: var(--admin-card-bg); border: 1px solid var(--admin-gold); border-radius: var(--admin-radius); padding: 2rem; box-shadow: 0 20px 50px rgba(0,0,0,0.6); position: relative;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem;">
+        <div>
+          <span class="status-chip chip-danger" style="margin-bottom: 0.5rem;"><span class="live-pulse"></span> LIVE CLASSROOM ACTIVE</span>
+          <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--admin-text);">Sicilian Najdorf Masterclass</h2>
+          <p style="font-size: 0.85rem; color: var(--admin-text-muted);">Interactive Board & Faculty Live Video Feed</p>
+        </div>
+        <button onclick="closeLiveRoomModal()" style="background: none; border: none; color: var(--admin-text-muted); cursor: pointer; font-size: 1.5rem; line-height: 1;">&times;</button>
+      </div>
+
+      <div style="aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1);">
+        <img src="../assets/images/chess-hero.png" alt="Live Board" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.4;">
+        <div style="position: absolute; text-align: center; color: #fff;">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--admin-gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; color: #080b12; box-shadow: 0 0 25px rgba(212,175,55,0.6);">
+            <i data-lucide="video" style="width: 28px; height: 28px;"></i>
+          </div>
+          <div style="font-weight: 700; font-size: 1.05rem;">FM Arjun Mehta is Broadcasting</div>
+          <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7);">Board Sync Active • 24 Academy Students in Room</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <button onclick="window.showCheckmateToast('Connected to digital chessboard and mic!', 'success'); closeLiveRoomModal();" class="btn-admin-gold" style="flex: 1; justify-content: center; padding: 0.85rem;">
+          <i data-lucide="mic" style="width: 16px;"></i> CONNECT WITH AUDIO & BOARD
+        </button>
+        <button onclick="closeLiveRoomModal()" class="action-icon-btn" style="width: auto; padding: 0.85rem 1.25rem;">
+          Dismiss
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Student Profile Modal -->
+  <div id="studentProfileModal" class="admin-modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: var(--admin-card-bg, #0f172a); border: 1px solid var(--admin-gold, #d4af37); border-radius: 12px; max-width: 480px; width: 100%; padding: 2rem; box-shadow: 0 25px 60px rgba(0,0,0,0.6);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--admin-card-border, rgba(255,255,255,0.1)); padding-bottom: 0.75rem;">
+        <h3 style="font-family: 'Sora', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--admin-text, #fff); margin: 0;">EDIT STUDENT PROFILE</h3>
+        <button onclick="closeStudentProfileModal()" style="background: none; border: none; color: var(--admin-text-muted, #94a3b8); font-size: 1.75rem; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+      <form id="studentProfileForm" onsubmit="saveStudentProfile(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Full Name</label>
+          <input type="text" id="profileStudentName" class="newsletter-input" required>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Current Rating (Elo)</label>
+          <input type="number" id="profileStudentRating" class="newsletter-input" required>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Academy Track / Title Target</label>
+          <input type="text" id="profileStudentTrack" class="newsletter-input" required>
+        </div>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+          <button type="submit" class="btn-admin-gold" style="flex: 1; justify-content: center; padding: 0.75rem;">SAVE PROFILE</button>
+          <button type="button" onclick="closeStudentProfileModal()" class="action-icon-btn" style="width: auto; padding: 0.75rem 1.25rem;">CANCEL</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Game / PGN Modal -->
+  <div id="studentAddGameModal" class="admin-modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: var(--admin-card-bg, #0f172a); border: 1px solid var(--admin-gold, #d4af37); border-radius: 12px; max-width: 520px; width: 100%; padding: 2rem; box-shadow: 0 25px 60px rgba(0,0,0,0.6);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--admin-card-border, rgba(255,255,255,0.1)); padding-bottom: 0.75rem;">
+        <h3 style="font-family: 'Sora', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--admin-text, #fff); margin: 0;">ADD / IMPORT PGN GAME</h3>
+        <button onclick="closeStudentAddGameModal()" style="background: none; border: none; color: var(--admin-text-muted, #94a3b8); font-size: 1.75rem; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+      <form id="studentAddGameForm" onsubmit="saveStudentGame(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Opponent Name & Rating</label>
+          <input type="text" id="gameOpponent" class="newsletter-input" placeholder="e.g. FM Daniel Ross (1780)" required>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Result</label>
+            <select id="gameResult" class="newsletter-input">
+              <option value="1 - 0">1 - 0 (White Win)</option>
+              <option value="0 - 1">0 - 1 (Black Win)</option>
+              <option value="½ - ½">½ - ½ (Draw)</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Accuracy (%)</label>
+            <input type="text" id="gameAccuracy" class="newsletter-input" placeholder="e.g. 93.8%" required>
+          </div>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Opening / ECO Code</label>
+          <input type="text" id="gameOpening" class="newsletter-input" placeholder="e.g. French Defense: Winawer (C18)" required>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Coach Review / Tactical Notes</label>
+          <input type="text" id="gameReview" class="newsletter-input" placeholder="e.g. Excellent pawn structure play" required>
+        </div>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+          <button type="submit" class="btn-admin-gold" style="flex: 1; justify-content: center; padding: 0.75rem;">SAVE GAME</button>
+          <button type="button" onclick="closeStudentAddGameModal()" class="action-icon-btn" style="width: auto; padding: 0.75rem 1.25rem;">CANCEL</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Homework Modal -->
+  <div id="studentAddHwModal" class="admin-modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: var(--admin-card-bg, #0f172a); border: 1px solid var(--admin-gold, #d4af37); border-radius: 12px; max-width: 480px; width: 100%; padding: 2rem; box-shadow: 0 25px 60px rgba(0,0,0,0.6);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--admin-card-border, rgba(255,255,255,0.1)); padding-bottom: 0.75rem;">
+        <h3 style="font-family: 'Sora', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--admin-text, #fff); margin: 0;">ADD STUDY TASK</h3>
+        <button onclick="closeStudentAddHwModal()" style="background: none; border: none; color: var(--admin-text-muted, #94a3b8); font-size: 1.75rem; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+      <form id="studentAddHwForm" onsubmit="saveStudentHomework(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Task Description</label>
+          <input type="text" id="hwTitleInput" class="newsletter-input" placeholder="e.g. Master 10 Philidor Position Tests" required>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Due Date</label>
+            <input type="text" id="hwDueInput" class="newsletter-input" placeholder="e.g. Due in 3 days" required>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Initial Progress</label>
+            <input type="text" id="hwProgressInput" class="newsletter-input" placeholder="e.g. 0 / 10 Solved" required>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+          <button type="submit" class="btn-admin-gold" style="flex: 1; justify-content: center; padding: 0.75rem;">ADD TASK</button>
+          <button type="button" onclick="closeStudentAddHwModal()" class="action-icon-btn" style="width: auto; padding: 0.75rem 1.25rem;">CANCEL</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Register Tournament Modal -->
+  <div id="studentRegisterTourneyModal" class="admin-modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: var(--admin-card-bg, #0f172a); border: 1px solid var(--admin-gold, #d4af37); border-radius: 12px; max-width: 480px; width: 100%; padding: 2rem; box-shadow: 0 25px 60px rgba(0,0,0,0.6);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--admin-card-border, rgba(255,255,255,0.1)); padding-bottom: 0.75rem;">
+        <h3 style="font-family: 'Sora', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--admin-text, #fff); margin: 0;">REGISTER TOURNAMENT</h3>
+        <button onclick="closeStudentRegisterTournamentModal()" style="background: none; border: none; color: var(--admin-text-muted, #94a3b8); font-size: 1.75rem; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+      <form id="studentRegisterTourneyForm" onsubmit="saveStudentTournament(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Tournament Name</label>
+          <input type="text" id="tourneyNameInput" class="newsletter-input" placeholder="e.g. Winter Grandmaster Invitational" required>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Date & Schedule</label>
+          <input type="text" id="tourneyDateInput" class="newsletter-input" placeholder="e.g. Dec 12 - 15 • 9 Rounds" required>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Prize Fund / Format</label>
+          <input type="text" id="tourneyFormatInput" class="newsletter-input" placeholder="e.g. ₹50,000 Fund • FIDE Classical" required>
+        </div>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+          <button type="submit" class="btn-admin-gold" style="flex: 1; justify-content: center; padding: 0.75rem;">CONFIRM REGISTRATION</button>
+          <button type="button" onclick="closeStudentRegisterTournamentModal()" class="action-icon-btn" style="width: auto; padding: 0.75rem 1.25rem;">CANCEL</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    // Initialize student profile and chart
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStudentProfile();
+      initStudentRatingChart();
+      lucide.createIcons();
+    });
+
+    function loadStudentProfile() {
+      const userJson = localStorage.getItem('checkmate_user');
+      let name = 'Alex Morgan';
+      let rating = '1,685';
+      let target = 'Elite Track';
+
+      if (userJson) {
+        try {
+          const user = JSON.parse(userJson);
+          if (user.name) name = user.name;
+          if (user.rating) rating = user.rating;
+          if (user.target) target = user.target;
+        } catch (e) {}
+      }
+
+      const welcomeHeading = document.getElementById('studentWelcomeHeading');
+      const sidebarName = document.getElementById('studentSidebarName');
+      if (welcomeHeading) welcomeHeading.innerHTML = `WELCOME BACK, ${name.toUpperCase()} ♟️`;
+      if (sidebarName) sidebarName.textContent = name;
+
+      const profileNameInput = document.getElementById('profileStudentName');
+      const profileRatingInput = document.getElementById('profileStudentRating');
+      const profileTrackInput = document.getElementById('profileStudentTrack');
+      if (profileNameInput) profileNameInput.value = name;
+      if (profileRatingInput) profileRatingInput.value = parseInt(rating.replace(/,/g, ''), 10) || 1685;
+      if (profileTrackInput) profileTrackInput.value = target;
+    }
+
+    function openStudentProfileModal() {
+      const modal = document.getElementById('studentProfileModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeStudentProfileModal() {
+      const modal = document.getElementById('studentProfileModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function saveStudentProfile(e) {
+      e.preventDefault();
+      const name = document.getElementById('profileStudentName').value.trim();
+      const rating = document.getElementById('profileStudentRating').value.trim();
+      const track = document.getElementById('profileStudentTrack').value.trim();
+
+      const userObj = {
+        name: name || 'Alex Morgan',
+        role: 'student',
+        rating: rating || '1,685',
+        target: track || 'Elite Track'
+      };
+
+      localStorage.setItem('checkmate_user', JSON.stringify(userObj));
+      loadStudentProfile();
+      closeStudentProfileModal();
+
+      if (window.showCheckmateToast) {
+        window.showCheckmateToast('Student profile updated successfully!', 'success');
+      }
+    }
+
+    /* PGN Game Modal */
+    function openStudentAddGameModal() {
+      const modal = document.getElementById('studentAddGameModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeStudentAddGameModal() {
+      const modal = document.getElementById('studentAddGameModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function saveStudentGame(e) {
+      e.preventDefault();
+      const opp = document.getElementById('gameOpponent').value.trim();
+      const res = document.getElementById('gameResult').value;
+      const acc = document.getElementById('gameAccuracy').value.trim();
+      const opn = document.getElementById('gameOpening').value.trim();
+      const rev = document.getElementById('gameReview').value.trim();
+
+      const tbody = document.querySelector('#studentGamesTable tbody');
+      if (tbody) {
+        const tr = document.createElement('tr');
+        const resChip = res === '1 - 0' ? 'chip-success' : (res === '0 - 1' ? 'chip-danger' : 'chip-warning');
+        tr.innerHTML = `
+          <td><strong>${escapeHtml(opp)}</strong></td>
+          <td><span class="status-chip ${resChip}">${escapeHtml(res)}</span></td>
+          <td>${escapeHtml(opn)}</td>
+          <td><strong>${escapeHtml(acc)}</strong></td>
+          <td><span style="color: var(--admin-text-muted); font-size: 0.8rem;">${escapeHtml(rev)}</span></td>
+          <td>
+            <div class="action-btns-group">
+              <button class="action-icon-btn" title="Inspect Moves"><i data-lucide="eye" style="width: 14px;"></i></button>
+              <button class="action-icon-btn" title="Edit Game"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+              <button class="action-icon-btn" title="Delete Game"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+            </div>
+          </td>
+        `;
+        tbody.prepend(tr);
+        tr.style.backgroundColor = 'rgba(212, 175, 55, 0.25)';
+        setTimeout(() => { tr.style.backgroundColor = ''; }, 1200);
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      document.getElementById('studentAddGameForm').reset();
+      closeStudentAddGameModal();
+      if (window.showCheckmateToast) {
+        window.showCheckmateToast(`Game vs ${opp} added to analysis archive!`, 'success');
+      }
+    }
+
+    /* Homework CRUD */
+    function openStudentAddHwModal() {
+      const modal = document.getElementById('studentAddHwModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeStudentAddHwModal() {
+      const modal = document.getElementById('studentAddHwModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function saveStudentHomework(e) {
+      e.preventDefault();
+      const title = document.getElementById('hwTitleInput').value.trim();
+      const due = document.getElementById('hwDueInput').value.trim();
+      const prog = document.getElementById('hwProgressInput').value.trim();
+
+      const container = document.getElementById('studentHomeworkContainer');
+      if (container) {
+        const item = document.createElement('div');
+        item.className = 'admin-card hw-item';
+        item.style.padding = '0.75rem 0.85rem';
+        item.style.background = 'var(--admin-hover-bg)';
+        item.style.borderRadius = 'var(--admin-radius)';
+        item.style.border = '1px solid var(--admin-card-border)';
+        item.style.margin = '0';
+        item.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+            <div style="display: flex; align-items: center; gap: 0.65rem;">
+              <input type="checkbox" class="hw-checkbox" style="width: 16px; height: 16px; accent-color: var(--admin-gold); cursor: pointer;" onchange="toggleHomeworkItem(this)">
+              <span class="hw-title" style="font-size: 0.84rem; font-weight: 700; color: var(--admin-text);">${escapeHtml(title)}</span>
+            </div>
+            <div class="action-btns-group">
+              <button class="action-icon-btn" title="Edit Task" onclick="editHomeworkItem(this)"><i data-lucide="edit-3" style="width: 13px;"></i></button>
+              <button class="action-icon-btn" title="Delete Task" onclick="deleteHomeworkItem(this)"><i data-lucide="trash-2" style="width: 13px;"></i></button>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--admin-text-muted); padding-left: 1.65rem;">
+            <span class="hw-due">${escapeHtml(due)}</span>
+            <span class="hw-progress status-chip chip-warning" style="font-size: 0.65rem;">${escapeHtml(prog)}</span>
+          </div>
+        `;
+        container.prepend(item);
+        item.style.backgroundColor = 'rgba(212, 175, 55, 0.25)';
+        setTimeout(() => { item.style.backgroundColor = ''; }, 1200);
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      document.getElementById('studentAddHwForm').reset();
+      closeStudentAddHwModal();
+      if (window.showCheckmateToast) {
+        window.showCheckmateToast('Study task added to your plan!', 'success');
+      }
+    }
+
+    function toggleHomeworkItem(chk) {
+      const item = chk.closest('.hw-item');
+      if (!item) return;
+      const title = item.querySelector('.hw-title');
+      const chip = item.querySelector('.hw-progress');
+      if (chk.checked) {
+        if (title) title.style.textDecoration = 'line-through';
+        if (title) title.style.opacity = '0.6';
+        if (chip) {
+          chip.className = 'hw-progress status-chip chip-success';
+          chip.textContent = 'Completed';
+        }
+        if (window.showCheckmateToast) window.showCheckmateToast('Task completed! Keep up the great work.', 'success');
+      } else {
+        if (title) title.style.textDecoration = 'none';
+        if (title) title.style.opacity = '1';
+        if (chip) {
+          chip.className = 'hw-progress status-chip chip-warning';
+          chip.textContent = 'In Progress';
+        }
+      }
+    }
+
+    function editHomeworkItem(btn) {
+      const item = btn.closest('.hw-item');
+      if (!item) return;
+      const titleEl = item.querySelector('.hw-title');
+      const dueEl = item.querySelector('.hw-due');
+      const currentTitle = titleEl ? titleEl.textContent : '';
+      const newTitle = prompt('Edit Study Task Description:', currentTitle);
+      if (newTitle && newTitle.trim()) {
+        titleEl.textContent = newTitle.trim();
+        if (window.showCheckmateToast) window.showCheckmateToast('Task updated successfully!', 'success');
+      }
+    }
+
+    function deleteHomeworkItem(btn) {
+      const item = btn.closest('.hw-item');
+      if (!item) return;
+      if (confirm('Delete this assigned study task?')) {
+        item.style.transition = 'all 0.35s ease';
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(20px)';
+        setTimeout(() => item.remove(), 350);
+        if (window.showCheckmateToast) window.showCheckmateToast('Task deleted', 'error');
+      }
+    }
+
+    /* Tournament CRUD */
+    function openStudentRegisterTournamentModal() {
+      const modal = document.getElementById('studentRegisterTourneyModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeStudentRegisterTournamentModal() {
+      const modal = document.getElementById('studentRegisterTourneyModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function saveStudentTournament(e) {
+      e.preventDefault();
+      const name = document.getElementById('tourneyNameInput').value.trim();
+      const date = document.getElementById('tourneyDateInput').value.trim();
+      const format = document.getElementById('tourneyFormatInput').value.trim();
+
+      const container = document.getElementById('studentTournamentContainer');
+      if (container) {
+        const item = document.createElement('div');
+        item.className = 'admin-card tourney-item';
+        item.style.display = 'flex';
+        item.style.justifyContent = 'space-between';
+        item.style.alignItems = 'center';
+        item.style.padding = '0.75rem 1rem';
+        item.style.background = 'var(--admin-hover-bg)';
+        item.style.borderRadius = 'var(--admin-radius)';
+        item.style.border = '1px solid var(--admin-card-border)';
+        item.style.margin = '0';
+        item.innerHTML = `
+          <div>
+            <div class="tourney-name" style="font-size: 0.88rem; font-weight: 700; color: var(--admin-text);">${escapeHtml(name)}</div>
+            <div class="tourney-details" style="font-size: 0.75rem; color: var(--admin-text-muted);">${escapeHtml(date)} • ${escapeHtml(format)}</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="status-chip chip-gold">Confirmed</span>
+            <button class="action-icon-btn" title="Withdraw / Delete" onclick="withdrawTournament(this)"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+          </div>
+        `;
+        container.prepend(item);
+        item.style.backgroundColor = 'rgba(212, 175, 55, 0.25)';
+        setTimeout(() => { item.style.backgroundColor = ''; }, 1200);
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      document.getElementById('studentRegisterTourneyForm').reset();
+      closeStudentRegisterTournamentModal();
+      if (window.showCheckmateToast) {
+        window.showCheckmateToast(`Successfully registered for "${name}"!`, 'success');
+      }
+    }
+
+    function withdrawTournament(btn) {
+      const item = btn.closest('.tourney-item');
+      if (!item) return;
+      const name = item.querySelector('.tourney-name')?.textContent || 'Tournament';
+      if (confirm(`Are you sure you want to withdraw registration from "${name}"?`)) {
+        item.style.transition = 'all 0.35s ease';
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(20px)';
+        setTimeout(() => item.remove(), 350);
+        if (window.showCheckmateToast) window.showCheckmateToast(`Withdrawn from "${name}"`, 'error');
+      }
+    }
+
+    function initStudentRatingChart() {
+      const canvas = document.getElementById('chartStudentRating');
+      if (!canvas || typeof Chart === 'undefined') return;
+
+      const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+      const textColor = isDark ? '#94a3b8' : '#64748b';
+      const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+
+      new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+          datasets: [{
+            label: 'Elo Rating',
+            data: [1420, 1450, 1490, 1515, 1540, 1565, 1590, 1610, 1630, 1645, 1660, 1685],
+            borderColor: '#d4af37',
+            backgroundColor: 'rgba(212, 175, 55, 0.12)',
+            fill: true,
+            tension: 0.35,
+            pointBackgroundColor: '#d4af37',
+            pointBorderColor: isDark ? '#080b12' : '#ffffff',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => ` Rating: ${ctx.raw} Elo`
+              }
+            }
+          },
+          scales: {
+            y: {
+              min: 1350,
+              max: 1750,
+              grid: { color: gridColor },
+              ticks: { color: textColor }
+            },
+            x: {
+              grid: { color: gridColor },
+              ticks: { color: textColor }
+            }
+          }
+        }
+      });
+    }
+
+    function solvePuzzle() {
+      const feedback = document.getElementById('puzzleFeedback');
+      feedback.style.display = 'block';
+      feedback.style.background = 'rgba(16, 185, 129, 0.15)';
+      feedback.style.color = '#10b981';
+      feedback.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+      feedback.innerHTML = '<strong>Brilliant! (1. Qxh7+! Kxh7 2. Rh3+ Kg8 3. Rh8#)</strong><br>Queen deflection mate verified. +12 Tactics Rating!';
+      window.showCheckmateToast('+12 Tactics Elo gained! Puzzle Solved.', 'success');
+    }
+
+    function showSolution() {
+      const feedback = document.getElementById('puzzleFeedback');
+      feedback.style.display = 'block';
+      feedback.style.background = 'rgba(212, 175, 55, 0.12)';
+      feedback.style.color = 'var(--admin-gold)';
+      feedback.style.border = '1px solid rgba(212, 175, 55, 0.35)';
+      feedback.innerHTML = '<strong>Hint:</strong> The black king on g8 is trapped along the h-file once the h7 pawn is cleared. Look for a rook checkmate.';
+    }
+
+    function showLiveRoomModal() {
+      const modal = document.getElementById('liveRoomModal');
+      if (modal) {
+        modal.style.display = 'flex';
+        lucide.createIcons();
+      }
+    }
+
+    function closeLiveRoomModal() {
+      const modal = document.getElementById('liveRoomModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>

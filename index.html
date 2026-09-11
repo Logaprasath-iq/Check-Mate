@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHECKMATE – Premium Chess Academy & Coaching Center</title>
+  <meta name="description" content="Master the royal game with CHECKMATE. FIDE-accredited chess coaches, personalized training programs, and elite tournament preparation.">
+  <link rel="canonical" href="https://checkmate-academy.com/">
+  
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:title" content="CHECKMATE – Premium Chess Academy">
+  <meta property="og:description" content="Master the royal game with certified coaches, structured curriculums, and interactive tactical training.">
+  <meta property="og:image" content="assets/images/chess-hero.png">
+  <meta property="og:type" content="website">
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="site-preloader">
+    <div class="preloader-king">
+      <img src="assets/images/logo-icon.png" alt="CHECKMATE Preloader" style="width: 68px; height: auto; filter: drop-shadow(0 0 16px var(--gold-primary));">
+    </div>
+    <div class="preloader-brand">
+      <img src="assets/images/logo-text.png" alt="CHECKMATE" style="height: 32px; width: auto;">
+    </div>
+    <div class="preloader-bar-bg">
+      <div class="preloader-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- Primary Sticky Navigation (Exact Required Order) -->
+  <header class="site-header">
+    <div class="site-container">
+      <nav class="navbar-inner" aria-label="Main Navigation">
+        <!-- Logo -->
+        <a href="index.html" class="site-logo">
+          <img src="assets/images/logo-icon.png" alt="CHECKMATE Crest Logo" class="site-logo-img">
+          <img src="assets/images/logo-text.png" alt="CHECKMATE - THINK. PLAY. MASTER." class="site-brand-img">
+        </a>
+
+        <!-- Desktop Links (Strict Navbar Requirement) -->
+        <ul class="nav-menu">
+          <li class="nav-item has-dropdown">
+            <a href="index.html" class="nav-link dropdown-toggle active">
+              HOME <i data-lucide="chevron-down" class="dropdown-chevron"></i>
+            </a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="index.html" class="nav-dropdown-link active"><i data-lucide="crown" style="width: 15px;"></i> Home 1 – Elite Academy</a></li>
+              <li><a href="home-2.html" class="nav-dropdown-link "><i data-lucide="cpu" style="width: 15px;"></i> Home 2 – EdTech & AI Platform</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">ABOUT</a></li>
+          <li><a href="gallery.html" class="nav-link">GALLERY</a></li>
+          <li><a href="programs.html" class="nav-link">PROGRAMS</a></li>
+          <li><a href="tournaments.html" class="nav-link">TOURNAMENTS</a></li>
+          <li><a href="pricing.html" class="nav-link">PRICING</a></li>
+          <li><a href="blog.html" class="nav-link">BLOG</a></li>
+          <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+        </ul>
+
+        <!-- Right Action Items -->
+        <div class="nav-actions">
+          <!-- Dark / Light Theme Toggle -->
+          <button class="tool-btn theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+            <span class="theme-icon-slot">
+              <i data-lucide="sun"></i>
+            </span>
+          </button>
+
+          <!-- RTL Toggle -->
+          <button class="tool-btn rtl-toggle-btn" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR">
+            <i data-lucide="arrow-left-right"></i>
+          </button>
+
+          <!-- Login & Join Now -->
+          <a href="login.html" class="btn-login">LOGIN</a>
+          <a href="register.html" class="btn-join">
+            JOIN NOW
+            <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button class="nav-toggle" aria-label="Open Navigation Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Slide-In Navigation -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav-panel">
+    <div>
+      <a href="index.html" class="site-logo" style="margin-bottom: 2rem; display: inline-flex;">
+        <img src="assets/images/logo-icon.png" alt="CHECKMATE Crest Logo" class="site-logo-img">
+        <img src="assets/images/logo-text.png" alt="CHECKMATE - THINK. PLAY. MASTER." class="site-brand-img">
+      </a>
+      <ul class="mobile-nav-list">
+        <li class="mobile-dropdown-item">
+          <div class="mobile-dropdown-header">
+            <a href="index.html" class="mobile-nav-link active">HOME</a>
+            <button class="mobile-submenu-toggle" aria-label="Toggle Home Submenu" type="button"><i data-lucide="chevron-down"></i></button>
+          </div>
+          <ul class="mobile-submenu">
+            <li><a href="index.html" class="mobile-submenu-link active"><i data-lucide="crown" style="width: 14px;"></i> Home 1 – Elite Academy</a></li>
+            <li><a href="home-2.html" class="mobile-submenu-link "><i data-lucide="cpu" style="width: 14px;"></i> Home 2 – EdTech & AI Platform</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html" class="mobile-nav-link">ABOUT <i data-lucide="chevron-right"></i></a></li>
+        <li><a href="gallery.html" class="mobile-nav-link">GALLERY <i data-lucide="chevron-right"></i></a></li>
+        <li><a href="programs.html" class="mobile-nav-link">PROGRAMS <i data-lucide="chevron-right"></i></a></li>
+        <li><a href="tournaments.html" class="mobile-nav-link">TOURNAMENTS <i data-lucide="chevron-right"></i></a></li>
+        <li><a href="pricing.html" class="mobile-nav-link">PRICING <i data-lucide="chevron-right"></i></a></li>
+        <li><a href="blog.html" class="mobile-nav-link">BLOG <i data-lucide="chevron-right"></i></a></li>
+        <li><a href="contact.html" class="mobile-nav-link">CONTACT <i data-lucide="chevron-right"></i></a></li>
+      </ul>
+    </div>
+    <div class="mobile-nav-actions">
+      <a href="login.html" class="btn-login" style="text-align: center;">LOGIN</a>
+      <a href="register.html" class="btn-join" style="justify-content: center;">JOIN NOW</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ============================================================
+         Hero Section: Preserves chess-hero.png with King on Right & Text on Left
+         ============================================================ -->
+    <section class="hero-home-1">
+      <div class="hero-bg-wrapper">
+        <img src="assets/images/home3.jpg" alt="Checkmate Chess Master Confrontation" class="hero-bg-img">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-bottom-fade"></div>
+
+      <div class="site-container" style="position: relative; z-index: 4; width: 100%;">
+        <div class="hero-content-wrap">
+          <!-- Text Content on Left Side -->
+          <div class="hero-text-side">
+            <div class="hero-eyebrow">
+              <span class="hero-eyebrow-dot"></span>
+              PREMIUM CHESS ACADEMY
+            </div>
+
+            <h1 class="hero-title">
+              MASTER THE GAME.<br>
+              <span class="text-gold">MASTER YOUR MIND.</span>
+            </h1>
+
+            <p class="hero-desc">
+              Learn from experienced coaches, sharpen your strategy, improve your rating, and compete with confidence in world-class tournaments.
+            </p>
+
+            <div class="hero-actions">
+              <a href="programs.html" class="btn-primary-gold">
+                START LEARNING
+                <i data-lucide="chevron-right" style="width: 17px; height: 17px;"></i>
+              </a>
+              <a href="programs.html" class="btn-secondary-outline">
+                EXPLORE PROGRAMS
+              </a>
+            </div>
+
+            <!-- Floating Statistics Cards -->
+            <div class="hero-stats-grid">
+              <div class="hero-stat-card">
+                <div class="stat-number stat-counter" data-target="5000" data-suffix="+">5,000+</div>
+                <div class="stat-label">Students Mentored</div>
+              </div>
+              <div class="hero-stat-card">
+                <div class="stat-number stat-counter" data-target="50" data-suffix="+">50+</div>
+                <div class="stat-label">Expert Coaches</div>
+              </div>
+              <div class="hero-stat-card">
+                <div class="stat-number stat-counter" data-target="120" data-suffix="+">120+</div>
+                <div class="stat-label">Tournaments Hosted</div>
+              </div>
+              <div class="hero-stat-card">
+                <div class="stat-number stat-counter" data-target="95" data-suffix="%">95%</div>
+                <div class="stat-label">Student Improvement</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty Right Column preserves visual clarity of Gold King vs Black Piece -->
+          <div class="hero-visual-side">
+            <div class="hero-floating-badge">
+              <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(212,175,55,0.2); display: flex; align-items: center; justify-content: center; color: var(--gold-primary);">
+                <i data-lucide="award" style="width: 22px; height: 22px;"></i>
+              </div>
+              <div>
+                <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">FIDE Accredited</div>
+                <div style="font-family: 'Sora'; font-size: 0.9rem; font-weight: 800; color: var(--text-primary);">International Standards</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Trust & Accreditation Section
+         ============================================================ -->
+    <section class="trust-strip">
+      <div class="site-container">
+        <h2 class="trust-title">BUILT FOR PLAYERS WHO WANT TO GO FURTHER.</h2>
+        <div class="trust-grid">
+          <div class="trust-item">
+            <div class="trust-icon"><i data-lucide="shield-check"></i></div>
+            <div class="trust-label">FIDE-STYLE TRAINING</div>
+            <div class="trust-subtext">Official syllabus aligned with international chess federation standards.</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon"><i data-lucide="award"></i></div>
+            <div class="trust-label">EXPERT COACHING</div>
+            <div class="trust-subtext">Direct guidance from Grandmasters and FIDE Masters.</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon"><i data-lucide="swords"></i></div>
+            <div class="trust-label">TOURNAMENT PREPARATION</div>
+            <div class="trust-subtext">Mental conditioning, clock handling, and opening repertoire.</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon"><i data-lucide="monitor"></i></div>
+            <div class="trust-label">ONLINE + OFFLINE CLASSES</div>
+            <div class="trust-subtext">Hybrid flexibility for students across all major time zones.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Why Checkmate Section (4 3D Tilt Cards)
+         ============================================================ -->
+    <section class="section-py" style="background-color: var(--bg-primary);">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag">Strategic Advantage</span>
+          <h2 class="section-title">WHY CHECKMATE?</h2>
+          <p class="section-subtitle">More than chess lessons. A complete system for becoming a stronger, calmer, and more decisive player.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card has-img">
+            <div class="feature-card-thumb">
+              <img src="assets/images/home1.jpg" alt="Expert Coaches" class="feature-thumb-img" loading="lazy">
+            </div>
+            <div class="feature-card-body">
+              <div class="feature-icon-box">
+                <i data-lucide="users"></i>
+              </div>
+              <h3 class="feature-title">EXPERT COACHES</h3>
+              <p class="feature-desc">Learn directly from verified FIDE Masters and experienced coaches who have competed at world championships.</p>
+            </div>
+          </div>
+
+          <div class="feature-card has-img">
+            <div class="feature-card-thumb">
+              <img src="assets/images/home2.jpg" alt="Structured Learning" class="feature-thumb-img" loading="lazy">
+            </div>
+            <div class="feature-card-body">
+              <div class="feature-icon-box">
+                <i data-lucide="book-open-check"></i>
+              </div>
+              <h3 class="feature-title">STRUCTURED LEARNING</h3>
+              <p class="feature-desc">Follow a clear, proven progression path from foundational fundamentals to intricate grandmaster endgames.</p>
+            </div>
+          </div>
+
+          <div class="feature-card has-img">
+            <div class="feature-card-thumb">
+              <img src="assets/images/home-3.jpg" alt="Personalized Training" class="feature-thumb-img" loading="lazy">
+            </div>
+            <div class="feature-card-body">
+              <div class="feature-icon-box">
+                <i data-lucide="target"></i>
+              </div>
+              <h3 class="feature-title">PERSONALIZED TRAINING</h3>
+              <p class="feature-desc">Receive individualized game diagnostic reports, tactical flaw correction, and targeted opening preparation.</p>
+            </div>
+          </div>
+
+          <div class="feature-card has-img">
+            <div class="feature-card-thumb">
+              <img src="assets/images/home4.jpg" alt="Tournament Preparation" class="feature-thumb-img" loading="lazy">
+            </div>
+            <div class="feature-card-body">
+              <div class="feature-icon-box">
+                <i data-lucide="trophy"></i>
+              </div>
+              <h3 class="feature-title">TOURNAMENT PREPARATION</h3>
+              <p class="feature-desc">Prepare mentally, strategically, and emotionally for competitive play under timed tournament conditions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Programs Section
+         ============================================================ -->
+    <section class="section-py" style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag">Structured Curriculums</span>
+          <h2 class="section-title">TRAIN AT YOUR LEVEL</h2>
+          <p class="section-subtitle">Choose the exact program engineered for your current rating and aspirational chess goals.</p>
+        </div>
+
+        <div class="programs-grid">
+          <!-- Beginner -->
+          <div class="program-card">
+            <div>
+              <div class="program-piece-icon">
+                <i data-lucide="compass" style="width: 44px; height: 44px;"></i>
+              </div>
+              <h3 class="program-level">BEGINNER</h3>
+              <p class="program-tagline">"Build a strong foundation."</p>
+              <ul class="program-specs">
+                <li class="program-spec-item">
+                  <span class="spec-title">Duration:</span>
+                  <span class="spec-value">3 Months</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Classes:</span>
+                  <span class="spec-value">2 Sessions / Week</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Target Rating:</span>
+                  <span class="spec-value">0 – 1200 Elo</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Lead Coach:</span>
+                  <span class="spec-value">Sofia Williams</span>
+                </li>
+              </ul>
+            </div>
+            <a href="programs.html" class="btn-card-action">VIEW PROGRAM</a>
+          </div>
+
+          <!-- Intermediate -->
+          <div class="program-card">
+            <div>
+              <div class="program-piece-icon">
+                <i data-lucide="zap" style="width: 44px; height: 44px;"></i>
+              </div>
+              <h3 class="program-level">INTERMEDIATE</h3>
+              <p class="program-tagline">"Develop tactical strength."</p>
+              <ul class="program-specs">
+                <li class="program-spec-item">
+                  <span class="spec-title">Duration:</span>
+                  <span class="spec-value">6 Months</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Classes:</span>
+                  <span class="spec-value">3 Sessions / Week</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Target Rating:</span>
+                  <span class="spec-value">1200 – 1600 Elo</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Lead Coach:</span>
+                  <span class="spec-value">Daniel Carter</span>
+                </li>
+              </ul>
+            </div>
+            <a href="programs.html" class="btn-card-action">VIEW PROGRAM</a>
+          </div>
+
+          <!-- Advanced (Featured) -->
+          <div class="program-card featured">
+            <span class="program-badge">Popular</span>
+            <div>
+              <div class="program-piece-icon">
+                <i data-lucide="shield" style="width: 44px; height: 44px;"></i>
+              </div>
+              <h3 class="program-level">ADVANCED</h3>
+              <p class="program-tagline">"Master deeper strategic concepts."</p>
+              <ul class="program-specs">
+                <li class="program-spec-item">
+                  <span class="spec-title">Duration:</span>
+                  <span class="spec-value">9 Months</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Classes:</span>
+                  <span class="spec-value">4 Sessions / Week</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Target Rating:</span>
+                  <span class="spec-value">1600 – 2000 Elo</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Lead Coach:</span>
+                  <span class="spec-value">Rahul Sharma</span>
+                </li>
+              </ul>
+            </div>
+            <a href="programs.html" class="btn-card-action">VIEW PROGRAM</a>
+          </div>
+
+          <!-- Elite -->
+          <div class="program-card">
+            <div>
+              <div class="program-piece-icon">
+                <i data-lucide="crown" style="width: 44px; height: 44px;"></i>
+              </div>
+              <h3 class="program-level">ELITE</h3>
+              <p class="program-tagline">"Train like a tournament player."</p>
+              <ul class="program-specs">
+                <li class="program-spec-item">
+                  <span class="spec-title">Duration:</span>
+                  <span class="spec-value">12 Months</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Classes:</span>
+                  <span class="spec-value">5 Sessions / Week</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Target Rating:</span>
+                  <span class="spec-value">2000+ FIDE</span>
+                </li>
+                <li class="program-spec-item">
+                  <span class="spec-title">Lead Coach:</span>
+                  <span class="spec-value">Arjun Mehta (FM)</span>
+                </li>
+              </ul>
+            </div>
+            <a href="programs.html" class="btn-card-action">VIEW PROGRAM</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Coaches Showcase
+         ============================================================ -->
+    <section class="section-py">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag">Grandmaster Faculty</span>
+          <h2 class="section-title">LEARN FROM THE BEST.</h2>
+          <p class="section-subtitle">Our coaches bring decades of competitive international chess experience and proven pedagogy.</p>
+        </div>
+
+        <div class="coaches-grid">
+          <!-- Arjun Mehta -->
+          <div class="coach-card">
+            <div class="coach-img-box">
+              <img src="assets/images/coach-arjun.jpg" alt="FM Arjun Mehta FIDE Master & Head Coach" class="coach-img" loading="lazy">
+              <div class="coach-rating-tag">FIDE 2380</div>
+            </div>
+            <div class="coach-info">
+              <div>
+                <h3 class="coach-name">Arjun Mehta</h3>
+                <div class="coach-title">FIDE Master & Head Coach</div>
+                <p class="coach-exp">15+ years coaching experience, coached 8 National Junior champions.</p>
+              </div>
+              <div class="coach-socials">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="Facebook" title="Facebook">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="Instagram" title="Instagram">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="WhatsApp" title="WhatsApp">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Daniel Carter -->
+          <div class="coach-card">
+            <div class="coach-img-box">
+              <img src="assets/images/coach-daniel.jpg" alt="Daniel Carter International Chess Master" class="coach-img" loading="lazy">
+              <div class="coach-rating-tag">FIDE 2310</div>
+            </div>
+            <div class="coach-info">
+              <div>
+                <h3 class="coach-name">Daniel Carter</h3>
+                <div class="coach-title">International Chess Coach</div>
+                <p class="coach-exp">Specialist in dynamic Sicilian Defenses and deep tactical calculation.</p>
+              </div>
+              <div class="coach-socials">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="Facebook" title="Facebook">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="Instagram" title="Instagram">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="WhatsApp" title="WhatsApp">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sofia Williams -->
+          <div class="coach-card">
+            <div class="coach-img-box">
+              <img src="assets/images/coach-sofia.jpg" alt="Sofia Williams Woman Grandmaster & Senior Trainer" class="coach-img" loading="lazy">
+              <div class="coach-rating-tag">FIDE 2240</div>
+            </div>
+            <div class="coach-info">
+              <div>
+                <h3 class="coach-name">Sofia Williams</h3>
+                <div class="coach-title">Senior Chess Trainer</div>
+                <p class="coach-exp">Renowned youth strategist and Olympiad squad prep director.</p>
+              </div>
+              <div class="coach-socials">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="Facebook" title="Facebook">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="Instagram" title="Instagram">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="WhatsApp" title="WhatsApp">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rahul Sharma -->
+          <div class="coach-card">
+            <div class="coach-img-box">
+              <img src="assets/images/coach-rahul.jpg" alt="IM Rahul Sharma Tournament Preparation Lead" class="coach-img" loading="lazy">
+              <div class="coach-rating-tag">FIDE 2350</div>
+            </div>
+            <div class="coach-info">
+              <div>
+                <h3 class="coach-name">Rahul Sharma</h3>
+                <div class="coach-title">Tournament Preparation Lead</div>
+                <p class="coach-exp">Endgame tablebase master and psychological tournament strategist.</p>
+              </div>
+              <div class="coach-socials">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="Facebook" title="Facebook">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="Instagram" title="Instagram">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="coach-social-btn" aria-label="WhatsApp" title="WhatsApp">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Interactive Chess Board Section (3D Perspective)
+         ============================================================ -->
+    <section class="section-py" style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <div class="site-container">
+        <div class="board-section-wrap">
+          <div>
+            <span class="section-tag">Interactive Tactical Study</span>
+            <h2 class="section-title">EVERY MOVE HAS A PURPOSE.</h2>
+            <p class="section-subtitle" style="margin-bottom: 2rem;">
+              Learn to see beyond the next move and understand the profound tension behind every square on the board. Test tactical maneuvers right here on this interactive board.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem;">
+              <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div style="color: var(--gold-primary); margin-top: 3px;"><i data-lucide="crosshair"></i></div>
+                <div>
+                  <div style="font-weight: 700; color: var(--text-primary);">Piece Coordination</div>
+                  <div style="font-size: 0.88rem; color: var(--text-secondary);">Harmonize knights and bishops into unassailable outposts.</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div style="color: var(--gold-primary); margin-top: 3px;"><i data-lucide="brain"></i></div>
+                <div>
+                  <div style="font-weight: 700; color: var(--text-primary);">Prophylactic Thinking</div>
+                  <div style="font-size: 0.88rem; color: var(--text-secondary);">Prevent opponent counterplay before launching your decisive offensive.</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+              <button class="btn-primary-gold" data-board-reset>
+                RESET BOARD
+              </button>
+              <a href="programs.html" class="btn-secondary-outline">
+                JOIN MASTERCLASS
+              </a>
+            </div>
+          </div>
+
+          <!-- 3D Perspective Interactive Board -->
+          <div class="board-perspective-wrapper">
+            <div class="chess-board-container interactive-chess-board" id="home1-chess-board">
+              <!-- Rendered automatically by chess-board.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Tournament Section with Live Countdown
+         ============================================================ -->
+    <section class="section-py">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag">Competitive Circuit</span>
+          <h2 class="section-title">PLAY. COMPETE. CONQUER.</h2>
+          <p class="section-subtitle">Test your skills in official FIDE-rated championships, blitz arenas, and academy grand prix events.</p>
+        </div>
+
+        <!-- Animated Countdown Banner -->
+        <div class="tournament-countdown-banner" data-countdown>
+          <div>
+            <span class="tournament-status-badge status-upcoming">Next Major Championship</span>
+            <h3 style="font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 0.35rem;">Checkmate Grand Masters Open 2026</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Venue: Royal Chess Hall & Online Arena • Prize Pool: ₹500,000</p>
+          </div>
+
+          <div class="countdown-digits">
+            <div class="countdown-box">
+              <div class="count-num count-days">14</div>
+              <div class="count-unit">Days</div>
+            </div>
+            <div class="countdown-box">
+              <div class="count-num count-hours">07</div>
+              <div class="count-unit">Hours</div>
+            </div>
+            <div class="countdown-box">
+              <div class="count-num count-mins">42</div>
+              <div class="count-unit">Mins</div>
+            </div>
+            <div class="countdown-box">
+              <div class="count-num count-secs">18</div>
+              <div class="count-unit">Secs</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tournaments Grid -->
+        <div class="tournaments-grid">
+          <!-- Tournament 1 -->
+          <div class="tournament-card">
+            <div>
+              <span class="tournament-status-badge status-upcoming">Registration Open</span>
+              <h3 class="tournament-name">Autumn Classical Masters</h3>
+              <ul class="tournament-details-list">
+                <li class="detail-row"><i data-lucide="calendar"></i> Oct 18 - 21, 2026</li>
+                <li class="detail-row"><i data-lucide="clock"></i> 90m + 30s Increment</li>
+                <li class="detail-row"><i data-lucide="map-pin"></i> Academy Main Arena & Online</li>
+                <li class="detail-row"><i data-lucide="users"></i> 128 Competitors Cap</li>
+                <li class="detail-row"><i data-lucide="trophy"></i> Prize Pool: ₹250,000</li>
+              </ul>
+            </div>
+            <div class="tournament-card-footer">
+              <a href="tournaments.html" class="btn-primary-gold" style="flex: 1; text-align: center; justify-content: center;">REGISTER NOW</a>
+            </div>
+          </div>
+
+          <!-- Tournament 2 -->
+          <div class="tournament-card">
+            <div>
+              <span class="tournament-status-badge status-live">Live Stream Now</span>
+              <h3 class="tournament-name">Sunday Lightning Blitz Invitational</h3>
+              <ul class="tournament-details-list">
+                <li class="detail-row"><i data-lucide="calendar"></i> Every Sunday 18:00 UTC</li>
+                <li class="detail-row"><i data-lucide="clock"></i> 3m + 2s Blitz</li>
+                <li class="detail-row"><i data-lucide="map-pin"></i> Checkmate Digital Arena</li>
+                <li class="detail-row"><i data-lucide="users"></i> 256 Active Players</li>
+                <li class="detail-row"><i data-lucide="trophy"></i> Prize Pool: ₹100,000</li>
+              </ul>
+            </div>
+            <div class="tournament-card-footer">
+              <a href="tournaments.html" class="btn-primary-gold" style="flex: 1; text-align: center; justify-content: center;">VIEW DETAILS</a>
+            </div>
+          </div>
+
+          <!-- Tournament 3 -->
+          <div class="tournament-card">
+            <div>
+              <span class="tournament-status-badge status-upcoming">Filling Fast</span>
+              <h3 class="tournament-name">Junior National Championship Prep</h3>
+              <ul class="tournament-details-list">
+                <li class="detail-row"><i data-lucide="calendar"></i> Nov 05 - 08, 2026</li>
+                <li class="detail-row"><i data-lucide="clock"></i> 60m + 10s Rapid</li>
+                <li class="detail-row"><i data-lucide="map-pin"></i> Academy Grand Hall</li>
+                <li class="detail-row"><i data-lucide="users"></i> Under-18 Only (64 Slots)</li>
+                <li class="detail-row"><i data-lucide="trophy"></i> Prize Pool: ₹150,000</li>
+              </ul>
+            </div>
+            <div class="tournament-card-footer">
+              <a href="tournaments.html" class="btn-primary-gold" style="flex: 1; text-align: center; justify-content: center;">REGISTER NOW</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Student Success Rating Improvement Visual
+         ============================================================ -->
+    <section class="section-py" style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag">Proven Trajectory</span>
+          <h2 class="section-title">REAL PROGRESS. REAL RESULTS.</h2>
+          <p class="section-subtitle">Consistent training with grandmaster mentors produces measurable rating leaps.</p>
+        </div>
+
+        <div class="rating-success-box">
+          <div>
+            <div class="rating-diff-badge">
+              <i data-lucide="trending-up"></i>
+              +425 RATING POINTS IN 9 MONTHS
+            </div>
+
+            <div class="rating-comparison">
+              <div class="rating-block">
+                <div class="rating-score before">1450</div>
+                <div class="rating-tag">Starting Rating</div>
+              </div>
+              <div class="rating-arrow">
+                <i data-lucide="arrow-right"></i>
+              </div>
+              <div class="rating-block">
+                <div class="rating-score after">1875</div>
+                <div class="rating-tag">Current FIDE Rating</div>
+              </div>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
+              "When I joined Checkmate, I kept blundering in complex middlegames. FM Arjun Mehta analyzed 40 of my games, revamped my repertoire against 1.d4, and within 9 months my rating surged past 1875."
+            </p>
+
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <img src="assets/images/student-4.jpg" alt="Student Arjun Rao" style="width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold-primary);">
+              <div>
+                <div style="font-weight: 700; color: var(--text-primary); font-size: 1rem;">Arjun Rao</div>
+                <div style="font-size: 0.85rem; color: var(--gold-light); font-weight: 600;">Under-16 State Silver Medalist</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rating-chart-container" style="position: relative; height: 260px; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem;">
+            <canvas id="studentRatingProgressChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Testimonials Slider (Swiper.js)
+         ============================================================ -->
+    <section class="section-py">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag">Student Voices</span>
+          <h2 class="section-title">WHAT OUR STUDENTS SAY</h2>
+          <p class="section-subtitle">Hear how Checkmate transformed players into calm, strategic contenders.</p>
+        </div>
+
+        <div class="swiper testimonial-slider" style="padding-bottom: 3.5rem;">
+          <div class="swiper-wrapper">
+            <!-- Review 1 -->
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div>
+                  <div class="testimonial-stars">
+                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+                  </div>
+                  <p class="testimonial-quote">
+                    "The personalized diagnostics changed everything. My coach spotted positional blind spots I had ignored for three years. I won my first state open last month!"
+                  </p>
+                </div>
+                <div class="testimonial-author">
+                  <img src="assets/images/student-1.jpg" alt="Student Priya Sundaram" class="author-avatar" loading="lazy">
+                  <div>
+                    <div class="author-name">Priya Sundaram</div>
+                    <div class="author-rating">Rating: 1940 • FIDE Candidate</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div>
+                  <div class="testimonial-stars">
+                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+                  </div>
+                  <p class="testimonial-quote">
+                    "Checkmate doesn't just teach openings; they teach you how to evaluate risk, control your clock, and maintain composure when you're under severe attack."
+                  </p>
+                </div>
+                <div class="testimonial-author">
+                  <img src="assets/images/student-2.jpg" alt="Student Rohan Kapoor" class="author-avatar" loading="lazy">
+                  <div>
+                    <div class="author-name">Rohan Kapoor</div>
+                    <div class="author-rating">Rating: 2110 • Junior Champion</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div>
+                  <div class="testimonial-stars">
+                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+                  </div>
+                  <p class="testimonial-quote">
+                    "As an adult improver, I thought my rating had peaked. Checkmate's structured curriculum helped me cross the 1800 barrier in less than six months."
+                  </p>
+                </div>
+                <div class="testimonial-author">
+                  <img src="assets/images/student-3.jpg" alt="Student Marcus Lee" class="author-avatar" loading="lazy">
+                  <div>
+                    <div class="author-name">Marcus Lee</div>
+                    <div class="author-rating">Rating: 1845 • Club Player</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Gallery Preview
+         ============================================================ -->
+    <section class="section-py" style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag">Moments of Mastery</span>
+          <h2 class="section-title">INSIDE CHECKMATE.</h2>
+          <p class="section-subtitle">Glimpse life inside our high-performance academy halls, tournament chambers, and award celebrations.</p>
+        </div>
+
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-filter="all">ALL</button>
+          <button class="filter-btn" data-filter="academy">ACADEMY</button>
+          <button class="filter-btn" data-filter="training">TRAINING</button>
+          <button class="filter-btn" data-filter="tournaments">TOURNAMENTS</button>
+          <button class="filter-btn" data-filter="students">STUDENTS</button>
+          <button class="filter-btn" data-filter="awards">AWARDS</button>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item" data-category="academy">
+            <img src="assets/images/g1.jpg" alt="Grand Arena Master Board" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-item-title">Championship Wooden Boards</div>
+              <div class="gallery-item-tag">Academy</div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="tournaments">
+            <img src="assets/images/g2.jpg" alt="National Youth Championship" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-item-title">National Youth Championship</div>
+              <div class="gallery-item-tag">Tournaments</div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="training">
+            <img src="assets/images/g3.jpg" alt="Tactics Masterclass Room" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-item-title">Tactics Masterclass Room</div>
+              <div class="gallery-item-tag">Training</div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="students">
+            <img src="assets/images/g4.jpg" alt="Junior Finalists Showdown" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-item-title">Junior Finalists Showdown</div>
+              <div class="gallery-item-tag">Students</div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="awards">
+            <img src="assets/images/g5.jpg" alt="Grand Prix Cup Presentation" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-item-title">Grand Prix Cup Presentation</div>
+              <div class="gallery-item-tag">Awards</div>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="academy">
+            <img src="assets/images/g7.jpg" alt="Regal Library & Study Lounge" class="gallery-thumb" loading="lazy">
+            <div class="gallery-overlay">
+              <div class="gallery-item-title">Regal Library & Study Lounge</div>
+              <div class="gallery-item-tag">Academy</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3.5rem;">
+          <a href="gallery.html" class="btn-secondary-outline">VIEW FULL GALLERY</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Pricing Preview
+         ============================================================ -->
+    <section class="section-py">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag">Investment in Excellence</span>
+          <h2 class="section-title">TRANSPARENT TUITION PLANS</h2>
+          <p class="section-subtitle">Invest in structured chess mastery. Flexible monthly or discounted annual enrollment.</p>
+        </div>
+
+        <div class="pricing-toggle-wrap">
+          <span class="toggle-label monthly active">Monthly Billing</span>
+          <div class="toggle-switch" role="button" aria-label="Toggle annual pricing"></div>
+          <span class="toggle-label yearly">Annual Billing <span class="discount-badge">SAVE 20%</span></span>
+        </div>
+
+        <div class="pricing-cards-grid">
+          <!-- Starter -->
+          <div class="pricing-card">
+            <div>
+              <h3 class="pricing-plan-name">STARTER</h3>
+              <p class="pricing-plan-desc">For budding players building solid foundations.</p>
+              <div class="pricing-price-box">
+                <span class="price-currency">₹</span>
+                <span class="price-amount" data-monthly="999" data-yearly="799">999</span>
+                <span class="price-period">/ month</span>
+              </div>
+              <ul class="pricing-features-list">
+                <li class="pricing-feature-item"><i data-lucide="check"></i> 2 Live Group Classes / Week</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> Foundational Opening Repertoire</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> Weekly 50+ Tactics Worksheets</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> Access to Academy Tournaments</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> Monthly Rating Progress Review</li>
+              </ul>
+            </div>
+            <a href="pricing.html" class="btn-secondary-outline" style="text-align: center; justify-content: center;">CHOOSE STARTER</a>
+          </div>
+
+          <!-- Pro (Most Popular) -->
+          <div class="pricing-card popular">
+            <div class="popular-badge">MOST POPULAR</div>
+            <div>
+              <h3 class="pricing-plan-name">PRO</h3>
+              <p class="pricing-plan-desc">For competitive club players hungry for 1800+ rating.</p>
+              <div class="pricing-price-box">
+                <span class="price-currency">₹</span>
+                <span class="price-amount" data-monthly="1999" data-yearly="1599">1999</span>
+                <span class="price-period">/ month</span>
+              </div>
+              <ul class="pricing-features-list">
+                <li class="pricing-feature-item"><i data-lucide="check"></i> 4 Live Interactive Classes / Week</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> 1-on-1 Monthly GM Diagnostic</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> FIDE Opening Repertoire Files (PGN)</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> Deep Endgame Tablebase Modules</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> Priority Tournament Entry</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> AI Blunder Detection & Analytics</li>
+              </ul>
+            </div>
+            <a href="pricing.html" class="btn-primary-gold" style="text-align: center; justify-content: center;">CHOOSE PRO</a>
+          </div>
+
+          <!-- Elite -->
+          <div class="pricing-card">
+            <div>
+              <h3 class="pricing-plan-name">ELITE</h3>
+              <p class="pricing-plan-desc">Intensive mentorship for titled players and Olympiad aspirants.</p>
+              <div class="pricing-price-box">
+                <span class="price-currency">₹</span>
+                <span class="price-amount" data-monthly="3999" data-yearly="3199">3999</span>
+                <span class="price-period">/ month</span>
+              </div>
+              <ul class="pricing-features-list">
+                <li class="pricing-feature-item"><i data-lucide="check"></i> Unlimited Live Masterclasses</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> Weekly 1-on-1 Grandmaster Mentorship</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> Bespoke Psychological Tournament Prep</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> Complete Opposition Scout Reports</li>
+                <li class="pricing-feature-item"><i data-lucide="check"></i> Direct WhatsApp Access to FM Arjun</li>
+              </ul>
+            </div>
+            <a href="pricing.html" class="btn-secondary-outline" style="text-align: center; justify-content: center;">CHOOSE ELITE</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Blog Preview
+         ============================================================ -->
+    <section class="section-py" style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag">Chess Insights</span>
+          <h2 class="section-title">FROM THE CHESSBOARD.</h2>
+          <p class="section-subtitle">Deep dives into opening novelties, endgame geometry, and psychological mastery.</p>
+        </div>
+
+        <div class="blog-grid">
+          <!-- Article 1 -->
+          <article class="blog-card">
+            <div class="blog-thumb-box">
+              <img src="assets/images/blog1.jpg" alt="Mastering the King's Indian" class="blog-thumb" loading="lazy">
+              <span class="blog-category-badge">Openings</span>
+            </div>
+            <div class="blog-content">
+              <div>
+                <div class="blog-meta">October 12, 2026 • 6 min read</div>
+                <h3 class="blog-title">
+                  <a href="blog-details-kings-indian.html">Mastering the King's Indian: Unleashing Kingside Attacks</a>
+                </h3>
+                <p class="blog-excerpt">
+                  Why Kasparov and Fischer loved the KID, and how to counter White's queenside expansion with devastating pawn sacrifices.
+                </p>
+              </div>
+              <a href="blog-details-kings-indian.html" class="blog-read-more">
+                READ ARTICLE <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 2 -->
+          <article class="blog-card">
+            <div class="blog-thumb-box">
+              <img src="assets/images/blog2.jpg" alt="Calculating Candidate Moves" class="blog-thumb" loading="lazy">
+              <span class="blog-category-badge">Tactics</span>
+            </div>
+            <div class="blog-content">
+              <div>
+                <div class="blog-meta">October 04, 2026 • 8 min read</div>
+                <h3 class="blog-title">
+                  <a href="blog-details-kotov.html">Kotov's Tree of Analysis: How to Calculate Without Overthinking</a>
+                </h3>
+                <p class="blog-excerpt">
+                  Learn how titled masters filter 5 candidate moves down to the single most punishing continuation in seconds.
+                </p>
+              </div>
+              <a href="blog-details-kotov.html" class="blog-read-more">
+                READ ARTICLE <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 3 -->
+          <article class="blog-card">
+            <div class="blog-thumb-box">
+              <img src="assets/images/blog3.jpg" alt="Rook and Pawn Endgames" class="blog-thumb" loading="lazy">
+              <span class="blog-category-badge">Endgames</span>
+            </div>
+            <div class="blog-content">
+              <div>
+                <div class="blog-meta">September 28, 2026 • 5 min read</div>
+                <h3 class="blog-title">
+                  <a href="blog-details-endgames.html">Lucena vs Philidor: Essential Rook Endgames Every 1600+ Must Know</a>
+                </h3>
+                <p class="blog-excerpt">
+                  A step-by-step masterclass on building the bridge with the Lucena technique and setting up passive Philidor defenses.
+                </p>
+              </div>
+              <a href="blog-details-endgames.html" class="blog-read-more">
+                READ ARTICLE <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Final Regal CTA Section
+         ============================================================ -->
+    <section class="final-cta-section">
+      <div class="cta-chess-bg"></div>
+      <div class="site-container" style="position: relative; z-index: 2;">
+        <span class="section-tag" style="color: var(--gold-light);">Your Move Next</span>
+        <h2 class="final-cta-title">YOUR NEXT MOVE STARTS HERE.</h2>
+        <p class="final-cta-desc">Think deeper. Train smarter. Play stronger. Join hundreds of passionate chess players who chose excellence.</p>
+        <div class="final-cta-actions">
+          <a href="register.html" class="btn-primary-gold">
+            JOIN CHECKMATE
+            <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+          </a>
+          <a href="contact.html" class="btn-secondary-outline">
+            CONTACT US
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Video Modal -->
+  <div id="video-modal" class="gallery-lightbox" style="position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;display:none;align-items:center;justify-content:center;">
+    <div style="position:relative;width:90%;max-width:850px;aspect-ratio:16/9;">
+      <button class="modal-close" style="position:absolute;top:-40px;right:0;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;">&times;</button>
+      <iframe src="" style="width:100%;height:100%;border:none;border-radius:8px;" allow="autoplay" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal Container -->
+  <div id="gallery-lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close">&times;</button>
+      <img src="" alt="Enlarged Chess Moment" class="lightbox-img">
+    </div>
+  </div>
+
+  <!-- ============================================================
+       Footer (Premium 4-Column Layout)
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="site-container">
+      <div class="footer-top-grid">
+        <!-- Brand Summary -->
+        <div>
+          <a href="index.html" class="site-logo footer-logo" style="margin-bottom: 1.25rem;">
+            <img src="assets/images/logo-icon.png" alt="CHECKMATE Crest Logo" class="site-logo-img">
+            <img src="assets/images/logo-text.png" alt="CHECKMATE - THINK. PLAY. MASTER." class="site-brand-img">
+          </a>
+          <p class="footer-tagline">"Think. Play. Master."<br>International premier chess academy committed to intellectual rigor, strategic foresight, and competitive sportsmanship.</p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Facebook" title="Facebook">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="YouTube" title="YouTube">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="WhatsApp" title="WhatsApp">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 1: Company -->
+        <div>
+          <h4 class="footer-col-title">COMPANY</h4>
+          <ul class="footer-links-list">
+            <li><a href="about.html" class="footer-link">About Academy</a></li>
+            <li><a href="gallery.html" class="footer-link">Photo Gallery</a></li>
+            <li><a href="programs.html" class="footer-link">Programs & Syllabus</a></li>
+            <li><a href="contact.html" class="footer-link">Contact & Campus</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 2: Academy -->
+        <div>
+          <h4 class="footer-col-title">ACADEMY</h4>
+          <ul class="footer-links-list">
+            <li><a href="programs.html" class="footer-link">Grandmaster Coaching</a></li>
+            <li><a href="home-2.html" class="footer-link">Online Classes</a></li>
+            <li><a href="tournaments.html" class="footer-link">FIDE Tournaments</a></li>
+            <li><a href="pricing.html" class="footer-link">Tuition & Pricing</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Resources -->
+        <div>
+          <h4 class="footer-col-title">RESOURCES</h4>
+          <ul class="footer-links-list">
+            <li><a href="blog.html" class="footer-link">Strategy Blog</a></li>
+            <li><a href="contact.html" class="footer-link">Frequently Asked Questions</a></li>
+            <li><a href="blog-details.html" class="footer-link">Training Tips</a></li>
+            <li><a href="home-2.html" class="footer-link">Chess Opening Guides</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Newsletter -->
+        <div>
+          <h4 class="footer-col-title">NEWSLETTER</h4>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem;">
+            Get chess tips, tournament updates, and academy news delivered weekly.
+          </p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+            <button type="submit" class="btn-primary-gold" style="padding: 0.75rem 1.25rem; font-size: 0.8rem; justify-content: center;">
+              SUBSCRIBE
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <div>&copy; 2026 CHECKMATE. All Rights Reserved. Master the Game.</div>
+        <div class="footer-bottom-links">
+          <a href="about.html" class="footer-link">Privacy Policy</a>
+          <a href="about.html" class="footer-link">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/chess-board.js"></script>
+
+  <script>
+    lucide.createIcons();
+
+    // Swiper Testimonial Carousel
+    new Swiper('.testimonial-slider', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: { delay: 4500, disableOnInteraction: false },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 }
+      }
+    });
+
+    // Rating Progress Graph
+    const progressCanvas = document.getElementById('studentRatingProgressChart');
+    if (progressCanvas) {
+      new Chart(progressCanvas, {
+        type: 'line',
+        data: {
+          labels: ['Month 1', 'Month 2', 'Month 4', 'Month 6', 'Month 7', 'Month 9'],
+          datasets: [{
+            label: 'FIDE Rating Elo',
+            data: [1450, 1510, 1625, 1710, 1780, 1875],
+            borderColor: '#d4af37',
+            backgroundColor: 'rgba(212, 175, 55, 0.1)',
+            fill: true,
+            tension: 0.35,
+            pointBackgroundColor: '#d4af37',
+            pointRadius: 5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: 'rgba(128,128,128,0.12)' }, ticks: { color: '#64748b', font: { weight: '600' } } },
+            y: { min: 1400, max: 1950, grid: { color: 'rgba(128,128,128,0.12)' }, ticks: { color: '#64748b', font: { weight: '600' } } }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

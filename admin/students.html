@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Directory – CHECKMATE Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <span class="status-chip chip-gold" style="font-size: 0.65rem;">PRO</span>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Management</li>
+      <li class="sidebar-item"><a href="index.html"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="sidebar-item active"><a href="students.html"><i data-lucide="users"></i> Students</a></li>
+      <li class="sidebar-item"><a href="coaches.html"><i data-lucide="award"></i> Coaches</a></li>
+      <li class="sidebar-item"><a href="programs.html"><i data-lucide="book-open"></i> Programs</a></li>
+      <li class="sidebar-item"><a href="classes.html"><i data-lucide="calendar"></i> Classes</a></li>
+      <li class="sidebar-item"><a href="tournaments.html"><i data-lucide="trophy"></i> Tournaments</a></li>
+      <li class="sidebar-item"><a href="gallery.html"><i data-lucide="image"></i> Gallery</a></li>
+
+      <li class="sidebar-label">Finances & Comms</li>
+      <li class="sidebar-item"><a href="orders.html"><i data-lucide="shopping-cart"></i> Orders</a></li>
+      <li class="sidebar-item"><a href="payments.html"><i data-lucide="credit-card"></i> Payments</a></li>
+      <li class="sidebar-item"><a href="messages.html"><i data-lucide="mail"></i> Messages</a></li>
+      <li class="sidebar-item"><a href="blog.html"><i data-lucide="file-text"></i> Blog Posts</a></li>
+      <li class="sidebar-item"><a href="testimonials.html"><i data-lucide="message-square"></i> Testimonials</a></li>
+
+      <li class="sidebar-label">System</li>
+      <li class="sidebar-item"><a href="reports.html"><i data-lucide="bar-chart-3"></i> Reports</a></li>
+      <li class="sidebar-item"><a href="settings.html"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-2.jpg" alt="Admin Arjun" class="user-avatar">
+        <div>
+          <div class="user-info-name">Arjun Mehta</div>
+          <div class="user-info-role">Super Admin</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Exit to Public Website"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <!-- Main Content Layout -->
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search students by name, email..." data-table-search>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <button class="topbar-action-btn admin-theme-toggle"><i data-lucide="sun"></i></button>
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR"><i data-lucide="arrow-left-right"></i></button>
+        <button class="topbar-action-btn"><i data-lucide="bell"></i><span class="badge-dot"></span></button>
+      </div>
+    </header>
+
+    <main class="admin-content">
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">STUDENT DIRECTORY</h1>
+          <p class="page-subheadline">Manage 5,420 registered chess scholars, ratings, and mentor assignments.</p>
+        </div>
+        <div>
+          <button class="btn-admin-gold" data-modal-target="add-student-modal">
+            <i data-lucide="user-plus" style="width: 16px;"></i> ENROLL NEW STUDENT
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Controls Strip -->
+      <div class="admin-card" style="margin-bottom: 1.5rem; padding: 1rem 1.5rem;">
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--admin-text-muted); text-transform: uppercase;">Filter by:</span>
+          <select class="newsletter-input" style="width: 180px; padding: 0.45rem 0.85rem; font-size: 0.82rem;">
+            <option>All Programs</option>
+            <option>Beginner Foundation</option>
+            <option>Intermediate Tactics</option>
+            <option>Advanced Strategy</option>
+            <option>Elite Masterclass</option>
+          </select>
+          <select class="newsletter-input" style="width: 160px; padding: 0.45rem 0.85rem; font-size: 0.82rem;">
+            <option>All Statuses</option>
+            <option>Active</option>
+            <option>Pending Evaluation</option>
+            <option>On Leave</option>
+          </select>
+          <select class="newsletter-input" style="width: 160px; padding: 0.45rem 0.85rem; font-size: 0.82rem;">
+            <option>All Coaches</option>
+            <option>Arjun Mehta</option>
+            <option>Daniel Carter</option>
+            <option>Sofia Williams</option>
+            <option>Rahul Sharma</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Students Table -->
+      <div class="admin-card">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Program</th>
+                <th>Rating (Elo)</th>
+                <th>Coach</th>
+                <th>Status</th>
+                <th>Join Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span style="font-family: 'Sora'; font-weight: 700; color: var(--admin-gold);">#ST-1048</span></td>
+                <td style="font-weight: 700;">Arjun Rao</td>
+                <td>arjun.rao@gmail.com</td>
+                <td><span class="status-chip chip-gold">Advanced</span></td>
+                <td style="font-weight: 700; color: #34d399;">1875 (+425)</td>
+                <td>FM Arjun Mehta</td>
+                <td><span class="status-chip chip-success">Active</span></td>
+                <td>Jan 12, 2026</td>
+                <td>
+                  <div class="action-btns-group">
+                    <button class="action-icon-btn" title="View Profile"><i data-lucide="eye" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn" title="Edit Student"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn" title="Delete"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td><span style="font-family: 'Sora'; font-weight: 700; color: var(--admin-gold);">#ST-1049</span></td>
+                <td style="font-weight: 700;">Priya Sundaram</td>
+                <td>priya.s@yahoo.com</td>
+                <td><span class="status-chip chip-gold">Elite</span></td>
+                <td style="font-weight: 700; color: #34d399;">1940 (+210)</td>
+                <td>FM Arjun Mehta</td>
+                <td><span class="status-chip chip-success">Active</span></td>
+                <td>Feb 04, 2026</td>
+                <td>
+                  <div class="action-btns-group">
+                    <button class="action-icon-btn" title="View Profile"><i data-lucide="eye" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn" title="Edit Student"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn" title="Delete"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td><span style="font-family: 'Sora'; font-weight: 700; color: var(--admin-gold);">#ST-1050</span></td>
+                <td style="font-weight: 700;">Rohan Kapoor</td>
+                <td>rohan.k@outlook.com</td>
+                <td><span class="status-chip chip-gold">Elite</span></td>
+                <td style="font-weight: 700; color: #34d399;">2110 (+180)</td>
+                <td>Rahul Sharma</td>
+                <td><span class="status-chip chip-success">Active</span></td>
+                <td>Mar 18, 2026</td>
+                <td>
+                  <div class="action-btns-group">
+                    <button class="action-icon-btn"><i data-lucide="eye" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td><span style="font-family: 'Sora'; font-weight: 700; color: var(--admin-gold);">#ST-1051</span></td>
+                <td style="font-weight: 700;">Marcus Lee</td>
+                <td>marcus.lee@gmail.com</td>
+                <td><span class="status-chip" style="background: rgba(56,189,248,0.15); color:#38bdf8;">Intermediate</span></td>
+                <td style="font-weight: 700; color: #34d399;">1560 (+140)</td>
+                <td>Daniel Carter</td>
+                <td><span class="status-chip chip-success">Active</span></td>
+                <td>Apr 02, 2026</td>
+                <td>
+                  <div class="action-btns-group">
+                    <button class="action-icon-btn"><i data-lucide="eye" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td><span style="font-family: 'Sora'; font-weight: 700; color: var(--admin-gold);">#ST-1052</span></td>
+                <td style="font-weight: 700;">Ananya Sharma</td>
+                <td>ananya.s@gmail.com</td>
+                <td><span class="status-chip" style="background: rgba(212,175,55,0.15); color:var(--admin-gold-light);">Beginner</span></td>
+                <td style="font-weight: 700;">1050</td>
+                <td>Sofia Williams</td>
+                <td><span class="status-chip chip-warning">Evaluation</span></td>
+                <td>May 10, 2026</td>
+                <td>
+                  <div class="action-btns-group">
+                    <button class="action-icon-btn"><i data-lucide="eye" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="admin-pagination">
+          <div>Showing 1 to 5 of 5,420 students</div>
+          <div class="pagination-pages">
+            <button class="page-num active">1</button>
+            <button class="page-num">2</button>
+            <button class="page-num">3</button>
+            <button class="page-num">&hellip;</button>
+            <button class="page-num">108</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Student Modal -->
+  <div id="add-student-modal" class="admin-modal-backdrop" style="position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 99999; display: none; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: var(--admin-card-bg); border: 1px solid var(--admin-gold); border-radius: var(--admin-radius); max-width: 500px; width: 100%; padding: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h3 style="font-family: 'Sora'; font-size: 1.25rem; font-weight: 800;">ENROLL NEW STUDENT</h3>
+        <button data-modal-close style="background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">&times;</button>
+      </div>
+      <form id="add-student-form" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">Full Name</label>
+          <input type="text" class="newsletter-input" required>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">Email Address</label>
+          <input type="email" class="newsletter-input" required>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">Program</label>
+            <select class="newsletter-input">
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+              <option>Elite</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">Initial Rating</label>
+            <input type="number" class="newsletter-input" placeholder="e.g. 1450" required>
+          </div>
+        </div>
+        <button type="submit" class="btn-admin-gold" style="justify-content: center; margin-top: 1rem;">SAVE STUDENT</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard – CHECKMATE Chess Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar Navigation -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <span class="status-chip chip-gold" style="font-size: 0.65rem;">PRO</span>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Management</li>
+      <li class="sidebar-item active"><a href="index.html"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="sidebar-item"><a href="students.html"><i data-lucide="users"></i> Students</a></li>
+      <li class="sidebar-item"><a href="coaches.html"><i data-lucide="award"></i> Coaches</a></li>
+      <li class="sidebar-item"><a href="programs.html"><i data-lucide="book-open"></i> Programs</a></li>
+      <li class="sidebar-item"><a href="classes.html"><i data-lucide="calendar"></i> Classes</a></li>
+      <li class="sidebar-item"><a href="tournaments.html"><i data-lucide="trophy"></i> Tournaments</a></li>
+      <li class="sidebar-item"><a href="gallery.html"><i data-lucide="image"></i> Gallery</a></li>
+
+      <li class="sidebar-label">Finances & Comms</li>
+      <li class="sidebar-item"><a href="orders.html"><i data-lucide="shopping-cart"></i> Orders</a></li>
+      <li class="sidebar-item"><a href="payments.html"><i data-lucide="credit-card"></i> Payments</a></li>
+      <li class="sidebar-item"><a href="messages.html"><i data-lucide="mail"></i> Messages <span class="badge-dot" style="position:static; margin-left:auto;"></span></a></li>
+      <li class="sidebar-item"><a href="blog.html"><i data-lucide="file-text"></i> Blog Posts</a></li>
+      <li class="sidebar-item"><a href="testimonials.html"><i data-lucide="message-square"></i> Testimonials</a></li>
+
+      <li class="sidebar-label">System</li>
+      <li class="sidebar-item"><a href="reports.html"><i data-lucide="bar-chart-3"></i> Reports</a></li>
+      <li class="sidebar-item"><a href="settings.html"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-2.jpg" alt="Admin Arjun" class="user-avatar">
+        <div>
+          <div class="user-info-name">Arjun Mehta</div>
+          <div class="user-info-role">Super Admin</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Exit to Public Website" style="color: var(--admin-text-muted);"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <!-- Main Content Layout -->
+  <div class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle" aria-label="Toggle Navigation"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search students, coaches, transactions...">
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Live System Indicator -->
+        <span style="font-size: 0.75rem; color: var(--admin-success); display: flex; align-items: center; gap: 0.4rem; font-weight: 600;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--admin-success);"></span> Academy Live
+        </span>
+
+        <!-- Theme Toggle -->
+        <button class="topbar-action-btn admin-theme-toggle" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun"></i>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR"><i data-lucide="arrow-left-right"></i></button>
+
+        <!-- Notifications -->
+        <button class="topbar-action-btn" title="Notifications" onclick="window.showCheckmateToast('No new unread alerts', 'success')">
+          <i data-lucide="bell"></i>
+          <span class="badge-dot"></span>
+        </button>
+
+        <!-- Logout Button -->
+        <button class="topbar-action-btn" onclick="window.checkmateLogout()" title="Log Out" style="color: #ef4444;">
+          <i data-lucide="log-out"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="admin-content">
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">ACADEMY DASHBOARD OVERVIEW</h1>
+          <p class="page-subheadline">Real-time academy health, student rating metrics, and tournament revenues.</p>
+        </div>
+        <div>
+          <a href="students.html" class="btn-admin-gold">
+            <i data-lucide="user-plus" style="width: 16px;"></i> ADD NEW STUDENT
+          </a>
+        </div>
+      </div>
+
+      <!-- 5 Metric KPI Cards -->
+      <div class="metrics-row" style="grid-template-columns: repeat(5, 1fr);">
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-title">TOTAL STUDENTS</span>
+            <div class="metric-icon-wrap"><i data-lucide="users"></i></div>
+          </div>
+          <div class="metric-val">5,420</div>
+          <div class="metric-trend trend-up"><i data-lucide="trending-up"></i> +12.4% this month</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-title">ACTIVE STUDENTS</span>
+            <div class="metric-icon-wrap"><i data-lucide="zap"></i></div>
+          </div>
+          <div class="metric-val">4,890</div>
+          <div class="metric-trend trend-up"><i data-lucide="trending-up"></i> 90.2% retention</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-title">MONTHLY REVENUE</span>
+            <div class="metric-icon-wrap"><i data-lucide="dollar-sign"></i></div>
+          </div>
+          <div class="metric-val">₹845,000</div>
+          <div class="metric-trend trend-up"><i data-lucide="trending-up"></i> +18.6% vs last mo</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-title">UPCOMING CLASSES</span>
+            <div class="metric-icon-wrap"><i data-lucide="calendar"></i></div>
+          </div>
+          <div class="metric-val">28 Today</div>
+          <div class="metric-trend" style="color: var(--admin-primary);"><i data-lucide="video"></i> 6 live now</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-title">TOURNAMENT REGS</span>
+            <div class="metric-icon-wrap"><i data-lucide="trophy"></i></div>
+          </div>
+          <div class="metric-val">412</div>
+          <div class="metric-trend trend-up"><i data-lucide="award"></i> 3 active opens</div>
+        </div>
+      </div>
+
+      <!-- Charts Row 1: Student Growth & Enrollment Distribution -->
+      <div class="charts-grid-2">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">Student Enrollment Growth (2026)</h2>
+            <span class="status-chip chip-gold">Annual Trend</span>
+          </div>
+          <div style="height: 280px;">
+            <canvas id="chartStudentGrowth"></canvas>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">Program Enrollment Share</h2>
+            <span class="status-chip chip-success">Balanced</span>
+          </div>
+          <div style="height: 280px;">
+            <canvas id="chartEnrollment"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row 2: Monthly Revenue & Rating Improvement -->
+      <div class="charts-grid-2">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">Monthly Tuition Revenue ($)</h2>
+            <span class="status-chip chip-success">+18.6% YoY</span>
+          </div>
+          <div style="height: 260px;">
+            <canvas id="chartRevenue"></canvas>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">Rating Improvement Boost</h2>
+            <span class="status-chip chip-gold">Average +320 Elo</span>
+          </div>
+          <div style="height: 260px;">
+            <canvas id="chartRatingDistribution"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Active Live Classes Table -->
+      <div class="admin-card" style="margin-top: 1.5rem;">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">Today's Live Grandmaster Classes</h2>
+          <a href="classes.html" style="font-size: 0.82rem; color: var(--admin-gold); font-weight: 700;">View All Schedules &rarr;</a>
+        </div>
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Class Session</th>
+                <th>Coach</th>
+                <th>Program</th>
+                <th>Time (IST)</th>
+                <th>Enrolled</th>
+                <th>Status</th>
+                <th>Room Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight: 700;">Sicilian Najdorf 6.Bg5 Complications</td>
+                <td>FM Arjun Mehta</td>
+                <td><span class="status-chip chip-gold">Elite</span></td>
+                <td>18:00 - 19:30</td>
+                <td>24 / 25</td>
+                <td><span class="status-chip chip-danger">● LIVE NOW</span></td>
+                <td><button class="btn-admin-gold" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="window.showCheckmateToast('Joined Room #104', 'success')">JOIN ROOM</button></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 700;">Essential Rook Endgames: Lucena Bridge</td>
+                <td>Rahul Sharma</td>
+                <td><span class="status-chip chip-warning">Advanced</span></td>
+                <td>19:00 - 20:15</td>
+                <td>28 / 30</td>
+                <td><span class="status-chip chip-success">Starts in 35m</span></td>
+                <td><a href="classes.html" class="action-icon-btn" title="View Details"><i data-lucide="eye" style="width: 15px;"></i></a></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 700;">Pin and Skewer Tactical Combinations</td>
+                <td>Sofia Williams</td>
+                <td><span class="status-chip" style="background: rgba(56,189,248,0.15); color:#38bdf8;">Intermediate</span></td>
+                <td>20:30 - 21:45</td>
+                <td>32 / 35</td>
+                <td><span class="status-chip chip-gold">Upcoming</span></td>
+                <td><a href="classes.html" class="action-icon-btn" title="View Details"><i data-lucide="eye" style="width: 15px;"></i></a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

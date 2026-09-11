@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platform Settings & Configuration – CHECKMATE Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+</head>
+<body class="admin-body">
+
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <span class="status-chip chip-gold" style="font-size: 0.65rem;">PRO</span>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Management</li>
+      <li class="sidebar-item"><a href="index.html"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="sidebar-item"><a href="students.html"><i data-lucide="users"></i> Students</a></li>
+      <li class="sidebar-item"><a href="coaches.html"><i data-lucide="award"></i> Coaches</a></li>
+      <li class="sidebar-item"><a href="programs.html"><i data-lucide="book-open"></i> Programs</a></li>
+      <li class="sidebar-item"><a href="classes.html"><i data-lucide="calendar"></i> Classes</a></li>
+      <li class="sidebar-item"><a href="tournaments.html"><i data-lucide="trophy"></i> Tournaments</a></li>
+      <li class="sidebar-item"><a href="gallery.html"><i data-lucide="image"></i> Gallery</a></li>
+
+      <li class="sidebar-label">Finances & Comms</li>
+      <li class="sidebar-item"><a href="orders.html"><i data-lucide="shopping-cart"></i> Orders</a></li>
+      <li class="sidebar-item"><a href="payments.html"><i data-lucide="credit-card"></i> Payments</a></li>
+      <li class="sidebar-item"><a href="messages.html"><i data-lucide="mail"></i> Messages</a></li>
+      <li class="sidebar-item"><a href="blog.html"><i data-lucide="file-text"></i> Blog Posts</a></li>
+      <li class="sidebar-item"><a href="testimonials.html"><i data-lucide="message-square"></i> Testimonials</a></li>
+
+      <li class="sidebar-label">System</li>
+      <li class="sidebar-item"><a href="reports.html"><i data-lucide="bar-chart-3"></i> Reports</a></li>
+      <li class="sidebar-item active"><a href="settings.html"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-2.jpg" alt="Admin" class="user-avatar">
+        <div>
+          <div class="user-info-name">Arjun Mehta</div>
+          <div class="user-info-role">Super Admin</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Public Site"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search system settings...">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-action-btn admin-theme-toggle"><i data-lucide="sun"></i></button>
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR"><i data-lucide="arrow-left-right"></i></button>
+        <button class="topbar-action-btn"><i data-lucide="bell"></i><span class="badge-dot"></span></button>
+      </div>
+    </header>
+
+    <main class="admin-content">
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">ACADEMY & PLATFORM SETTINGS</h1>
+          <p class="page-subheadline">Configure general academy branding, administrator credentials, theme, and localization.</p>
+        </div>
+        <div>
+          <button class="btn-admin-gold" onclick="window.showCheckmateToast('All platform settings saved!', 'success')">
+            <i data-lucide="save" style="width: 16px;"></i> SAVE CHANGES
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-card" style="padding: 2rem;">
+        <!-- Settings Form -->
+        <form onsubmit="event.preventDefault(); window.showCheckmateToast('Settings saved successfully!', 'success');" style="display: flex; flex-direction: column; gap: 2rem;">
+          
+          <!-- General Settings -->
+          <div>
+            <h2 style="font-family: 'Sora'; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">General Academy Details</h2>
+            <p style="font-size: 0.82rem; color: var(--admin-text-muted); margin-bottom: 1.25rem;">Global branding visible across invoices and student portals.</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">Academy Name</label>
+                <input type="text" class="newsletter-input" value="CHECKMATE – Premium Chess Academy">
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">Primary Tagline</label>
+                <input type="text" class="newsletter-input" value="Think. Play. Master.">
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">Contact Phone</label>
+                <input type="text" class="newsletter-input" value="+91 98765 43210">
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">Official Admissions Email</label>
+                <input type="email" class="newsletter-input" value="admissions@checkmate.academy">
+              </div>
+            </div>
+          </div>
+
+          <!-- Localization & Theme Preferences -->
+          <div style="border-top: 1px solid var(--admin-card-border); padding-top: 2rem;">
+            <h2 style="font-family: 'Sora'; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">Localization & Layout Direction</h2>
+            <p style="font-size: 0.82rem; color: var(--admin-text-muted); margin-bottom: 1.25rem;">Configure default language, time zones, and Right-to-Left (RTL) mode.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">Default Language</label>
+                <select class="newsletter-input">
+                  <option selected>English (US / UK)</option>
+                  <option>Arabic (العربية)</option>
+                  <option>Hebrew (עברית)</option>
+                  <option>French (Français)</option>
+                  <option>German (Deutsch)</option>
+                  <option>Spanish (Español)</option>
+                </select>
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">Default Direction</label>
+                <select class="newsletter-input" id="settings-dir-select" onchange="document.documentElement.setAttribute('dir', this.value); localStorage.setItem('checkmate-dir', this.value);">
+                  <option value="ltr">LTR – Left to Right (Default)</option>
+                  <option value="rtl">RTL – Right to Left (Arabic, Hebrew)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security & Admin Password -->
+          <div style="border-top: 1px solid var(--admin-card-border); padding-top: 2rem;">
+            <h2 style="font-family: 'Sora'; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">Security Credentials</h2>
+            <p style="font-size: 0.82rem; color: var(--admin-text-muted); margin-bottom: 1.25rem;">Change your administrative password and active session tokens.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">Current Password</label>
+                <input type="password" class="newsletter-input" placeholder="••••••••••••">
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">New Password</label>
+                <input type="password" class="newsletter-input" placeholder="••••••••••••">
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" class="btn-admin-gold">SAVE PLATFORM CONFIGURATION</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

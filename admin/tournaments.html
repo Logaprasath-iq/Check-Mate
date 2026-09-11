@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tournament Operations – CHECKMATE Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+</head>
+<body class="admin-body">
+
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <span class="status-chip chip-gold" style="font-size: 0.65rem;">PRO</span>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Management</li>
+      <li class="sidebar-item"><a href="index.html"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="sidebar-item"><a href="students.html"><i data-lucide="users"></i> Students</a></li>
+      <li class="sidebar-item"><a href="coaches.html"><i data-lucide="award"></i> Coaches</a></li>
+      <li class="sidebar-item"><a href="programs.html"><i data-lucide="book-open"></i> Programs</a></li>
+      <li class="sidebar-item"><a href="classes.html"><i data-lucide="calendar"></i> Classes</a></li>
+      <li class="sidebar-item active"><a href="tournaments.html"><i data-lucide="trophy"></i> Tournaments</a></li>
+      <li class="sidebar-item"><a href="gallery.html"><i data-lucide="image"></i> Gallery</a></li>
+
+      <li class="sidebar-label">Finances & Comms</li>
+      <li class="sidebar-item"><a href="orders.html"><i data-lucide="shopping-cart"></i> Orders</a></li>
+      <li class="sidebar-item"><a href="payments.html"><i data-lucide="credit-card"></i> Payments</a></li>
+      <li class="sidebar-item"><a href="messages.html"><i data-lucide="mail"></i> Messages</a></li>
+      <li class="sidebar-item"><a href="blog.html"><i data-lucide="file-text"></i> Blog Posts</a></li>
+      <li class="sidebar-item"><a href="testimonials.html"><i data-lucide="message-square"></i> Testimonials</a></li>
+
+      <li class="sidebar-label">System</li>
+      <li class="sidebar-item"><a href="reports.html"><i data-lucide="bar-chart-3"></i> Reports</a></li>
+      <li class="sidebar-item"><a href="settings.html"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-2.jpg" alt="Admin" class="user-avatar">
+        <div>
+          <div class="user-info-name">Arjun Mehta</div>
+          <div class="user-info-role">Super Admin</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Public Site"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search tournaments..." data-table-search>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-action-btn admin-theme-toggle"><i data-lucide="sun"></i></button>
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR"><i data-lucide="arrow-left-right"></i></button>
+        <button class="topbar-action-btn"><i data-lucide="bell"></i><span class="badge-dot"></span></button>
+      </div>
+    </header>
+
+    <main class="admin-content">
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">TOURNAMENTS ADMINISTRATION</h1>
+          <p class="page-subheadline">Manage sanctioned Swiss pairings, registration capacities, and prize distribution.</p>
+        </div>
+        <div>
+          <button class="btn-admin-gold" onclick="window.showCheckmateToast('Tournament Wizard Opened', 'success')">
+            <i data-lucide="plus" style="width: 16px;"></i> CREATE TOURNAMENT
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Tournament</th>
+                <th>Date & Time</th>
+                <th>Format</th>
+                <th>Registered</th>
+                <th>Prize Pool</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight: 700;">Autumn Classical Masters 2026</td>
+                <td>Oct 18 - 21, 2026</td>
+                <td>90m + 30s (7 Rounds)</td>
+                <td><span style="font-weight: 700; color: var(--admin-gold-light);">112 / 128</span></td>
+                <td style="font-weight: 700; color: #34d399;">₹250,000</td>
+                <td><span class="status-chip chip-gold">Upcoming</span></td>
+                <td>
+                  <div class="action-btns-group">
+                    <button class="action-icon-btn" title="Pairing Engine"><i data-lucide="git-branch" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn" title="Edit"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="font-weight: 700;">Sunday Lightning Blitz Arena</td>
+                <td>Every Sunday 18:00 UTC</td>
+                <td>3m + 2s (9 Rounds)</td>
+                <td><span style="font-weight: 700; color: #34d399;">256 / 256 (Full)</span></td>
+                <td style="font-weight: 700; color: #34d399;">₹100,000</td>
+                <td><span class="status-chip chip-danger">● LIVE NOW</span></td>
+                <td>
+                  <button class="btn-admin-gold" style="padding: 0.3rem 0.65rem; font-size: 0.72rem;">
+                    VIEW PAIRINGS
+                  </button>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="font-weight: 700;">National Junior Championship Prep</td>
+                <td>Nov 05 - 08, 2026</td>
+                <td>60m + 10s (6 Rounds)</td>
+                <td><span style="font-weight: 700; color: var(--admin-gold-light);">56 / 64</span></td>
+                <td style="font-weight: 700; color: #34d399;">₹150,000</td>
+                <td><span class="status-chip chip-gold">Upcoming</span></td>
+                <td>
+                  <div class="action-btns-group">
+                    <button class="action-icon-btn"><i data-lucide="git-branch" style="width: 14px;"></i></button>
+                    <button class="action-icon-btn"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="font-weight: 700;">Summer Grand Prix Invitational</td>
+                <td>Sep 02 - 05, 2026</td>
+                <td>Classical 7-Round Swiss</td>
+                <td>128 Completed</td>
+                <td style="font-weight: 700; color: var(--admin-text-muted);">₹300,000 Paid</td>
+                <td><span class="status-chip chip-success">Completed</span></td>
+                <td>
+                  <button class="btn-login" style="padding: 0.3rem 0.65rem; font-size: 0.72rem;">RESULTS</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
