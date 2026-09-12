@@ -122,7 +122,7 @@
       <div class="site-container" style="display: flex; flex-direction: column; gap: 3.5rem;">
         
         <!-- Program 1: Beginner -->
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center;">
+        <div class="program-deep-card" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center;">
           <div>
             <div style="width: 54px; height: 54px; border-radius: var(--radius-md); background: rgba(212,175,55,0.1); display: flex; align-items: center; justify-content: center; color: var(--gold-primary); margin-bottom: 1.25rem;">
               <i data-lucide="compass" style="width: 32px; height: 32px;"></i>
@@ -147,38 +147,38 @@
             
             <div class="accordion-item active" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); overflow: hidden;">
               <div class="accordion-header" style="padding: 1rem 1.25rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
-                <span>Module 1: Rules, Board Vision & Tactical Safety</span>
+                <span>Module 1: Board Geometry & Piece Physics</span>
                 <i data-lucide="chevron-down" style="width: 16px;"></i>
               </div>
               <div class="accordion-body" style="padding: 0 1.25rem 1rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                Board coordinate mastery, value of pieces, pawn promotion, castling, en passant, detecting undefended pieces, avoiding 1-move blunders.
+                Piece movement coordinates, algebraic notation notation, center control concepts, tempo management, relative piece values.
               </div>
             </div>
 
             <div class="accordion-item" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); overflow: hidden;">
               <div class="accordion-header" style="padding: 1rem 1.25rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
-                <span>Module 2: Fundamental Checkmating Patterns</span>
+                <span>Module 2: Essential Checkmating Patterns</span>
                 <i data-lucide="chevron-down" style="width: 16px;"></i>
               </div>
               <div class="accordion-body" style="padding: 0 1.25rem 1rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                Ladder mate (2 Rooks), King and Queen vs lone King, King and Rook box method, back-rank mates, scholar's mate defense.
+                Queen + King vs King, Rook + King vs King, double rook ladder mates, back-rank vulnerabilities, smothered checkmate mechanics.
               </div>
             </div>
 
             <div class="accordion-item" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); overflow: hidden;">
               <div class="accordion-header" style="padding: 1rem 1.25rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
-                <span>Module 3: The Golden Opening Principles</span>
+                <span>Module 3: Elementary Tactics 101</span>
                 <i data-lucide="chevron-down" style="width: 16px;"></i>
               </div>
               <div class="accordion-body" style="padding: 0 1.25rem 1rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                Control the center, develop knights before bishops, king safety before attacking, avoiding moving the same piece twice in the opening.
+                Forks (Knight & Pawn), absolute vs relative pins, skewers, discovered attacks, basic defensive countermeasures.
               </div>
             </div>
           </div>
         </div>
 
         <!-- Program 2: Intermediate -->
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center;">
+        <div class="program-deep-card" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center;">
           <div>
             <div style="width: 54px; height: 54px; border-radius: var(--radius-md); background: rgba(56,189,248,0.1); display: flex; align-items: center; justify-content: center; color: #38bdf8; margin-bottom: 1.25rem;">
               <i data-lucide="zap" style="width: 32px; height: 32px;"></i>
@@ -234,7 +234,7 @@
         </div>
 
         <!-- Program 3: Advanced (Featured) -->
-        <div style="background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, var(--bg-card) 40%); border: 1px solid var(--border-gold-bright); border-radius: var(--radius-lg); padding: 2.5rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center; box-shadow: var(--shadow-gold);">
+        <div class="program-deep-card" style="background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, var(--bg-card) 40%); border: 1px solid var(--border-gold-bright); border-radius: var(--radius-lg); padding: 2.5rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center; box-shadow: var(--shadow-gold);">
           <div>
             <div style="display: inline-block; background: var(--gold-gradient); color: #080b12; font-size: 0.72rem; font-weight: 800; padding: 0.25rem 0.65rem; border-radius: 99px; text-transform: uppercase; margin-bottom: 0.75rem;">Flagship Program</div>
             <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem;">ADVANCED STRATEGY</h2>
@@ -288,7 +288,7 @@
         </div>
 
         <!-- Program 4: Elite Masterclass -->
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center;">
+        <div class="program-deep-card" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center;">
           <div>
             <div style="width: 54px; height: 54px; border-radius: var(--radius-md); background: rgba(168,85,247,0.1); display: flex; align-items: center; justify-content: center; color: #a855f7; margin-bottom: 1.25rem;">
               <i data-lucide="crown" style="width: 32px; height: 32px;"></i>

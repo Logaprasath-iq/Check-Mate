@@ -121,7 +121,7 @@
     <section class="section-py">
       <div class="site-container">
         <!-- 4 Quick Contact Cards -->
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 4rem;">
+        <div class="contact-quick-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 4rem;">
           <div class="feature-card" style="padding: 1.75rem;">
             <div class="feature-icon-box" style="margin-bottom: 1rem;"><i data-lucide="phone"></i></div>
             <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem;">Phone & WhatsApp</h3>
@@ -152,7 +152,7 @@
         </div>
 
         <!-- Form & Styled Map Split Grid -->
-        <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 3.5rem; align-items: flex-start;">
+        <div class="contact-main-grid" style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 3.5rem; align-items: flex-start;">
           <!-- Validated Contact Form -->
           <div style="background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: 3rem; box-shadow: var(--shadow-md);">
             <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem;">SEND A MESSAGE</h2>
@@ -161,7 +161,7 @@
             </p>
 
             <form id="contact-form" onsubmit="handleContactSubmit(event)" style="display: flex; flex-direction: column; gap: 1.25rem;">
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+              <div class="contact-form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
                 <div>
                   <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Full Name *</label>
                   <input type="text" id="contact-name" class="newsletter-input" placeholder="e.g. Arjun Mehta" required>
@@ -172,7 +172,7 @@
                 </div>
               </div>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+              <div class="contact-form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
                 <div>
                   <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Phone / WhatsApp *</label>
                   <input type="tel" id="contact-phone" class="newsletter-input" placeholder="+91 98765 43210" required>
