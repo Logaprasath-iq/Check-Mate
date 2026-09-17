@@ -58,7 +58,7 @@
         <!-- Actions -->
         <div class="nav-actions">
           <button class="tool-btn theme-toggle-btn" title="Toggle Dark/Light Mode"><span class="theme-icon-slot"><i data-lucide="sun"></i></span></button>
-          <button class="tool-btn rtl-toggle-btn" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR"><i data-lucide="arrow-left-right"></i></button>
+          <button class="tool-btn rtl-toggle-btn" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR"><i data-lucide="arrow-left-right"></i><span class="rtl-label">RTL</span></button>
           <a href="login.html" class="btn-login">LOGIN</a>
           <a href="register.html" class="btn-join">JOIN NOW <i data-lucide="arrow-right" style="width: 15px;"></i></a>
           <button class="nav-toggle" aria-label="Open Navigation Menu"><span></span><span></span><span></span></button>
@@ -175,7 +175,10 @@
               <div class="contact-form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
                 <div>
                   <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Phone / WhatsApp *</label>
-                  <input type="tel" id="contact-phone" class="newsletter-input" placeholder="+91 98765 43210" required>
+                  <input type="tel" id="contact-phone" class="newsletter-input" placeholder="+91 98765 43210" required
+                         inputmode="tel" autocomplete="tel" pattern="^\+?[0-9\s\-()]{7,20}$"
+                         title="Please enter a valid phone number with digits only (no alphabets)"
+                         oninput="this.value = this.value.replace(/[^0-9+\s\-()]/g, '').replace(/(?!^)\+/g, '')">
                 </div>
                 <div>
                   <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Target Program</label>
@@ -342,6 +345,21 @@
 
     function handleContactSubmit(e) {
       e.preventDefault();
+      const phoneEl = document.getElementById('contact-phone');
+      const phoneVal = phoneEl ? phoneEl.value.trim() : '';
+      const phoneDigits = phoneVal.replace(/\D/g, '');
+
+      if (/[a-zA-Z]/.test(phoneVal)) {
+        window.showCheckmateToast('Phone number cannot contain alphabets! Numbers only.', 'error');
+        phoneEl.focus();
+        return;
+      }
+      if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+        window.showCheckmateToast('Please enter a valid phone number (7 to 15 digits).', 'error');
+        phoneEl.focus();
+        return;
+      }
+
       const name = document.getElementById('contact-name').value;
       window.showCheckmateToast(`Thank you, ${name}! Your inquiry has been dispatched to admissions. We will call you within 4 hours.`, 'success');
       document.getElementById('contact-form').reset();

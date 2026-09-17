@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAccordions();
   initNewsletter();
   initAuthNav();
+  initPhoneInputs();
 });
 
 /* ------------------------------------------------------------
@@ -74,19 +75,39 @@ function updateThemeIcons(theme) {
 }
 
 /* ------------------------------------------------------------
-   3. RTL Toggle with Persistence
+   3. RTL Toggle with Persistence & Synced Labels
    ------------------------------------------------------------ */
 function initRTL() {
   const savedDir = localStorage.getItem('checkmate-dir') || 'ltr';
   document.documentElement.setAttribute('dir', savedDir);
 
-  const rtlToggles = document.querySelectorAll('.rtl-toggle-btn');
+  const updateRTLButtons = (dir) => {
+    const isRtl = dir === 'rtl';
+    const rtlToggles = document.querySelectorAll('.rtl-toggle-btn, .admin-rtl-toggle');
+    rtlToggles.forEach(btn => {
+      let label = btn.querySelector('.rtl-label');
+      if (!label) {
+        label = document.createElement('span');
+        label.className = 'rtl-label';
+        btn.appendChild(label);
+      }
+      label.textContent = isRtl ? 'LTR' : 'RTL';
+      const actionText = isRtl ? 'Switch to LTR' : 'Switch to RTL';
+      btn.setAttribute('title', actionText);
+      btn.setAttribute('aria-label', actionText);
+    });
+  };
+
+  updateRTLButtons(savedDir);
+
+  const rtlToggles = document.querySelectorAll('.rtl-toggle-btn, .admin-rtl-toggle');
   rtlToggles.forEach(btn => {
     btn.addEventListener('click', () => {
       const currentDir = document.documentElement.getAttribute('dir') || 'ltr';
       const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
       document.documentElement.setAttribute('dir', newDir);
       localStorage.setItem('checkmate-dir', newDir);
+      updateRTLButtons(newDir);
       window.dispatchEvent(new CustomEvent('dirChanged', { detail: { dir: newDir } }));
     });
   });
@@ -609,3 +630,81 @@ window.checkmateLogin = function(userData, redirect = true) {
     window.location.href = dest;
   }
 };
+
+/* ------------------------------------------------------------
+   Phone Number Input Restriction (Numbers only, no alphabets)
+   ------------------------------------------------------------ */
+function initPhoneInputs() {
+  const sanitizePhone = (val) => {
+    if (!val) return '';
+    // Disallow alphabetic letters and any disallowed symbols
+    let clean = val.replace(/[^0-9+\s\-()]/g, '');
+    // Ensure '+' can only appear once at the very start
+    if (clean.includes('+')) {
+      const startsWithPlus = clean.trim().startsWith('+');
+      clean = clean.replace(/\+/g, '');
+      if (startsWithPlus) {
+        clean = '+' + clean;
+      }
+    }
+    return clean;
+  };
+
+  const bindPhone = (input) => {
+    if (input.dataset.phoneRestricted) return;
+    input.dataset.phoneRestricted = 'true';
+
+    // Prevent typing of any alphabet or illegal character in real time
+    input.addEventListener('keydown', (e) => {
+      // Navigation / control keys
+      if ([
+        'Backspace', 'Delete', 'Tab', 'Enter', 'Escape',
+        'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+        'Home', 'End'
+      ].includes(e.key)) {
+        return;
+      }
+
+      // Keyboard shortcuts (Ctrl/Cmd + A, C, V, X, Z)
+      if (e.ctrlKey || e.metaKey) return;
+
+      // Allow '+' only at index 0 and if not already present
+      if (e.key === '+') {
+        if (!input.value.includes('+') && input.selectionStart === 0) {
+          return;
+        }
+        e.preventDefault();
+        return;
+      }
+
+      // Allow digits and standard phone separators
+      if (/^[0-9\s\-()]$/.test(e.key)) {
+        return;
+      }
+
+      // Block all letters and unsupported symbols
+      e.preventDefault();
+    });
+
+    // Real-time cleanup on input (paste, autofill, virtual keyboard, IME)
+    input.addEventListener('input', (e) => {
+      const original = e.target.value;
+      const clean = sanitizePhone(original);
+      if (original !== clean) {
+        e.target.value = clean;
+      }
+    });
+
+    // Final scrub on blur
+    input.addEventListener('blur', (e) => {
+      e.target.value = sanitizePhone(e.target.value).trim();
+    });
+  };
+
+  document.querySelectorAll('input[type="tel"], #reg-phone, #contact-phone').forEach(bindPhone);
+}
+
+// Fallback execution if script runs after DOM is ready
+if (document.readyState !== 'loading') {
+  initPhoneInputs();
+}

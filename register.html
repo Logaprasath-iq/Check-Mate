@@ -29,7 +29,7 @@
   <!-- Floating Controls: Dark/Light Mode & RTL/LTR -->
   <div style="position: fixed; top: 1.5rem; inset-inline-end: 1.5rem; z-index: 1000; display: flex; align-items: center; gap: 0.75rem;">
     <button class="tool-btn theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme"><span class="theme-icon-slot"><i data-lucide="sun"></i></span></button>
-    <button class="tool-btn rtl-toggle-btn" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR"><i data-lucide="arrow-left-right"></i></button>
+    <button class="tool-btn rtl-toggle-btn" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR"><i data-lucide="arrow-left-right"></i><span class="rtl-label">RTL</span></button>
   </div>
 
   <main style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2.5rem 1.5rem; position: relative; background: radial-gradient(circle at center, #162035 0%, #07090e 75%);">
@@ -58,7 +58,10 @@
           </div>
           <div>
             <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Phone / WhatsApp *</label>
-            <input type="tel" id="reg-phone" class="newsletter-input" placeholder="+91 98765 43210" required>
+            <input type="tel" id="reg-phone" class="newsletter-input" placeholder="+91 98765 43210" required
+                   inputmode="tel" autocomplete="tel" pattern="^\+?[0-9\s\-()]{7,20}$"
+                   title="Please enter a valid phone number with digits only (no alphabets)"
+                   oninput="this.value = this.value.replace(/[^0-9+\s\-()]/g, '').replace(/(?!^)\+/g, '')">
           </div>
         </div>
 
@@ -112,10 +115,25 @@
         window.showCheckmateToast('Passwords do not match! Please check again.', 'error');
         return;
       }
+
+      const phoneEl = document.getElementById('reg-phone');
+      const phoneVal = phoneEl ? phoneEl.value.trim() : '';
+      const phoneDigits = phoneVal.replace(/\D/g, '');
+      if (/[a-zA-Z]/.test(phoneVal)) {
+        window.showCheckmateToast('Phone number cannot contain alphabets! Numbers only.', 'error');
+        phoneEl.focus();
+        return;
+      }
+      if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+        window.showCheckmateToast('Please enter a valid phone number (7 to 15 digits).', 'error');
+        phoneEl.focus();
+        return;
+      }
+
       const name = document.getElementById('reg-name').value || 'Student Member';
       const email = document.getElementById('reg-email').value || 'student@checkmate.academy';
 
-      const user = { name, role: 'student', email };
+      const user = { name, role: 'student', email, phone: phoneVal };
       localStorage.setItem('checkmate_user', JSON.stringify(user));
 
       window.showCheckmateToast(`Account created! Welcome to the Academy, ${name}.`, 'success');
