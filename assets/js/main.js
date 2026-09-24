@@ -530,80 +530,11 @@ function initNewsletter() {
 }
 
 /* ------------------------------------------------------------
-   16. Authentication State in Navbar (Across All Pages)
+   16. Authentication State in Navbar (Retain Normal Login & Join Now)
    ------------------------------------------------------------ */
 function initAuthNav() {
-  const userJson = localStorage.getItem('checkmate_user');
-  if (!userJson) return;
-
-  let user;
-  try {
-    user = JSON.parse(userJson);
-  } catch (e) {
-    return;
-  }
-  if (!user || !user.name) return;
-
-  const role = (user.role || 'student').toLowerCase();
-  const rawName = user.name.trim();
-  const firstName = rawName.split(' ')[0];
-
-  const path = window.location.pathname.replace(/\\/g, '/');
-  const isInSubdir = path.includes('/admin/') || path.includes('/student/') || path.includes('/documentation/');
-  const rootPrefix = isInSubdir ? '../' : '';
-  const dashboardUrl = role === 'admin' ? `${rootPrefix}admin/index.html` : `${rootPrefix}student/index.html`;
-
-  // Update Desktop Navbar Actions
-  const navActions = document.querySelector('.nav-actions');
-  if (navActions) {
-    const loginBtn = navActions.querySelector('.btn-login');
-    const joinBtn = navActions.querySelector('.btn-join');
-
-    if (loginBtn && joinBtn) {
-      const userPill = document.createElement('div');
-      userPill.className = 'nav-user-info';
-      userPill.innerHTML = `
-        <span class="nav-user-hi">HI, <strong>${firstName.toUpperCase()}</strong></span>
-        <span class="nav-user-badge role-${role}">${role.toUpperCase()}</span>
-      `;
-
-      const dashBtn = document.createElement('a');
-      dashBtn.href = dashboardUrl;
-      dashBtn.className = 'btn-nav-dashboard';
-      dashBtn.innerHTML = `<i data-lucide="layout-dashboard" style="width: 15px;"></i> DASHBOARD`;
-
-      const logoutBtn = document.createElement('button');
-      logoutBtn.className = 'tool-btn btn-nav-logout';
-      logoutBtn.title = 'Logout';
-      logoutBtn.setAttribute('aria-label', 'Logout');
-      logoutBtn.innerHTML = `<i data-lucide="log-out" style="width: 15px;"></i>`;
-      logoutBtn.onclick = (e) => {
-        e.preventDefault();
-        window.checkmateLogout();
-      };
-
-      loginBtn.replaceWith(userPill);
-      joinBtn.replaceWith(dashBtn);
-      dashBtn.insertAdjacentElement('afterend', logoutBtn);
-    }
-  }
-
-  // Update Mobile Navigation Actions
-  const mobileNavActions = document.querySelector('.mobile-nav-actions');
-  if (mobileNavActions) {
-    mobileNavActions.innerHTML = `
-      <div style="text-align: center; margin-bottom: 0.85rem; padding: 0.75rem; background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: var(--radius-md);">
-        <div style="font-size: 0.72rem; color: var(--gold-light); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">ACTIVE SESSION (${role.toUpperCase()})</div>
-        <div style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary); margin-top: 0.2rem;">HI, ${rawName.toUpperCase()}</div>
-      </div>
-      <a href="${dashboardUrl}" class="btn-nav-dashboard" style="width: 100%; justify-content: center; margin-bottom: 0.65rem; padding: 0.75rem;"><i data-lucide="layout-dashboard" style="width: 16px;"></i> OPEN ${role.toUpperCase()} DASHBOARD</a>
-      <button onclick="window.checkmateLogout()" class="btn-login" style="width: 100%; justify-content: center; gap: 0.5rem; color: #ef4444; border-color: rgba(239, 68, 68, 0.4);"><i data-lucide="log-out" style="width: 15px;"></i> LOGOUT</button>
-    `;
-  }
-
-  if (window.lucide && typeof window.lucide.createIcons === 'function') {
-    window.lucide.createIcons();
-  }
+  // Retain the standard LOGIN and JOIN NOW buttons across all navbars even after login
+  return;
 }
 
 window.checkmateLogout = function() {
@@ -625,9 +556,7 @@ window.checkmateLogin = function(userData, redirect = true) {
   if (!userData) return;
   localStorage.setItem('checkmate_user', JSON.stringify(userData));
   if (redirect) {
-    const role = (userData.role || 'student').toLowerCase();
-    const dest = role === 'admin' ? 'admin/index.html' : 'student/index.html';
-    window.location.href = dest;
+    window.location.href = 'student/index.html';
   }
 };
 

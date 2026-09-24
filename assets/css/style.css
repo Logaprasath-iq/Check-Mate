@@ -988,6 +988,37 @@ button, input, select, textarea {
   margin-top: 2rem;
 }
 
+@media (max-width: 1360px) and (min-width: 1025px) {
+  .nav-menu {
+    gap: 1.1rem;
+  }
+  .nav-link {
+    font-size: 0.79rem;
+    letter-spacing: 0.04em;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 1025px) {
+  .nav-menu {
+    gap: 0.8rem;
+  }
+  .nav-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+  }
+  .nav-actions {
+    gap: 0.6rem;
+  }
+  .btn-join {
+    padding: 0.52rem 1.05rem;
+    font-size: 0.75rem;
+  }
+  .btn-login {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.75rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .nav-menu {
     display: none;

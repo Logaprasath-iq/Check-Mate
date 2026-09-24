@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student & Faculty Login – CHECKMATE Chess Academy</title>
+  <title>Student Login – CHECKMATE Chess Academy</title>
   <meta name="description" content="Access your personalized chess student portal, live analysis engine, homework assignments, and tournament schedule.">
   <link rel="canonical" href="https://checkmate-academy.com/login.html">
 
@@ -42,23 +42,13 @@
           <img src="assets/images/logo-text.png" alt="CHECKMATE - THINK. PLAY. MASTER." class="site-brand-img">
         </a>
         <h1 style="font-size: 1.4rem; font-weight: 800; color: var(--text-primary);">WELCOME BACK</h1>
-        <p style="font-size: 0.85rem; color: var(--text-secondary);">Log in to access your portal, puzzles & live rooms</p>
-      </div>
-
-      <!-- Role Selector Tabs -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1.5rem; background: rgba(0,0,0,0.25); padding: 4px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
-        <button type="button" id="tab-student" onclick="selectRole('student')" style="padding: 0.55rem; font-size: 0.8rem; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: var(--gold-primary); color: #080b12; transition: var(--transition);">
-          <i data-lucide="graduation-cap" style="width: 15px;"></i> Student
-        </button>
-        <button type="button" id="tab-admin" onclick="selectRole('admin')" style="padding: 0.55rem; font-size: 0.8rem; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: transparent; color: var(--text-muted); transition: var(--transition);">
-          <i data-lucide="shield" style="width: 15px;"></i> Admin
-        </button>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">Log in to access your student portal, puzzles & live rooms</p>
       </div>
 
       <form onsubmit="handleLoginSubmit(event)" style="display: flex; flex-direction: column; gap: 1.25rem;">
         <div>
-          <label id="email-label" style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Student Email Address</label>
-          <input type="email" id="login-email" class="newsletter-input" value="alex.morgan@checkmate.academy" placeholder="student@checkmate.academy" required>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Email Address</label>
+          <input type="email" id="login-email" class="newsletter-input" value="alex.morgan@checkmate.academy" placeholder="e.g. alex.morgan@checkmate.academy" required>
         </div>
 
         <div>
@@ -75,22 +65,9 @@
         </div>
 
         <button type="submit" id="btn-submit-login" class="btn-primary-gold" style="justify-content: center; padding: 0.85rem; width: 100%;">
-          SIGN IN AS STUDENT <i data-lucide="log-in" style="width: 16px;"></i>
+          LOGIN <i data-lucide="log-in" style="width: 16px;"></i>
         </button>
       </form>
-
-      <!-- Quick 1-Click Demo Login Helpers -->
-      <div style="margin-top: 1.5rem; padding: 0.85rem; background: rgba(212, 175, 55, 0.06); border: 1px dashed var(--border-gold); border-radius: var(--radius-sm); text-align: center;">
-        <span style="display: block; font-size: 0.72rem; font-weight: 700; color: var(--gold-light); text-transform: uppercase; margin-bottom: 0.5rem;">⚡ Instant 1-Click Demo Login</span>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-          <button type="button" onclick="quickDemoLogin('student')" class="btn-login" style="font-size: 0.75rem; padding: 0.45rem; justify-content: center;">
-            Student (Alex)
-          </button>
-          <button type="button" onclick="quickDemoLogin('admin')" class="btn-login" style="font-size: 0.75rem; padding: 0.45rem; justify-content: center;">
-            Admin (Arjun)
-          </button>
-        </div>
-      </div>
 
       <!-- Social Logins UI -->
       <div style="text-align: center; margin: 1.5rem 0 1.25rem; position: relative;">
@@ -99,10 +76,10 @@
       </div>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-        <button class="btn-login" style="justify-content: center; gap: 0.5rem;" onclick="window.showCheckmateToast('Google SSO Activated', 'success')">
+        <button type="button" class="btn-login" style="justify-content: center; gap: 0.5rem;" onclick="handleSocialLogin('Google')">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.761H12.545z"/></svg> Google
         </button>
-        <button class="btn-login" style="justify-content: center; gap: 0.5rem;" onclick="window.showCheckmateToast('Chess.com SSO Connected', 'success')">
+        <button type="button" class="btn-login" style="justify-content: center; gap: 0.5rem;" onclick="handleSocialLogin('Chess.com')">
           <i data-lucide="award" style="width: 16px;"></i> Chess.com
         </button>
       </div>
@@ -118,63 +95,35 @@
   <script>
     lucide.createIcons();
 
-    let currentRole = 'student';
-
-    function selectRole(role) {
-      currentRole = role;
-      const tabStudent = document.getElementById('tab-student');
-      const tabAdmin = document.getElementById('tab-admin');
-      const emailInput = document.getElementById('login-email');
-      const emailLabel = document.getElementById('email-label');
-      const submitBtn = document.getElementById('btn-submit-login');
-
-      if (role === 'admin') {
-        tabAdmin.style.background = 'var(--gold-primary)';
-        tabAdmin.style.color = '#080b12';
-        tabStudent.style.background = 'transparent';
-        tabStudent.style.color = 'var(--text-muted)';
-        emailLabel.textContent = 'Admin Email Address';
-        emailInput.value = 'arjun.mehta@checkmate.academy';
-        submitBtn.innerHTML = 'SIGN IN AS ADMIN <i data-lucide="shield" style="width: 16px;"></i>';
-      } else {
-        tabStudent.style.background = 'var(--gold-primary)';
-        tabStudent.style.color = '#080b12';
-        tabAdmin.style.background = 'transparent';
-        tabAdmin.style.color = 'var(--text-muted)';
-        emailLabel.textContent = 'Student Email Address';
-        emailInput.value = 'alex.morgan@checkmate.academy';
-        submitBtn.innerHTML = 'SIGN IN AS STUDENT <i data-lucide="log-in" style="width: 16px;"></i>';
-      }
-      lucide.createIcons();
-    }
-
-    function quickDemoLogin(role) {
-      if (role === 'admin') {
-        const user = { name: 'Arjun Mehta', role: 'admin', email: 'arjun.mehta@checkmate.academy' };
-        localStorage.setItem('checkmate_user', JSON.stringify(user));
-        window.showCheckmateToast('Welcome Chief Arbiter Arjun! Redirecting to Admin Dashboard...', 'success');
-        setTimeout(() => { window.location.href = 'admin/index.html'; }, 800);
-      } else {
-        const user = { name: 'Alex Morgan', role: 'student', email: 'alex.morgan@checkmate.academy' };
-        localStorage.setItem('checkmate_user', JSON.stringify(user));
-        window.showCheckmateToast('Welcome back Alex! Redirecting to Student Dashboard...', 'success');
-        setTimeout(() => { window.location.href = 'student/index.html'; }, 800);
-      }
-    }
-
     function handleLoginSubmit(e) {
       e.preventDefault();
-      const email = document.getElementById('login-email').value;
-      const role = currentRole || (email.toLowerCase().includes('admin') ? 'admin' : 'student');
-      const name = role === 'admin' ? 'Arjun Mehta' : 'Alex Morgan';
+      const emailInput = document.getElementById('login-email');
+      const email = (emailInput && emailInput.value.trim()) || 'alex.morgan@checkmate.academy';
 
-      const user = { name, role, email };
+      let name = 'Alex Morgan';
+      if (email && email.includes('@')) {
+        const localPart = email.split('@')[0].replace(/[._]/g, ' ').trim();
+        if (localPart) {
+          name = localPart.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        }
+      }
+
+      const user = { name, role: 'student', email };
       localStorage.setItem('checkmate_user', JSON.stringify(user));
 
-      window.showCheckmateToast(`Login verified! Welcome ${name}`, 'success');
+      window.showCheckmateToast(`Welcome back, ${name}! Redirecting to home...`, 'success');
       setTimeout(() => {
-        window.location.href = role === 'admin' ? 'admin/index.html' : 'student/index.html';
-      }, 900);
+        window.location.href = 'index.html';
+      }, 700);
+    }
+
+    function handleSocialLogin(provider) {
+      const user = { name: 'Alex Morgan', role: 'student', email: 'alex.morgan@checkmate.academy' };
+      localStorage.setItem('checkmate_user', JSON.stringify(user));
+      window.showCheckmateToast(`Signed in with ${provider}! Redirecting to home...`, 'success');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 700);
     }
   </script>
 </body>
