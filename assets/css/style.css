@@ -60,35 +60,35 @@
 
 [data-theme="light"] {
   color-scheme: light;
-  --bg-primary: #f8fafc;
-  --bg-secondary: #f1f5f9;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
   --bg-card: #ffffff;
   --bg-card-hover: #ffffff;
-  --bg-glass: rgba(255, 255, 255, 0.9);
-  --bg-glass-nav: rgba(255, 255, 255, 0.95);
+  --bg-glass: rgba(255, 255, 255, 0.95);
+  --bg-glass-nav: rgba(255, 255, 255, 0.98);
   
-  --text-primary: #090d16;
+  --text-primary: #0f172a;
   --text-secondary: #334155;
   --text-muted: #64748b;
   
-  --border-subtle: rgba(15, 23, 42, 0.1);
-  --border-gold: rgba(180, 140, 20, 0.4);
-  --border-gold-bright: rgba(180, 140, 20, 0.8);
+  --border-subtle: #e2e8f0;
+  --border-gold: rgba(180, 140, 20, 0.35);
+  --border-gold-bright: rgba(180, 140, 20, 0.75);
 
   --gold-primary: #b8911b;
   --gold-light: #997316;
   --gold-dark: #826307;
   --gold-champagne: #997316;
   --gold-gradient: linear-gradient(135deg, #d4af37 0%, #b8911b 50%, #826307 100%);
-  --gold-glow: rgba(184, 145, 27, 0.2);
-  --gold-glow-strong: rgba(184, 145, 27, 0.35);
+  --gold-glow: rgba(184, 145, 27, 0.15);
+  --gold-glow-strong: rgba(184, 145, 27, 0.28);
 
   --accent-navy: #e2e8f0;
   --accent-blue: #0284c7;
-  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.06);
-  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.12);
-  --shadow-gold: 0 10px 25px rgba(184, 145, 27, 0.18);
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.07);
+  --shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.1);
+  --shadow-gold: 0 10px 25px rgba(184, 145, 27, 0.16);
 
   --board-light: #f1ede4;
   --board-dark: #7a8fa6;
@@ -179,6 +179,16 @@ button, input, select, textarea {
 .section-py {
   padding-top: 6rem;
   padding-bottom: 6rem;
+}
+
+.section-main {
+  background-color: var(--bg-primary);
+}
+
+.section-alt {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 @media (max-width: 768px) {
@@ -4860,6 +4870,650 @@ select optgroup {
   .blog-details-grid article {
     padding: 1.5rem 1rem !important;
   }
+}
+
+/* ============================================================
+   CHESS ACADEMY SECTIONS: AGE GROUPS, COACHING LEVELS,
+   TRAINING APPROACH, ACHIEVEMENTS, BOOK A TRIAL
+   ============================================================ */
+
+/* Age Groups Grid */
+.age-groups-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+}
+
+.age-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.age-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.age-card-img-box {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.age-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.age-card:hover .age-card-img {
+  transform: scale(1.05);
+}
+
+.age-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(8, 11, 18, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-light);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.age-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.age-card-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.age-card-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.age-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.age-feature-item {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.age-feature-item i {
+  color: var(--gold-primary);
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* Coaching Levels Grid */
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+}
+
+.level-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition);
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.level-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.level-card.featured {
+  border-color: var(--gold-primary);
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, var(--bg-card) 45%);
+}
+
+.level-badge-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.level-num-tag {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-primary);
+  background: rgba(212, 175, 55, 0.12);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.level-hours {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.level-elo {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  margin-bottom: 0.2rem;
+}
+
+.level-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.level-target {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.level-milestone {
+  background: rgba(212, 175, 55, 0.08);
+  border-left: 3px solid var(--gold-primary);
+  padding: 0.65rem 0.85rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.level-skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.level-skill-item {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.45;
+}
+
+.level-skill-item i {
+  color: var(--gold-primary);
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* Training Approach (Methodology) Grid */
+.approach-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+}
+
+.approach-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 2.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.approach-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.approach-step-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: rgba(212, 175, 55, 0.22);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.approach-icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.approach-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+}
+
+.approach-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* Achievements Section Layout */
+.achievements-grid-wrap {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+.achievements-visual-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.achievements-hero-img {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  display: block;
+}
+
+.achievements-hero-caption {
+  padding: 1.5rem 1.75rem;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.achievements-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.achievement-stat-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+}
+
+.achievement-stat-number {
+  font-family: 'Sora', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--gold-primary);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.achievement-stat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.achievements-story-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-md);
+}
+
+.honor-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.honor-item:last-child {
+  border-bottom: none;
+}
+
+.honor-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold-primary);
+  flex-shrink: 0;
+}
+
+.honor-name {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.honor-award {
+  font-size: 0.82rem;
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+/* Book a Trial Section Layout */
+.trial-section-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 3rem;
+  align-items: stretch;
+}
+
+.trial-info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);
+}
+
+.trial-info-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.trial-info-body {
+  padding: 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.trial-benefit-row {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.trial-benefit-row i {
+  color: var(--gold-primary);
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.trial-form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.trial-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.15rem;
+}
+
+.trial-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.trial-form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.trial-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.trial-input,
+.trial-select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.92rem;
+  transition: var(--transition);
+}
+
+.trial-input:focus,
+.trial-select:focus {
+  outline: none;
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+.trial-select option {
+  background: #0e1422;
+  color: #fff;
+}
+
+.trial-submit-btn {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: var(--gold-gradient);
+  color: #080b12;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+  margin-top: 0.5rem;
+}
+
+.trial-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+.trial-success-box {
+  display: none;
+  text-align: center;
+  padding: 2rem 1rem;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Responsive Grid Collapses */
+@media (max-width: 1100px) {
+  .age-groups-grid,
+  .levels-grid,
+  .approach-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .achievements-grid-wrap,
+  .trial-section-wrapper {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .age-groups-grid,
+  .levels-grid,
+  .approach-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .achievements-metrics-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .trial-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .trial-form-card {
+    padding: 1.5rem !important;
+  }
+}
+
+/* Light Mode Overrides for Academy Sections */
+[data-theme="light"] .age-card,
+[data-theme="light"] .level-card,
+[data-theme="light"] .approach-card,
+[data-theme="light"] .achievements-visual-card,
+[data-theme="light"] .achievements-hero-caption,
+[data-theme="light"] .achievement-stat-item,
+[data-theme="light"] .achievements-story-card,
+[data-theme="light"] .trial-info-card,
+[data-theme="light"] .trial-form-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+}
+
+[data-theme="light"] .age-card:hover,
+[data-theme="light"] .level-card:hover,
+[data-theme="light"] .approach-card:hover {
+  border-color: rgba(180, 140, 20, 0.5) !important;
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.16) !important;
+}
+
+[data-theme="light"] .age-badge {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #997316 !important;
+  border-color: rgba(180, 140, 20, 0.5) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="light"] .age-card-title,
+[data-theme="light"] .level-name,
+[data-theme="light"] .approach-title,
+[data-theme="light"] .honor-name {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .age-card-desc,
+[data-theme="light"] .approach-desc,
+[data-theme="light"] .level-skill-item,
+[data-theme="light"] .trial-benefit-row {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .level-milestone {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-left-color: #b8911b !important;
+}
+
+[data-theme="light"] .approach-step-num {
+  color: rgba(184, 145, 27, 0.25) !important;
+}
+
+[data-theme="light"] .achievement-stat-number {
+  color: #997316 !important;
+}
+
+[data-theme="light"] .trial-input,
+[data-theme="light"] .trial-select {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .trial-input:focus,
+[data-theme="light"] .trial-select:focus {
+  border-color: #b8911b !important;
+  box-shadow: 0 0 0 3px rgba(184, 145, 27, 0.15) !important;
+}
+
+[data-theme="light"] .trial-select option {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .trial-label {
+  color: #1e293b !important;
 }
 
 
