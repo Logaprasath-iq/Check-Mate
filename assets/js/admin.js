@@ -33,6 +33,38 @@ function initAdminSidebar() {
       }
     }
   });
+
+  // Sidebar item active highlight on click & hash change
+  const sidebarNavItems = document.querySelectorAll('.sidebar-nav .sidebar-item');
+  sidebarNavItems.forEach(item => {
+    const link = item.querySelector('a');
+    if (!link) return;
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href && (href.startsWith('#') || href.includes('index.html'))) {
+        sidebarNavItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        if (window.innerWidth <= 900) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  });
+
+  // Sync active state from current hash
+  function syncActiveFromHash() {
+    const hash = window.location.hash;
+    if (hash) {
+      const targetLink = document.querySelector(`.sidebar-nav .sidebar-item a[href="${hash}"]`);
+      if (targetLink) {
+        sidebarNavItems.forEach(i => i.classList.remove('active'));
+        targetLink.closest('.sidebar-item')?.classList.add('active');
+      }
+    }
+  }
+
+  window.addEventListener('hashchange', syncActiveFromHash);
+  syncActiveFromHash();
 }
 
 /* ------------------------------------------------------------

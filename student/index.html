@@ -497,6 +497,7 @@
               "Alex, your transition into the endgame in Round 4 was masterclass-grade. Be mindful not to rush moves when down under 1 minute. Focus on the f4 pawn break timing."
             </blockquote>
             
+            <div id="homework"></div>
             <div id="studentHomeworkContainer" style="display: flex; flex-direction: column; gap: 0.65rem;">
               <!-- Item 1 -->
               <div class="admin-card hw-item" style="padding: 0.75rem 0.85rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border); margin: 0;">
@@ -1123,6 +1124,35 @@
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
     }
+
+    // Interactive Sidebar Active Item Highlighting
+    document.addEventListener('DOMContentLoaded', () => {
+      const sidebarItems = document.querySelectorAll('.sidebar-nav .sidebar-item');
+      sidebarItems.forEach(item => {
+        const link = item.querySelector('a');
+        if (!link) return;
+        link.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href && (href.startsWith('#') || href.includes('index.html'))) {
+            sidebarItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+          }
+        });
+      });
+
+      function syncActiveSidebar() {
+        const hash = window.location.hash;
+        if (!hash) return;
+        const target = document.querySelector(`.sidebar-nav .sidebar-item a[href="${hash}"]`);
+        if (target) {
+          sidebarItems.forEach(i => i.classList.remove('active'));
+          target.closest('.sidebar-item')?.classList.add('active');
+        }
+      }
+
+      window.addEventListener('hashchange', syncActiveSidebar);
+      syncActiveSidebar();
+    });
   </script>
 </body>
 </html>
