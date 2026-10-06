@@ -726,6 +726,19 @@ body.admin-body {
   text-align: right;
 }
 
+[dir="rtl"] .admin-search-box input {
+  padding: 0 2.4rem 0 1rem;
+}
+
+[dir="rtl"] .admin-search-box svg {
+  left: auto;
+  right: 0.75rem;
+}
+
+[dir="rtl"] .student-banner {
+  text-align: right;
+}
+
 [dir="rtl"] .sidebar-item.active a {
   border-left: none !important;
   border-right: 4px solid var(--admin-gold) !important;
@@ -771,7 +784,8 @@ body.admin-body {
     left: auto !important;
     right: 0 !important;
   }
-  .admin-sidebar.open {
+  .admin-sidebar.open,
+  [dir="rtl"] .admin-sidebar.open {
     transform: translateX(0) !important;
   }
   .admin-main {
@@ -817,6 +831,13 @@ body.admin-body {
     left: 0.65rem !important;
     width: 15px !important;
     height: 15px !important;
+  }
+  [dir="rtl"] .admin-search-box input {
+    padding: 0 2.2rem 0 0.75rem !important;
+  }
+  [dir="rtl"] .admin-search-box svg {
+    left: auto !important;
+    right: 0.65rem !important;
   }
   .topbar-right {
     gap: 0.5rem !important;

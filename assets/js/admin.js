@@ -89,36 +89,43 @@ function initAdminTheme() {
    RTL Switcher Synced
    ------------------------------------------------------------ */
 function initAdminRTL() {
+  if (typeof initRTL === 'function') {
+    initRTL();
+    return;
+  }
+
   const savedDir = localStorage.getItem('checkmate-dir') || 'ltr';
   document.documentElement.setAttribute('dir', savedDir);
 
-  const updateLabels = (dir) => {
-    const isRtl = dir === 'rtl';
-    document.querySelectorAll('.admin-rtl-toggle, .rtl-toggle-btn').forEach(btn => {
-      let label = btn.querySelector('.rtl-label');
-      if (!label) {
-        label = document.createElement('span');
-        label.className = 'rtl-label';
-        btn.appendChild(label);
-      }
-      label.textContent = isRtl ? 'LTR' : 'RTL';
-      const actionText = isRtl ? 'Switch to LTR' : 'Switch to RTL';
-      btn.setAttribute('title', actionText);
-      btn.setAttribute('aria-label', actionText);
-    });
-  };
-
-  updateLabels(savedDir);
-
+  const isRtl = savedDir === 'rtl';
   const rtlToggles = document.querySelectorAll('.admin-rtl-toggle, .rtl-toggle-btn');
   rtlToggles.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('dir') || 'ltr';
-      const next = current === 'ltr' ? 'rtl' : 'ltr';
-      document.documentElement.setAttribute('dir', next);
-      localStorage.setItem('checkmate-dir', next);
-      updateLabels(next);
-      window.dispatchEvent(new CustomEvent('dirChanged', { detail: { dir: next } }));
+    let label = btn.querySelector('.rtl-label');
+    if (!label) {
+      label = document.createElement('span');
+      label.className = 'rtl-label';
+      btn.appendChild(label);
+    }
+    label.textContent = isRtl ? 'LTR' : 'RTL';
+    const actionText = isRtl ? 'Switch to LTR' : 'Switch to RTL';
+    btn.setAttribute('title', actionText);
+    btn.setAttribute('aria-label', actionText);
+
+    if (btn.dataset.rtlBound === 'true') return;
+    btn.dataset.rtlBound = 'true';
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (typeof window.checkmateToggleRTL === 'function') {
+        window.checkmateToggleRTL();
+      } else {
+        const current = document.documentElement.getAttribute('dir') || 'ltr';
+        const next = current === 'ltr' ? 'rtl' : 'ltr';
+        document.documentElement.setAttribute('dir', next);
+        localStorage.setItem('checkmate-dir', next);
+        label.textContent = next === 'rtl' ? 'LTR' : 'RTL';
+        window.dispatchEvent(new CustomEvent('dirChanged', { detail: { dir: next } }));
+      }
     });
   });
 }

@@ -77,38 +77,53 @@ function updateThemeIcons(theme) {
 /* ------------------------------------------------------------
    3. RTL Toggle with Persistence & Synced Labels
    ------------------------------------------------------------ */
+window.checkmateToggleRTL = function() {
+  const currentDir = document.documentElement.getAttribute('dir') || 'ltr';
+  const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+  document.documentElement.setAttribute('dir', newDir);
+  localStorage.setItem('checkmate-dir', newDir);
+
+  const isRtl = newDir === 'rtl';
+  document.querySelectorAll('.rtl-toggle-btn, .admin-rtl-toggle').forEach(btn => {
+    let label = btn.querySelector('.rtl-label');
+    if (!label) {
+      label = document.createElement('span');
+      label.className = 'rtl-label';
+      btn.appendChild(label);
+    }
+    label.textContent = isRtl ? 'LTR' : 'RTL';
+    const actionText = isRtl ? 'Switch to LTR' : 'Switch to RTL';
+    btn.setAttribute('title', actionText);
+    btn.setAttribute('aria-label', actionText);
+  });
+
+  window.dispatchEvent(new CustomEvent('dirChanged', { detail: { dir: newDir } }));
+};
+
 function initRTL() {
   const savedDir = localStorage.getItem('checkmate-dir') || 'ltr';
   document.documentElement.setAttribute('dir', savedDir);
 
-  const updateRTLButtons = (dir) => {
-    const isRtl = dir === 'rtl';
-    const rtlToggles = document.querySelectorAll('.rtl-toggle-btn, .admin-rtl-toggle');
-    rtlToggles.forEach(btn => {
-      let label = btn.querySelector('.rtl-label');
-      if (!label) {
-        label = document.createElement('span');
-        label.className = 'rtl-label';
-        btn.appendChild(label);
-      }
-      label.textContent = isRtl ? 'LTR' : 'RTL';
-      const actionText = isRtl ? 'Switch to LTR' : 'Switch to RTL';
-      btn.setAttribute('title', actionText);
-      btn.setAttribute('aria-label', actionText);
-    });
-  };
-
-  updateRTLButtons(savedDir);
-
+  const isRtl = savedDir === 'rtl';
   const rtlToggles = document.querySelectorAll('.rtl-toggle-btn, .admin-rtl-toggle');
   rtlToggles.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const currentDir = document.documentElement.getAttribute('dir') || 'ltr';
-      const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
-      document.documentElement.setAttribute('dir', newDir);
-      localStorage.setItem('checkmate-dir', newDir);
-      updateRTLButtons(newDir);
-      window.dispatchEvent(new CustomEvent('dirChanged', { detail: { dir: newDir } }));
+    let label = btn.querySelector('.rtl-label');
+    if (!label) {
+      label = document.createElement('span');
+      label.className = 'rtl-label';
+      btn.appendChild(label);
+    }
+    label.textContent = isRtl ? 'LTR' : 'RTL';
+    const actionText = isRtl ? 'Switch to LTR' : 'Switch to RTL';
+    btn.setAttribute('title', actionText);
+    btn.setAttribute('aria-label', actionText);
+
+    if (btn.dataset.rtlBound === 'true') return;
+    btn.dataset.rtlBound = 'true';
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.checkmateToggleRTL();
     });
   });
 }
