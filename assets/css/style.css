@@ -513,7 +513,8 @@ button, input, select, textarea {
 }
 
 .has-dropdown:hover .dropdown-chevron,
-.has-dropdown:focus-within .dropdown-chevron {
+.has-dropdown:focus-within .dropdown-chevron,
+.has-dropdown.open .dropdown-chevron {
   transform: rotate(180deg);
   color: var(--gold-light);
 }
@@ -539,10 +540,12 @@ button, input, select, textarea {
 }
 
 .has-dropdown:hover .nav-dropdown-menu,
-.has-dropdown:focus-within .nav-dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(4px);
+.has-dropdown:focus-within .nav-dropdown-menu,
+.has-dropdown.open .nav-dropdown-menu {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(4px) !important;
+  pointer-events: auto !important;
 }
 
 .nav-dropdown-link {
@@ -1806,6 +1809,112 @@ button, input, select, textarea {
   }
 }
 
+.features-grid-3 {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+@media (max-width: 860px) {
+  .features-grid-3 {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+}
+
+/* Checkmate Genesis Section (Item 11 & Item 13.1) */
+.genesis-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+.genesis-story p {
+  color: var(--text-secondary);
+  line-height: 1.85;
+  font-size: 1.02rem;
+  margin-bottom: 1.25rem;
+}
+
+.genesis-quote-card {
+  background: rgba(212, 175, 55, 0.07);
+  border: 1px solid var(--border-gold);
+  border-left: 4px solid var(--gold-primary);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.genesis-quote-text {
+  font-style: italic;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.genesis-quote-author {
+  font-weight: 700;
+  color: var(--gold-light);
+  font-size: 0.88rem;
+}
+
+.genesis-img-box {
+  border: 2px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg), 0 0 35px var(--gold-glow);
+  position: relative;
+  width: 100%;
+}
+
+.genesis-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+/* High Contrast Light Mode Rules for Genesis (Item 11) */
+[data-theme="light"] .genesis-story p {
+  color: #1e293b !important;
+  font-weight: 450;
+}
+
+[data-theme="light"] .genesis-story .section-title {
+  color: #090d16 !important;
+}
+
+[data-theme="light"] .genesis-quote-card {
+  background: #fdfbf5 !important;
+  border: 1px solid rgba(184, 145, 27, 0.45) !important;
+  border-left: 4px solid #b8911b !important;
+  box-shadow: 0 4px 18px rgba(184, 145, 27, 0.1) !important;
+}
+
+[data-theme="light"] .genesis-quote-text {
+  color: #0f172a !important;
+  font-weight: 500;
+}
+
+[data-theme="light"] .genesis-quote-author {
+  color: #785a06 !important;
+  font-weight: 800 !important;
+}
+
+/* Responsive Genesis (Item 13.1 for 360px) */
+@media (max-width: 992px) {
+  .genesis-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.25rem !important;
+  }
+  .genesis-img {
+    height: auto !important;
+    min-height: 240px;
+    max-height: 360px;
+    width: 100% !important;
+  }
+}
+
 /* Programs Cards */
 .programs-grid {
   display: grid;
@@ -3049,10 +3158,11 @@ button, input, select, textarea {
   }
 }
 
-/* Final CTA */
+/* Final CTA - Uses Primary Background Colour as requested */
 .final-cta-section {
   position: relative;
-  background: radial-gradient(circle at center, #162035 0%, #080b12 80%);
+  background-color: var(--bg-primary) !important;
+  background: var(--bg-primary) !important;
   border-top: 1px solid var(--border-gold);
   padding: 7rem 0;
   overflow: hidden;
@@ -3099,7 +3209,8 @@ button, input, select, textarea {
 
 /* Final CTA in Light Mode */
 [data-theme="light"] .final-cta-section {
-  background: radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%) !important;
+  background-color: var(--bg-primary) !important;
+  background: var(--bg-primary) !important;
   border-top: 1px solid rgba(180, 140, 20, 0.35) !important;
   border-bottom: 1px solid rgba(180, 140, 20, 0.35) !important;
 }

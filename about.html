@@ -66,7 +66,6 @@
         <div class="nav-actions">
           <button class="tool-btn theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme"><span class="theme-icon-slot"><i data-lucide="sun"></i></span></button>
           <button class="tool-btn rtl-toggle-btn" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR"><i data-lucide="arrow-left-right"></i><span class="rtl-label">RTL</span></button>
-          <a href="login.html" class="btn-login">LOGIN</a>
           <a href="register.html" class="btn-join">JOIN NOW <i data-lucide="arrow-right" style="width: 15px;"></i></a>
           <button class="nav-toggle" aria-label="Open Navigation Menu"><span></span><span></span><span></span></button>
         </div>
@@ -156,22 +155,22 @@
     <!-- Our Inception & Heritage Story -->
     <section class="section-py" style="padding-top: 3.5rem;">
       <div class="site-container">
-        <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4.5rem; align-items: center;">
-          <div>
+        <div class="genesis-grid">
+          <div class="genesis-story">
             <span class="section-tag">The Checkmate Genesis</span>
             <h2 class="section-title">A REVOLUTION IN MODERN CHESS EDUCATION</h2>
-            <p style="color: var(--text-secondary); line-height: 1.85; margin-bottom: 1.25rem; font-size: 1.05rem;">
+            <p>
               CHECKMATE was founded in 2018 by FIDE Master Arjun Mehta with an audacious ambition: to replace rote opening memorization with deep cognitive foresight, emotional resilience, and scientific endgame precision.
             </p>
-            <p style="color: var(--text-secondary); line-height: 1.85; margin-bottom: 1.75rem; font-size: 0.98rem;">
+            <p>
               What started as an intimate chess salon in New Delhi with 30 enthusiastic prodigies has grown into a world-renowned chess academy with state-of-the-art residential training campuses and a high-tech online platform serving students across Europe, the Americas, Asia, and the Middle East.
             </p>
             
-            <div style="background: rgba(212, 175, 55, 0.05); border: 1px solid var(--border-gold); border-left: 4px solid var(--gold-primary); border-radius: var(--radius-sm); padding: 1.25rem 1.5rem; margin-bottom: 2rem;">
-              <p style="font-style: italic; color: var(--text-primary); margin-bottom: 0.5rem; font-size: 0.95rem;">
+            <div class="genesis-quote-card">
+              <p class="genesis-quote-text">
                 "Every chess game is a mirror of decision-making under uncertainty. When we train a student to foresee three candidate moves ahead, we are not just teaching a game—we are cultivating the leaders, strategists, and thinkers of tomorrow."
               </p>
-              <div style="font-weight: 700; color: var(--gold-light); font-size: 0.85rem;">— FM Arjun Mehta, Founder & Dean of Faculty</div>
+              <div class="genesis-quote-author">— FM Arjun Mehta, Founder & Dean of Faculty</div>
             </div>
 
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
@@ -180,12 +179,12 @@
             </div>
           </div>
 
-          <div style="position: relative;">
-            <div style="border: 2px solid var(--border-gold); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg), 0 0 35px var(--gold-glow); position: relative;">
-              <img src="assets/images/about1.jpg" alt="Checkmate Academy Main Amphitheater" style="width: 100%; height: 420px; object-fit: cover;">
+          <div style="position: relative; width: 100%;">
+            <div class="genesis-img-box">
+              <img src="assets/images/about1.jpg" alt="Checkmate Academy Main Amphitheater" class="genesis-img">
               <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(8,11,18,0.95) 0%, transparent 100%); padding: 1.5rem; color: #fff;">
                 <div style="font-family: 'Sora'; font-weight: 700; font-size: 1.1rem; color: var(--gold-light);">Central Training Amphitheater</div>
-                <div style="font-size: 0.82rem; color: var(--text-muted);">Equipped with 24 DGT Smart E-Boards and 4K Master Projection Screens</div>
+                <div style="font-size: 0.82rem; color: #94a3b8;">Equipped with 24 DGT Smart E-Boards and 4K Master Projection Screens</div>
               </div>
             </div>
           </div>
@@ -365,7 +364,7 @@
     <!-- Mission, Vision & Values -->
     <section class="section-py">
       <div class="site-container">
-        <div class="features-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="features-grid features-grid-3">
           <div class="feature-card">
             <div class="feature-icon-box"><i data-lucide="compass"></i></div>
             <h3 class="feature-title">OUR MISSION</h3>
