@@ -153,7 +153,7 @@
         <button class="topbar-toggle" aria-label="Toggle Navigation"><i data-lucide="menu"></i></button>
         <div class="admin-search-box">
           <i data-lucide="search"></i>
-          <input type="text" placeholder="Search lessons, masterclass topics, tournament pairings...">
+          <input type="text" placeholder="Search lessons, courses...">
         </div>
       </div>
 
@@ -195,9 +195,9 @@
       <div class="student-banner">
         <div class="student-banner-bg"></div>
         <div style="position: relative; z-index: 2; max-width: 780px;">
-          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
-            <span class="status-chip chip-gold" style="font-size: 0.72rem;"><i data-lucide="crown" style="width: 13px;"></i> FIDE CANDIDATE TRACK</span>
-            <span style="font-size: 0.8rem; color: var(--admin-text-muted);">Student ID: <strong>CM-892410</strong></span>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+            <span class="status-chip chip-gold" style="font-size: 0.72rem; white-space: nowrap;"><i data-lucide="crown" style="width: 13px;"></i> FIDE CANDIDATE TRACK</span>
+            <span style="font-size: 0.8rem; color: var(--admin-text-muted); white-space: nowrap;">Student ID: <strong>CM-892410</strong></span>
           </div>
           <h1 class="page-headline" style="margin-bottom: 0.5rem;" id="studentWelcomeHeading">
             WELCOME BACK, ALEX MORGAN ♟️
@@ -277,7 +277,7 @@
       <div class="charts-grid" style="margin-top: 2rem;">
         
         <!-- Left: Rating Chart & Active Modules -->
-        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; width: 100%; max-width: 100%;">
           
           <!-- Rating Progression Chart -->
           <div class="admin-card" id="ratings">
@@ -288,7 +288,7 @@
               </div>
               <span class="status-chip chip-gold">+265 Total Elo Gained</span>
             </div>
-            <div style="height: 280px; position: relative;">
+            <div class="chart-container-box" style="height: 280px; position: relative; width: 100%; max-width: 100%; min-width: 0; overflow: hidden;">
               <canvas id="chartStudentRating"></canvas>
             </div>
           </div>
@@ -302,41 +302,41 @@
             
             <div style="display: flex; flex-direction: column; gap: 1.25rem;">
               <!-- Course 1 -->
-              <div style="padding: 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
-                  <div style="font-weight: 700; color: var(--admin-text);">Modern Sicilian Defense: Najdorf & Dragon Complexes</div>
-                  <span class="status-chip chip-gold">85% Complete</span>
+              <div class="course-card-box" style="padding: 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border); min-width: 0; max-width: 100%;">
+                <div class="course-card-header" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
+                  <div style="font-weight: 700; color: var(--admin-text); word-break: break-word; flex: 1 1 200px;">Modern Sicilian Defense: Najdorf & Dragon Complexes</div>
+                  <span class="status-chip chip-gold" style="white-space: nowrap; flex-shrink: 0;">85% Complete</span>
                 </div>
                 <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%;"></div></div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted);">
-                  <span>Current Unit: 6.Bg5 Complications & Counterplay</span>
-                  <a href="#live-room" onclick="showLiveRoomModal()" style="color: var(--admin-gold); font-weight: 600;">Continue Lesson &rarr;</a>
+                <div class="course-card-footer" style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted); flex-wrap: wrap; gap: 0.35rem;">
+                  <span style="word-break: break-word;">Current Unit: 6.Bg5 Complications & Counterplay</span>
+                  <a href="#live-room" onclick="showLiveRoomModal()" style="color: var(--admin-gold); font-weight: 600; white-space: nowrap;">Continue Lesson &rarr;</a>
                 </div>
               </div>
 
               <!-- Course 2 -->
-              <div style="padding: 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
-                  <div style="font-weight: 700; color: var(--admin-text);">Pawn Structures & The Carlsbad Minority Attack</div>
-                  <span class="status-chip chip-warning">60% Complete</span>
+              <div class="course-card-box" style="padding: 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border); min-width: 0; max-width: 100%;">
+                <div class="course-card-header" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
+                  <div style="font-weight: 700; color: var(--admin-text); word-break: break-word; flex: 1 1 200px;">Pawn Structures & The Carlsbad Minority Attack</div>
+                  <span class="status-chip chip-warning" style="white-space: nowrap; flex-shrink: 0;">60% Complete</span>
                 </div>
                 <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 60%; background: #f59e0b;"></div></div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted);">
-                  <span>Current Unit: Queenside Infiltration on the c-file</span>
-                  <span style="color: var(--admin-text-muted);">4 Lessons Remaining</span>
+                <div class="course-card-footer" style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted); flex-wrap: wrap; gap: 0.35rem;">
+                  <span style="word-break: break-word;">Current Unit: Queenside Infiltration on the c-file</span>
+                  <span style="color: var(--admin-text-muted); white-space: nowrap;">4 Lessons Remaining</span>
                 </div>
               </div>
 
               <!-- Course 3 -->
-              <div style="padding: 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
-                  <div style="font-weight: 700; color: var(--admin-text);">Essential Rook & Pawn Endgames (Lucena & Philidor)</div>
-                  <span class="status-chip chip-success">100% Certified</span>
+              <div class="course-card-box" style="padding: 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border); min-width: 0; max-width: 100%;">
+                <div class="course-card-header" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
+                  <div style="font-weight: 700; color: var(--admin-text); word-break: break-word; flex: 1 1 200px;">Essential Rook & Pawn Endgames (Lucena & Philidor)</div>
+                  <span class="status-chip chip-success" style="white-space: nowrap; flex-shrink: 0;">100% Certified</span>
                 </div>
                 <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%; background: #10b981;"></div></div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted);">
-                  <span>Completed on Oct 10, 2026 • Grade: Distinction</span>
-                  <a href="#" onclick="window.showCheckmateToast('Certificate downloaded: Rook Endgames', 'success'); return false;" style="color: var(--admin-success); font-weight: 600;">Download Certificate</a>
+                <div class="course-card-footer" style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted); flex-wrap: wrap; gap: 0.35rem;">
+                  <span style="word-break: break-word;">Completed on Oct 10, 2026 • Distinction</span>
+                  <a href="#" onclick="window.showCheckmateToast('Certificate downloaded: Rook Endgames', 'success'); return false;" style="color: var(--admin-success); font-weight: 600; white-space: nowrap;">Download Certificate</a>
                 </div>
               </div>
             </div>
@@ -1078,7 +1078,12 @@
             },
             x: {
               grid: { color: gridColor },
-              ticks: { color: textColor }
+              ticks: { 
+                color: textColor,
+                autoSkip: true,
+                maxTicksLimit: 7,
+                maxRotation: 0
+              }
             }
           }
         }

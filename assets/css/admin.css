@@ -245,29 +245,44 @@ body.admin-body {
 }
 
 .topbar-toggle {
-  background: transparent;
-  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--admin-hover-bg);
+  border: 1px solid var(--admin-card-border);
   color: var(--admin-text);
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  padding: 0.4rem;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--admin-transition);
+}
+
+.topbar-toggle:hover {
+  border-color: var(--admin-gold);
+  color: var(--admin-gold);
 }
 
 .admin-search-box {
   position: relative;
   width: 320px;
+  height: 38px;
+  display: flex;
+  align-items: center;
 }
 
 .admin-search-box input {
   width: 100%;
+  height: 38px;
   background: var(--admin-hover-bg);
   border: 1px solid var(--admin-card-border);
   border-radius: 8px;
-  padding: 0.55rem 1rem 0.55rem 2.4rem;
+  padding: 0 1rem 0 2.4rem;
   color: var(--admin-text);
   font-size: 0.84rem;
   outline: none;
+  box-sizing: border-box;
 }
 
 .admin-search-box input:focus {
@@ -290,19 +305,36 @@ body.admin-body {
   gap: 1rem;
 }
 
+.topbar-live-chip {
+  height: 38px !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 0.85rem !important;
+  border-radius: 8px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
 .topbar-action-btn {
   width: 38px;
   height: 38px;
+  box-sizing: border-box;
   border-radius: 8px;
   background: var(--admin-hover-bg);
   border: 1px solid var(--admin-card-border);
   color: var(--admin-text);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   position: relative;
   transition: var(--admin-transition);
+  flex-shrink: 0;
 }
 
 .topbar-action-btn:hover {
@@ -314,6 +346,8 @@ body.admin-body {
   width: auto;
   min-width: 44px;
   height: 38px;
+  box-sizing: border-box;
+  border-radius: 8px;
   padding: 0 10px;
   gap: 6px;
   font-family: inherit;
@@ -323,6 +357,7 @@ body.admin-body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .topbar-action-btn.admin-rtl-toggle svg,
@@ -748,39 +783,53 @@ body.admin-body {
   }
 }
 
-/* Fix Navbar Alignment at 768px (Item 13.5) */
+/* Fix Navbar Alignment at 768px & Tablet (Item 13.5) */
 @media (max-width: 820px) {
   .admin-topbar {
-    padding: 0 1rem !important;
-    gap: 0.5rem !important;
+    padding: 0 1.25rem !important;
+    gap: 0.75rem !important;
+    height: 64px !important;
   }
   .topbar-left {
-    gap: 0.5rem !important;
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
+    gap: 0.75rem !important;
+    display: flex !important;
+    align-items: center !important;
+    flex: 0 1 auto !important;
   }
-  .admin-search-box {
-    width: 100% !important;
-    max-width: 200px !important;
-    min-width: 120px !important;
-  }
-  .admin-search-box input {
-    font-size: 0.76rem !important;
-    padding: 0.45rem 0.6rem 0.45rem 2.1rem !important;
-  }
-  .admin-search-box svg {
-    left: 0.6rem !important;
-    width: 14px !important;
-    height: 14px !important;
-  }
-  .topbar-right {
-    gap: 0.45rem !important;
+  .topbar-toggle {
+    width: 38px !important;
+    height: 38px !important;
     flex-shrink: 0 !important;
   }
+  .admin-search-box {
+    width: 220px !important;
+    max-width: 220px !important;
+    min-width: 140px !important;
+    height: 38px !important;
+  }
+  .admin-search-box input {
+    height: 38px !important;
+    font-size: 0.78rem !important;
+    padding: 0 0.75rem 0 2.2rem !important;
+    box-sizing: border-box !important;
+  }
+  .admin-search-box svg {
+    left: 0.65rem !important;
+    width: 15px !important;
+    height: 15px !important;
+  }
+  .topbar-right {
+    gap: 0.5rem !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
   .topbar-live-chip {
-    padding: 0.35rem 0.65rem !important;
+    height: 38px !important;
+    padding: 0 0.75rem !important;
     font-size: 0.74rem !important;
     white-space: nowrap !important;
+    border-radius: 8px !important;
   }
   .live-chip-full {
     display: none !important;
@@ -789,16 +838,21 @@ body.admin-body {
     display: inline !important;
   }
   .topbar-action-btn {
-    width: 36px !important;
-    height: 36px !important;
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 8px !important;
+    flex-shrink: 0 !important;
   }
   .topbar-action-btn.admin-rtl-toggle {
-    padding: 0 7px !important;
-    min-width: 36px !important;
-    font-size: 0.75rem !important;
+    height: 38px !important;
+    padding: 0 8px !important;
+    min-width: 38px !important;
+    font-size: 0.76rem !important;
+    border-radius: 8px !important;
+    flex-shrink: 0 !important;
   }
   .admin-content {
-    padding: 1.25rem 1rem !important;
+    padding: 1.25rem 1.25rem !important;
   }
   .student-banner {
     padding: 1.35rem 1.15rem !important;
@@ -812,20 +866,69 @@ body.admin-body {
 @media (max-width: 600px) {
   .admin-topbar {
     padding: 0 0.75rem !important;
+    height: 58px !important;
+    gap: 0.5rem !important;
   }
   .admin-search-box {
-    display: none !important; /* Hide wide desktop search bar to keep topbar pristine */
+    display: none !important; /* Hide wide search bar to keep mobile topbar clean and uncluttered */
   }
-  .metrics-row,
-  .metrics-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
+  .topbar-toggle {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 6px !important;
+    flex-shrink: 0 !important;
+  }
+  .topbar-right {
+    gap: 0.35rem !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+  }
+  .topbar-live-chip {
+    height: 34px !important;
+    padding: 0 0.55rem !important;
+    font-size: 0.72rem !important;
+    border-radius: 6px !important;
+  }
+  .topbar-action-btn {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 6px !important;
+    flex-shrink: 0 !important;
+  }
+  .topbar-action-btn.admin-rtl-toggle {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
+    flex-shrink: 0 !important;
+  }
+  .topbar-action-btn.admin-rtl-toggle .rtl-label {
+    display: none !important;
+  }
+
+  /* Prevent page horizontal stretching */
+  .admin-main {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
   }
   .admin-content {
-    padding: 1rem 0.75rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0.85rem 0.65rem !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
   }
   .student-banner {
+    width: 100% !important;
+    max-width: 100% !important;
     padding: 1.15rem 0.85rem !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
   .student-banner h1 {
     font-size: 1.18rem !important;
@@ -839,64 +942,139 @@ body.admin-body {
     font-size: 0.78rem !important;
     padding: 0.55rem 0.85rem !important;
   }
+
+  .metrics-row,
+  .metrics-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Force grid columns to shrink below content size */
+  .charts-grid-2,
+  .charts-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.25rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  .charts-grid > *,
+  .charts-grid-2 > * {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
   .admin-card {
-    padding: 1.1rem 0.85rem !important;
+    padding: 1rem 0.75rem !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
   .admin-card-header {
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 0.65rem !important;
+    gap: 0.5rem !important;
   }
+
+  /* Responsive Chart.js Box */
+  .chart-container-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    height: 250px !important;
+    position: relative !important;
+  }
+  .chart-container-box canvas {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Course Card Mobile Wrapping */
+  .course-card-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.35rem !important;
+  }
+  .course-card-footer {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.25rem !important;
+  }
+
   .table-responsive {
     width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    display: block !important;
   }
   .admin-table {
-    min-width: 520px !important;
+    min-width: 480px !important;
   }
   .chessboard-preview {
-    max-width: 220px !important;
+    max-width: 200px !important;
+    margin: 0 auto 1rem !important;
   }
 }
 
 @media (max-width: 380px) {
   .admin-topbar {
     padding: 0 0.5rem !important;
-    gap: 0.35rem !important;
+    gap: 0.25rem !important;
+    height: 56px !important;
+  }
+  .topbar-left {
+    gap: 0.25rem !important;
   }
   .topbar-right {
-    gap: 0.35rem !important;
+    gap: 0.25rem !important;
   }
   .topbar-live-chip {
-    padding: 0.3rem 0.5rem !important;
-    font-size: 0.7rem !important;
+    padding: 0 0.45rem !important;
+    font-size: 0.68rem !important;
   }
   .topbar-action-btn {
     width: 32px !important;
     height: 32px !important;
   }
   .topbar-action-btn.admin-rtl-toggle {
-    padding: 0 5px !important;
-    font-size: 0.7rem !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    padding: 0 !important;
   }
-  .topbar-action-btn.admin-rtl-toggle .rtl-label {
-    display: none !important;
+  .topbar-toggle {
+    width: 32px !important;
+    height: 32px !important;
   }
   .admin-content {
-    padding: 0.75rem 0.5rem !important;
+    padding: 0.65rem 0.5rem !important;
   }
   .student-banner {
-    padding: 1rem 0.75rem !important;
+    padding: 0.85rem 0.65rem !important;
   }
   .student-banner h1 {
     font-size: 1.05rem !important;
   }
+  .chart-container-box {
+    height: 220px !important;
+  }
   .chessboard-preview {
-    max-width: 190px !important;
+    max-width: 180px !important;
   }
   .chess-sq {
-    font-size: 0.95rem !important;
+    font-size: 0.9rem !important;
   }
 }
 
