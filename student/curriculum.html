@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curriculum & Modules – CHECKMATE Chess Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+
+  <style>
+    .chip-student {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .live-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .progress-bar-bg {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    [data-theme="light"] .progress-bar-bg {
+      background: rgba(0, 0, 0, 0.08);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--admin-gold);
+      border-radius: 999px;
+      transition: width 0.6s ease;
+    }
+    .course-card-box {
+      background: var(--admin-card-bg);
+      border: 1px solid var(--admin-card-border);
+      border-radius: var(--admin-radius);
+      padding: 1.25rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .course-card-box:hover {
+      border-color: var(--admin-gold);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar Navigation -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: auto;">
+        <span class="status-chip chip-student" style="font-size: 0.65rem;">STUDENT</span>
+        <button class="sidebar-close-btn" aria-label="Close Navigation" style="background: transparent; border: none; color: var(--admin-text-muted); cursor: pointer; padding: 4px; display: inline-flex; align-items: center; justify-content: center;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Learning & Arena</li>
+      <li class="sidebar-item"><a href="index.html"><i data-lucide="layout-dashboard"></i> Overview</a></li>
+      <li class="sidebar-item"><a href="live-classes.html"><i data-lucide="video"></i> Live Classes <span class="status-chip chip-danger" style="padding: 2px 6px; font-size: 9px; margin-left: auto;">LIVE</span></a></li>
+      <li class="sidebar-item active"><a href="curriculum.html"><i data-lucide="book-open"></i> Curriculum & Modules</a></li>
+      <li class="sidebar-item"><a href="puzzles.html"><i data-lucide="crosshair"></i> Tactics & Puzzles</a></li>
+      <li class="sidebar-item"><a href="tournaments.html"><i data-lucide="trophy"></i> My Tournaments</a></li>
+      <li class="sidebar-item"><a href="analysis.html"><i data-lucide="cpu"></i> Game Analysis Engine</a></li>
+
+      <li class="sidebar-label">Mentorship & Records</li>
+      <li class="sidebar-item"><a href="feedback.html"><i data-lucide="message-square"></i> Coach Feedback</a></li>
+      <li class="sidebar-item"><a href="homework.html"><i data-lucide="clipboard-check"></i> Homework & Studies</a></li>
+      <li class="sidebar-item"><a href="ratings.html"><i data-lucide="trending-up"></i> Rating Progression</a></li>
+
+      <li class="sidebar-label">Navigation</li>
+      <li class="sidebar-item"><a href="../index.html"><i data-lucide="globe"></i> Public Website</a></li>
+      <li class="sidebar-item"><a href="#" onclick="window.checkmateLogout(); return false;" style="color: var(--admin-danger);"><i data-lucide="log-out"></i> Log Out</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-3.jpg" alt="Student Avatar" class="user-avatar">
+        <div>
+          <div class="user-info-name" id="studentSidebarName">Alex Morgan</div>
+          <div class="user-info-role">FIDE: 1685 • Elite Track</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Exit to Public Website" style="color: var(--admin-text-muted);"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+  <!-- Main Content Layout -->
+  <div class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle" aria-label="Toggle Navigation"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search syllabus modules, openings, endgames...">
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Live Class Indicator -->
+        <a href="live-classes.html" class="status-chip chip-success topbar-live-chip" style="border: 1px solid rgba(16,185,129,0.4); display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <span class="live-pulse"></span>
+          <span class="live-chip-full">Live Room Open (Sicilian Workshop)</span>
+          <span class="live-chip-short">Live Room</span>
+        </a>
+
+        <!-- Theme Toggle -->
+        <button class="topbar-action-btn admin-theme-toggle" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun"></i>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR">
+          <i data-lucide="arrow-left-right"></i><span class="rtl-label">RTL</span>
+        </button>
+
+        <!-- Notifications -->
+        <button class="topbar-action-btn" title="Notifications" onclick="window.showCheckmateToast('New module unlocked: Lucena Endgame Master Drills', 'success')">
+          <i data-lucide="bell"></i>
+          <span class="badge-dot"></span>
+        </button>
+
+        <!-- Logout Button -->
+        <button class="topbar-action-btn" onclick="window.checkmateLogout()" title="Log Out" style="color: #ef4444;">
+          <i data-lucide="log-out"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="admin-content">
+      
+      <!-- Page Title Bar -->
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">CURRICULUM & SYLLABUS MODULES</h1>
+          <p class="page-subheadline">Structured training syllabus developed by Grandmasters to progress from Candidate Master to FIDE Title.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn-admin-gold" onclick="window.showCheckmateToast('Comprehensive Grandmaster Syllabus (PDF) downloaded!', 'success')">
+            <i data-lucide="download" style="width: 16px;"></i> DOWNLOAD SYLLABUS PDF
+          </button>
+          <button class="action-icon-btn" onclick="window.showCheckmateToast('Assessment requested. FM Arjun Mehta will schedule your evaluation.', 'success')" style="width: auto; padding: 0.65rem 1.15rem; font-weight: 600;">
+            <i data-lucide="award" style="width: 16px;"></i> Request Level Test
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Curriculum Metric Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Enrolled Academic Track</span>
+            <div class="metric-icon-box icon-gold"><i data-lucide="crown"></i></div>
+          </div>
+          <div class="metric-value">Candidate Track</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">1600 - 1900 Elo</span>
+            <span>Grandmaster Track</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Curriculum Progress</span>
+            <div class="metric-icon-box icon-purple"><i data-lucide="book-open"></i></div>
+          </div>
+          <div class="metric-value">28 / 36 Units</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">78% Complete</span>
+            <span>8 Units Remaining</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Certifications Earned</span>
+            <div class="metric-icon-box icon-green"><i data-lucide="award"></i></div>
+          </div>
+          <div class="metric-value">3 Distinction</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">Latest: Oct 10, 2026</span>
+            <span>Endgame Specialization</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Next Title Target</span>
+            <div class="metric-icon-box icon-blue"><i data-lucide="trending-up"></i></div>
+          </div>
+          <div class="metric-value">1,800 FIDE CM</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">115 Elo Points Away</span>
+            <span>Projected: Dec 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Active Enrolled Courses -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Active Enrolled Training Modules</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Current syllabus units with progressive lesson completions and video lectures.</p>
+          </div>
+          <span class="status-chip chip-gold">5 Modules Active</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <!-- Course 1 -->
+          <div class="course-card-box">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+              <div>
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--admin-text); margin-bottom: 0.25rem;">
+                  Modern Sicilian Defense: Najdorf & Dragon Complexes
+                </h3>
+                <div style="font-size: 0.8rem; color: var(--admin-text-muted);">Opening Repertoire • 14 Comprehensive Video Units • Faculty: FM Arjun Mehta</div>
+              </div>
+              <span class="status-chip chip-gold">85% Complete (12/14)</span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%;"></div></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--admin-text-muted); flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+              <span>Current Unit: <strong>Unit 13 - 6.Bg5 Complications & Counterplay</strong></span>
+              <a href="live-classes.html" class="btn-admin-gold" style="padding: 0.35rem 0.85rem; font-size: 0.75rem; text-decoration: none;">Continue Lesson &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Course 2 -->
+          <div class="course-card-box">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+              <div>
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--admin-text); margin-bottom: 0.25rem;">
+                  Pawn Structures & The Carlsbad Minority Attack
+                </h3>
+                <div style="font-size: 0.8rem; color: var(--admin-text-muted);">Middlegame Strategy • 10 Interactive Masterclasses • Faculty: IM Elena Rostova</div>
+              </div>
+              <span class="status-chip chip-warning">60% Complete (6/10)</span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 60%; background: #f59e0b;"></div></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--admin-text-muted); flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+              <span>Current Unit: <strong>Unit 7 - Queenside Infiltration on the c-file</strong></span>
+              <button onclick="window.showCheckmateToast('Opening Unit 7 lecture...', 'info')" class="btn-admin-gold" style="padding: 0.35rem 0.85rem; font-size: 0.75rem;">Continue Lesson &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Course 3 -->
+          <div class="course-card-box" style="border-left: 4px solid var(--admin-success);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+              <div>
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--admin-text); margin-bottom: 0.25rem;">
+                  Essential Rook & Pawn Endgames (Lucena & Philidor)
+                </h3>
+                <div style="font-size: 0.8rem; color: var(--admin-text-muted);">Endgame Mastery • 12 Precision Studies • Faculty: GM Vladimir Petrov</div>
+              </div>
+              <span class="status-chip chip-success"><i data-lucide="check" style="width: 12px;"></i> 100% Certified</span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%; background: #10b981;"></div></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--admin-text-muted); flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+              <span>Completed on Oct 10, 2026 • Distinction Honors</span>
+              <button onclick="window.showCheckmateToast('Certificate downloaded: Essential Rook Endgames', 'success')" class="action-icon-btn" style="width: auto; padding: 0.35rem 0.85rem; font-size: 0.75rem; color: var(--admin-success);">
+                <i data-lucide="download" style="width: 13px;"></i> Download Certificate
+              </button>
+            </div>
+          </div>
+
+          <!-- Course 4 -->
+          <div class="course-card-box">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+              <div>
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--admin-text); margin-bottom: 0.25rem;">
+                  King's Indian Defense: Classical & Sämisch Systems
+                </h3>
+                <div style="font-size: 0.8rem; color: var(--admin-text-muted);">Black Fighting Repertoire • 9 Lessons • Faculty: FM Arjun Mehta</div>
+              </div>
+              <span class="status-chip chip-warning">45% Complete (4/9)</span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 45%; background: #f59e0b;"></div></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--admin-text-muted); flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+              <span>Current Unit: <strong>Unit 5 - The f5 Pawn Avalanche Breakthrough</strong></span>
+              <button onclick="window.showCheckmateToast('Opening Unit 5 lecture...', 'info')" class="btn-admin-gold" style="padding: 0.35rem 0.85rem; font-size: 0.75rem;">Continue Lesson &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Downloadable Study Materials & PGNs -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Study Materials, Repertoire PGNs & Workbooks</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Download annotated opening databases, grandmaster puzzles, and masterclass notes.</p>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Resource Title</th>
+                <th>Category</th>
+                <th>File Format</th>
+                <th>Size</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>50 Classical Sicilian Najdorf GM Games (Annotated)</strong></td>
+                <td><span class="status-chip chip-gold">Opening Tree</span></td>
+                <td>PGN File</td>
+                <td>2.4 MB</td>
+                <td>
+                  <button onclick="window.showCheckmateToast('Downloaded 50 Najdorf Games.pgn', 'success')" class="action-icon-btn" title="Download"><i data-lucide="download" style="width: 14px;"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Dvoretsky Endgame Manual: Academy Workbook Vol 2</strong></td>
+                <td><span class="status-chip chip-purple">Endgame Drills</span></td>
+                <td>PDF Document</td>
+                <td>5.1 MB</td>
+                <td>
+                  <button onclick="window.showCheckmateToast('Downloaded Dvoretsky Workbook.pdf', 'success')" class="action-icon-btn" title="Download"><i data-lucide="download" style="width: 14px;"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>King's Indian Defense Repertoire Model Games</strong></td>
+                <td><span class="status-chip chip-blue">Repertoire</span></td>
+                <td>PGN File</td>
+                <td>3.2 MB</td>
+                <td>
+                  <button onclick="window.showCheckmateToast('Downloaded KID Repertoire.pgn', 'success')" class="action-icon-btn" title="Download"><i data-lucide="download" style="width: 14px;"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStudentProfile();
+      lucide.createIcons();
+    });
+
+    function loadStudentProfile() {
+      const userJson = localStorage.getItem('checkmate_user');
+      let name = 'Alex Morgan';
+      if (userJson) {
+        try {
+          const user = JSON.parse(userJson);
+          if (user.name) name = user.name;
+        } catch (e) {}
+      }
+      const sidebarName = document.getElementById('studentSidebarName');
+      if (sidebarName) sidebarName.textContent = name;
+    }
+  </script>
+</body>
+</html>

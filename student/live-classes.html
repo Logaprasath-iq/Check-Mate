@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Classes & Masterclass Arena – CHECKMATE Chess Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+
+  <style>
+    .chip-student {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .live-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .broadcast-container {
+      aspect-ratio: 16/9;
+      background: #000;
+      border-radius: var(--admin-radius);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+    .broadcast-overlay-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .chat-message-bubble {
+      padding: 0.65rem 0.85rem;
+      background: var(--admin-hover-bg);
+      border-radius: 8px;
+      border: 1px solid var(--admin-card-border);
+      font-size: 0.82rem;
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar Navigation -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: auto;">
+        <span class="status-chip chip-student" style="font-size: 0.65rem;">STUDENT</span>
+        <button class="sidebar-close-btn" aria-label="Close Navigation" style="background: transparent; border: none; color: var(--admin-text-muted); cursor: pointer; padding: 4px; display: inline-flex; align-items: center; justify-content: center;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Learning & Arena</li>
+      <li class="sidebar-item"><a href="index.html"><i data-lucide="layout-dashboard"></i> Overview</a></li>
+      <li class="sidebar-item active"><a href="live-classes.html"><i data-lucide="video"></i> Live Classes <span class="status-chip chip-danger" style="padding: 2px 6px; font-size: 9px; margin-left: auto;">LIVE</span></a></li>
+      <li class="sidebar-item"><a href="curriculum.html"><i data-lucide="book-open"></i> Curriculum & Modules</a></li>
+      <li class="sidebar-item"><a href="puzzles.html"><i data-lucide="crosshair"></i> Tactics & Puzzles</a></li>
+      <li class="sidebar-item"><a href="tournaments.html"><i data-lucide="trophy"></i> My Tournaments</a></li>
+      <li class="sidebar-item"><a href="analysis.html"><i data-lucide="cpu"></i> Game Analysis Engine</a></li>
+
+      <li class="sidebar-label">Mentorship & Records</li>
+      <li class="sidebar-item"><a href="feedback.html"><i data-lucide="message-square"></i> Coach Feedback</a></li>
+      <li class="sidebar-item"><a href="homework.html"><i data-lucide="clipboard-check"></i> Homework & Studies</a></li>
+      <li class="sidebar-item"><a href="ratings.html"><i data-lucide="trending-up"></i> Rating Progression</a></li>
+
+      <li class="sidebar-label">Navigation</li>
+      <li class="sidebar-item"><a href="../index.html"><i data-lucide="globe"></i> Public Website</a></li>
+      <li class="sidebar-item"><a href="#" onclick="window.checkmateLogout(); return false;" style="color: var(--admin-danger);"><i data-lucide="log-out"></i> Log Out</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-3.jpg" alt="Student Avatar" class="user-avatar">
+        <div>
+          <div class="user-info-name" id="studentSidebarName">Alex Morgan</div>
+          <div class="user-info-role">FIDE: 1685 • Elite Track</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Exit to Public Website" style="color: var(--admin-text-muted);"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+  <!-- Main Content Layout -->
+  <div class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle" aria-label="Toggle Navigation"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search masterclasses, topics, coaches...">
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Live Class Indicator -->
+        <button onclick="window.showCheckmateToast('You are currently on the Live Classes stage!', 'info')" class="status-chip chip-success topbar-live-chip" style="cursor: pointer; border: 1px solid rgba(16,185,129,0.4); display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <span class="live-pulse"></span>
+          <span class="live-chip-full">Live Room Open (Sicilian Workshop)</span>
+          <span class="live-chip-short">Live Room</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="topbar-action-btn admin-theme-toggle" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun"></i>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR">
+          <i data-lucide="arrow-left-right"></i><span class="rtl-label">RTL</span>
+        </button>
+
+        <!-- Notifications -->
+        <button class="topbar-action-btn" title="Notifications" onclick="window.showCheckmateToast('FM Arjun Mehta opened the live Sicilian workshop.', 'success')">
+          <i data-lucide="bell"></i>
+          <span class="badge-dot"></span>
+        </button>
+
+        <!-- Logout Button -->
+        <button class="topbar-action-btn" onclick="window.checkmateLogout()" title="Log Out" style="color: #ef4444;">
+          <i data-lucide="log-out"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="admin-content">
+      
+      <!-- Page Title Bar -->
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">LIVE CLASSES & MASTERCLASS ARENA</h1>
+          <p class="page-subheadline">Real-time synchronized video broadcasts, digital board analysis, and interactive student Q&A.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn-admin-gold" onclick="connectLiveRoom()">
+            <i data-lucide="video" style="width: 16px;"></i> CONNECT AUDIO & MIC
+          </button>
+          <button class="action-icon-btn" onclick="window.showCheckmateToast('Hand raised! Coach Arjun will call on you shortly.', 'success')" style="width: auto; padding: 0.65rem 1.15rem; font-weight: 600;">
+            <i data-lucide="hand" style="width: 16px;"></i> Raise Hand
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Live Class Metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Broadcast Status</span>
+            <div class="metric-icon-box icon-green"><i data-lucide="radio"></i></div>
+          </div>
+          <div class="metric-value"><span class="live-pulse"></span> LIVE NOW</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">Ultra-Low Latency</span>
+            <span>HD 1080p Stream</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Current Workshop</span>
+            <div class="metric-icon-box icon-gold"><i data-lucide="book-open"></i></div>
+          </div>
+          <div class="metric-value" style="font-size: 1.25rem;">Sicilian 6.Bg5</div>
+          <div class="metric-footer">
+            <span>Poisoned Pawn Complex</span>
+            <span>Grandmaster Track</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Host Faculty</span>
+            <div class="metric-icon-box icon-purple"><i data-lucide="user-check"></i></div>
+          </div>
+          <div class="metric-value">FM Arjun Mehta</div>
+          <div class="metric-footer">
+            <span>Lead Trainer</span>
+            <span>Interactive Q&A Active</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Students Attending</span>
+            <div class="metric-icon-box icon-blue"><i data-lucide="users"></i></div>
+          </div>
+          <div class="metric-value">24 Online</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">Full Cohort Presence</span>
+            <span>Room Capacity: 30</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Broadcast Stage & Q&A Layout -->
+      <div class="charts-grid" style="margin-top: 2rem;">
+        
+        <!-- Left: Live Broadcast Screen -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; width: 100%;">
+          
+          <div class="admin-card" style="padding: 1rem;">
+            <div class="broadcast-container">
+              <img src="../assets/images/chess-hero.png" alt="Live Board" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.45;">
+              
+              <div style="position: absolute; text-align: center; color: #fff; z-index: 2;">
+                <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--admin-gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem; color: #080b12; box-shadow: 0 0 30px rgba(212,175,55,0.7);">
+                  <i data-lucide="video" style="width: 32px; height: 32px;"></i>
+                </div>
+                <div style="font-weight: 800; font-size: 1.25rem; font-family: 'Sora', sans-serif;">FM Arjun Mehta is Broadcasting</div>
+                <div style="font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-top: 4px;">Synchronized Digital Board • Audio Stream Connected</div>
+              </div>
+
+              <!-- Overlay Bar -->
+              <div class="broadcast-overlay-bar">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <span class="status-chip chip-danger"><span class="live-pulse"></span> LIVE</span>
+                  <span style="font-size: 0.85rem; color: #fff; font-weight: 600;">Sicilian Najdorf 6.Bg5 Masterclass</span>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                  <button onclick="toggleMic(this)" class="action-icon-btn" title="Toggle Mic" style="background: rgba(255,255,255,0.2); border: none; color: #fff;"><i data-lucide="mic" style="width: 15px;"></i></button>
+                  <button onclick="toggleVideo(this)" class="action-icon-btn" title="Toggle Camera" style="background: rgba(255,255,255,0.2); border: none; color: #fff;"><i data-lucide="video" style="width: 15px;"></i></button>
+                  <button onclick="window.showCheckmateToast('Stream fullscreen toggled', 'success')" class="action-icon-btn" title="Fullscreen" style="background: rgba(255,255,255,0.2); border: none; color: #fff;"><i data-lucide="maximize" style="width: 15px;"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage Control Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <img src="../assets/images/coach-2.jpg" alt="FM Arjun" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                <div>
+                  <div style="font-size: 0.9rem; font-weight: 700; color: var(--admin-text);">FM Arjun Mehta</div>
+                  <div style="font-size: 0.75rem; color: var(--admin-gold);">Lead Masterclass Coach</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <button onclick="window.showCheckmateToast('Hand raised! Coach Arjun will call on you.', 'success')" class="btn-admin-gold" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+                  <i data-lucide="hand" style="width: 14px;"></i> Raise Hand
+                </button>
+                <button onclick="window.showCheckmateToast('PGN sync downloaded for current position', 'success')" class="action-icon-btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.8rem;">
+                  <i data-lucide="download" style="width: 14px;"></i> Download Board PGN
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Live Interactive Chat & Q&A -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; width: 100%;">
+          
+          <div class="admin-card" style="display: flex; flex-direction: column; height: 100%;">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Live Classroom Q&A & Chat</h3>
+              <span class="status-chip chip-success">24 Online</span>
+            </div>
+
+            <div id="liveChatMessages" style="flex: 1; display: flex; flex-direction: column; gap: 0.75rem; overflow-y: auto; max-height: 380px; padding: 0.5rem 0;">
+              <div class="chat-message-bubble" style="border-left: 3px solid var(--admin-gold);">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: var(--admin-gold); margin-bottom: 2px;">
+                  <span>FM Arjun Mehta (Coach)</span>
+                  <span style="color: var(--admin-text-muted);">6:32 PM</span>
+                </div>
+                <div style="color: var(--admin-text);">"Welcome everyone! Look at Move 14 on the board. Why is 14... b4 better than 14... Be7?"</div>
+              </div>
+
+              <div class="chat-message-bubble">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: #38bdf8; margin-bottom: 2px;">
+                  <span>Alex Morgan (You)</span>
+                  <span style="color: var(--admin-text-muted);">6:34 PM</span>
+                </div>
+                <div style="color: var(--admin-text);">"Because it kicks the knight away from d4 before White can play f5!"</div>
+              </div>
+
+              <div class="chat-message-bubble" style="border-left: 3px solid var(--admin-gold);">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: var(--admin-gold); margin-bottom: 2px;">
+                  <span>FM Arjun Mehta (Coach)</span>
+                  <span style="color: var(--admin-text-muted);">6:35 PM</span>
+                </div>
+                <div style="color: var(--admin-text);">"Spot on, Alex! Exactly. If Nd4 is forced to a4 or e2, White loses tempo."</div>
+              </div>
+
+              <div class="chat-message-bubble">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: #94a3b8; margin-bottom: 2px;">
+                  <span>Kavya Ramanathan</span>
+                  <span style="color: var(--admin-text-muted);">6:36 PM</span>
+                </div>
+                <div style="color: var(--admin-text);">"What if White plays 15. Na4 instead of Ne2?"</div>
+              </div>
+            </div>
+
+            <!-- Chat Input -->
+            <form onsubmit="sendChatMessage(event)" style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+              <input type="text" id="chatInputText" class="newsletter-input" placeholder="Type question for FM Arjun..." required style="flex: 1;">
+              <button type="submit" class="btn-admin-gold" style="padding: 0.65rem 1rem;">
+                <i data-lucide="send" style="width: 15px;"></i>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Section: Upcoming Masterclass Schedule -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Upcoming Live Masterclasses Schedule</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Confirmed interactive workshops and live sparring sessions.</p>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Masterclass Topic</th>
+                <th>Instructor</th>
+                <th>Date & Time</th>
+                <th>Focus Area</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>The 6.Bg5 Najdorf Poisoned Pawn Attack</strong></td>
+                <td>FM Arjun Mehta</td>
+                <td>Today • 6:30 PM IST</td>
+                <td>Opening Dynamics</td>
+                <td><span class="status-chip chip-success"><span class="live-pulse"></span> IN PROGRESS</span></td>
+                <td><button onclick="connectLiveRoom()" class="btn-admin-gold" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">Enter Room</button></td>
+              </tr>
+              <tr>
+                <td><strong>Endgame Masterclass: Rook vs Pawns Breakthroughs</strong></td>
+                <td>GM Vladimir Petrov</td>
+                <td>Tomorrow • 5:00 PM IST</td>
+                <td>Endgame Mastery</td>
+                <td><span class="status-chip chip-gold">Scheduled</span></td>
+                <td><button onclick="window.showCheckmateToast('Class reminder set for tomorrow 5:00 PM', 'success')" class="action-icon-btn" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.75rem;">Set Reminder</button></td>
+              </tr>
+              <tr>
+                <td><strong>Rapid Sparring Arena & Live Diagnostics</strong></td>
+                <td>IM Elena Rostova</td>
+                <td>Saturday • 7:00 PM IST</td>
+                <td>Live Peer Matchups</td>
+                <td><span class="status-chip chip-blue">Registration Open</span></td>
+                <td><button onclick="window.showCheckmateToast('Registered for Saturday Rapid Sparring!', 'success')" class="action-icon-btn" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.75rem;">Register</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStudentProfile();
+      lucide.createIcons();
+    });
+
+    function loadStudentProfile() {
+      const userJson = localStorage.getItem('checkmate_user');
+      let name = 'Alex Morgan';
+      if (userJson) {
+        try {
+          const user = JSON.parse(userJson);
+          if (user.name) name = user.name;
+        } catch (e) {}
+      }
+      const sidebarName = document.getElementById('studentSidebarName');
+      if (sidebarName) sidebarName.textContent = name;
+    }
+
+    function connectLiveRoom() {
+      if (window.showCheckmateToast) {
+        window.showCheckmateToast('Connected to FM Arjun Mehta broadcast audio & interactive digital board!', 'success');
+      }
+    }
+
+    function toggleMic(btn) {
+      if (btn.classList.contains('muted')) {
+        btn.classList.remove('muted');
+        btn.style.background = 'rgba(255,255,255,0.2)';
+        if (window.showCheckmateToast) window.showCheckmateToast('Microphone unmuted', 'success');
+      } else {
+        btn.classList.add('muted');
+        btn.style.background = 'rgba(239, 68, 68, 0.6)';
+        if (window.showCheckmateToast) window.showCheckmateToast('Microphone muted', 'info');
+      }
+    }
+
+    function toggleVideo(btn) {
+      if (btn.classList.contains('video-off')) {
+        btn.classList.remove('video-off');
+        btn.style.background = 'rgba(255,255,255,0.2)';
+        if (window.showCheckmateToast) window.showCheckmateToast('Camera turned on', 'success');
+      } else {
+        btn.classList.add('video-off');
+        btn.style.background = 'rgba(239, 68, 68, 0.6)';
+        if (window.showCheckmateToast) window.showCheckmateToast('Camera turned off', 'info');
+      }
+    }
+
+    function sendChatMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('chatInputText');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('liveChatMessages');
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-message-bubble';
+      bubble.innerHTML = `
+        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: #38bdf8; margin-bottom: 2px;">
+          <span>Alex Morgan (You)</span>
+          <span style="color: var(--admin-text-muted);">Just now</span>
+        </div>
+        <div style="color: var(--admin-text);">${escapeHtml(text)}</div>
+      `;
+      container.appendChild(bubble);
+      container.scrollTop = container.scrollHeight;
+      input.value = '';
+
+      if (window.showCheckmateToast) {
+        window.showCheckmateToast('Question submitted to classroom feed!', 'success');
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>

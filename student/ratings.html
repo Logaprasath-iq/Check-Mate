@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rating Progression – CHECKMATE Chess Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+
+  <style>
+    .chip-student {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .live-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .progress-bar-bg {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    [data-theme="light"] .progress-bar-bg {
+      background: rgba(0, 0, 0, 0.08);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--admin-gold);
+      border-radius: 999px;
+      transition: width 0.6s ease;
+    }
+    .milestone-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+      padding-left: 2rem;
+    }
+    .milestone-timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: var(--admin-card-border);
+    }
+    .milestone-node {
+      position: relative;
+    }
+    .milestone-node::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--admin-card-bg);
+      border: 3px solid var(--admin-gold);
+    }
+    .milestone-node.done::before {
+      background: var(--admin-gold);
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar Navigation -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: auto;">
+        <span class="status-chip chip-student" style="font-size: 0.65rem;">STUDENT</span>
+        <button class="sidebar-close-btn" aria-label="Close Navigation" style="background: transparent; border: none; color: var(--admin-text-muted); cursor: pointer; padding: 4px; display: inline-flex; align-items: center; justify-content: center;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Learning & Arena</li>
+      <li class="sidebar-item"><a href="index.html"><i data-lucide="layout-dashboard"></i> Overview</a></li>
+      <li class="sidebar-item"><a href="live-classes.html"><i data-lucide="video"></i> Live Classes <span class="status-chip chip-danger" style="padding: 2px 6px; font-size: 9px; margin-left: auto;">LIVE</span></a></li>
+      <li class="sidebar-item"><a href="curriculum.html"><i data-lucide="book-open"></i> Curriculum & Modules</a></li>
+      <li class="sidebar-item"><a href="puzzles.html"><i data-lucide="crosshair"></i> Tactics & Puzzles</a></li>
+      <li class="sidebar-item"><a href="tournaments.html"><i data-lucide="trophy"></i> My Tournaments</a></li>
+      <li class="sidebar-item"><a href="analysis.html"><i data-lucide="cpu"></i> Game Analysis Engine</a></li>
+
+      <li class="sidebar-label">Mentorship & Records</li>
+      <li class="sidebar-item"><a href="feedback.html"><i data-lucide="message-square"></i> Coach Feedback</a></li>
+      <li class="sidebar-item"><a href="homework.html"><i data-lucide="clipboard-check"></i> Homework & Studies</a></li>
+      <li class="sidebar-item active"><a href="ratings.html"><i data-lucide="trending-up"></i> Rating Progression</a></li>
+
+      <li class="sidebar-label">Navigation</li>
+      <li class="sidebar-item"><a href="../index.html"><i data-lucide="globe"></i> Public Website</a></li>
+      <li class="sidebar-item"><a href="#" onclick="window.checkmateLogout(); return false;" style="color: var(--admin-danger);"><i data-lucide="log-out"></i> Log Out</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-3.jpg" alt="Student Avatar" class="user-avatar">
+        <div>
+          <div class="user-info-name" id="studentSidebarName">Alex Morgan</div>
+          <div class="user-info-role">FIDE: 1685 • Elite Track</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Exit to Public Website" style="color: var(--admin-text-muted);"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+  <!-- Main Content Layout -->
+  <div class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle" aria-label="Toggle Navigation"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search ratings, stats, milestones...">
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Live Class Indicator -->
+        <a href="live-classes.html" class="status-chip chip-success topbar-live-chip" style="border: 1px solid rgba(16,185,129,0.4); display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <span class="live-pulse"></span>
+          <span class="live-chip-full">Live Room Open (Sicilian Workshop)</span>
+          <span class="live-chip-short">Live Room</span>
+        </a>
+
+        <!-- Theme Toggle -->
+        <button class="topbar-action-btn admin-theme-toggle" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun"></i>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR">
+          <i data-lucide="arrow-left-right"></i><span class="rtl-label">RTL</span>
+        </button>
+
+        <!-- Notifications -->
+        <button class="topbar-action-btn" title="Notifications" onclick="window.showCheckmateToast('+24 Elo gained in Autumn Rapid Trophy updated to your profile!', 'success')">
+          <i data-lucide="bell"></i>
+          <span class="badge-dot"></span>
+        </button>
+
+        <!-- Logout Button -->
+        <button class="topbar-action-btn" onclick="window.checkmateLogout()" title="Log Out" style="color: #ef4444;">
+          <i data-lucide="log-out"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="admin-content">
+      
+      <!-- Page Title Bar -->
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">ELO RATING PROGRESSION & ANALYTICS</h1>
+          <p class="page-subheadline">Demonstrated rating trajectory across Classical, Rapid, and Blitz formats over 12 months.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn-admin-gold" onclick="window.showCheckmateToast('Exporting official rating trajectory chart...', 'success')">
+            <i data-lucide="download" style="width: 16px;"></i> EXPORT RATING REPORT
+          </button>
+          <button class="action-icon-btn" onclick="window.showCheckmateToast('FIDE ID: CM-892410 verified with FIDE rating server', 'success')" style="width: auto; padding: 0.65rem 1.15rem; font-weight: 600;">
+            <i data-lucide="refresh-cw" style="width: 16px;"></i> Sync FIDE Data
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Rating Metric Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Official FIDE Classical</span>
+            <div class="metric-icon-box icon-gold"><i data-lucide="trending-up"></i></div>
+          </div>
+          <div class="metric-value">1,685 <span style="font-size: 0.85rem; font-weight: 600; color: var(--admin-success);">+55 mo</span></div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up"><i data-lucide="award"></i> Top 8% Academy</span>
+            <span>Target: 1,800 CM</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Academy Rapid Rating</span>
+            <div class="metric-icon-box icon-blue"><i data-lucide="zap"></i></div>
+          </div>
+          <div class="metric-value">1,740 <span style="font-size: 0.85rem; font-weight: 600; color: var(--admin-success);">+80 mo</span></div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">15+10 Time Control</span>
+            <span>Silver Medalist</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Academy Blitz Rating</span>
+            <div class="metric-icon-box icon-purple"><i data-lucide="flame"></i></div>
+          </div>
+          <div class="metric-value">1,815 <span style="font-size: 0.85rem; font-weight: 600; color: var(--admin-success);">+110 mo</span></div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">3+2 & 5+3 Formats</span>
+            <span>Sunday GP Winner</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">12-Month Total Gain</span>
+            <div class="metric-icon-box icon-green"><i data-lucide="arrow-up-right"></i></div>
+          </div>
+          <div class="metric-value">+265 Elo</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">From 1420 to 1685</span>
+            <span>Steady Climb</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rating Progression Chart Section -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header" style="flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2 class="admin-card-title">Elo Rating Progression Curve (12 Months)</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Verified match rating data recorded through sanction tournaments and academy sparring.</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button onclick="updateChartFormat('classical')" class="action-icon-btn active-filter" id="btnChartClassical" style="width: auto; padding: 0.35rem 0.85rem; font-size: 0.78rem; font-weight: 700; background: rgba(212, 175, 55, 0.2); color: var(--admin-gold); border-color: var(--admin-gold);">Classical</button>
+            <button onclick="updateChartFormat('rapid')" class="action-icon-btn" id="btnChartRapid" style="width: auto; padding: 0.35rem 0.85rem; font-size: 0.78rem; font-weight: 600;">Rapid</button>
+            <button onclick="updateChartFormat('blitz')" class="action-icon-btn" id="btnChartBlitz" style="width: auto; padding: 0.35rem 0.85rem; font-size: 0.78rem; font-weight: 600;">Blitz</button>
+          </div>
+        </div>
+
+        <div class="chart-container-box" style="height: 340px; position: relative; width: 100%;">
+          <canvas id="chartStudentRating"></canvas>
+        </div>
+      </div>
+
+      <!-- Two-Column: Discipline Targets & Milestones Timeline -->
+      <div class="charts-grid" style="margin-top: 2rem;">
+        
+        <!-- Left: Format Breakdown & Target Progress Bars -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; width: 100%;">
+          
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Rating Targets by Format</h3>
+              <span class="status-chip chip-gold">2026 Season</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <!-- Classical -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--admin-text); margin-bottom: 0.25rem;">
+                  <span>FIDE Classical (1,685 / 1,800 Goal)</span>
+                  <span style="color: var(--admin-gold);">93.6%</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 93.6%;"></div></div>
+                <div style="font-size: 0.78rem; color: var(--admin-text-muted);">115 Elo points to Candidate Master qualification threshold.</div>
+              </div>
+
+              <!-- Rapid -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--admin-text); margin-bottom: 0.25rem;">
+                  <span>Academy Rapid (1,740 / 1,850 Goal)</span>
+                  <span style="color: #38bdf8;">94.0%</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 94%; background: #38bdf8;"></div></div>
+                <div style="font-size: 0.78rem; color: var(--admin-text-muted);">110 Elo points to Rapid Master title standard.</div>
+              </div>
+
+              <!-- Blitz -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--admin-text); margin-bottom: 0.25rem;">
+                  <span>Academy Blitz (1,815 / 1,900 Goal)</span>
+                  <span style="color: #10b981;">95.5%</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 95.5%; background: #10b981;"></div></div>
+                <div style="font-size: 0.78rem; color: var(--admin-text-muted);">85 Elo points to Blitz Grandmaster Arena bracket.</div>
+              </div>
+
+              <!-- Tactics -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--admin-text); margin-bottom: 0.25rem;">
+                  <span>Tactics Puzzle Arena (1,820 / 2,000 Goal)</span>
+                  <span style="color: #a855f7;">91.0%</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 91%; background: #a855f7;"></div></div>
+                <div style="font-size: 0.78rem; color: var(--admin-text-muted);">180 Elo points to Expert Tactician ranking.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Official Rating Milestones Timeline -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; width: 100%;">
+          
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Career Elo Milestones Timeline</h3>
+              <span class="status-chip chip-success">Verified</span>
+            </div>
+
+            <div class="milestone-timeline">
+              <!-- Node 1 -->
+              <div class="milestone-node done">
+                <div style="font-size: 0.92rem; font-weight: 800; color: var(--admin-gold);">1420 Elo • Foundation Track Enrollment</div>
+                <div style="font-size: 0.78rem; color: var(--admin-text-muted); margin-bottom: 0.25rem;">November 2025 • Initial Academy Assessment</div>
+                <p style="font-size: 0.82rem; color: var(--admin-text-muted); line-height: 1.5; margin: 0;">
+                  Joined Checkmate Academy under FM Arjun Mehta with foundational repertoire in 1.e4.
+                </p>
+              </div>
+
+              <!-- Node 2 -->
+              <div class="milestone-node done">
+                <div style="font-size: 0.92rem; font-weight: 800; color: var(--admin-gold);">1500 Elo • Class C Benchmark Conquered</div>
+                <div style="font-size: 0.78rem; color: var(--admin-text-muted); margin-bottom: 0.25rem;">January 2026 • Winter Academy Open</div>
+                <p style="font-size: 0.82rem; color: var(--admin-text-muted); line-height: 1.5; margin: 0;">
+                  Completed 50 rook endgame studies and adopted the Sicilian Najdorf defense.
+                </p>
+              </div>
+
+              <!-- Node 3 -->
+              <div class="milestone-node done">
+                <div style="font-size: 0.92rem; font-weight: 800; color: var(--admin-gold);">1600 Elo • Promoted to Candidate Track</div>
+                <div style="font-size: 0.78rem; color: var(--admin-text-muted); margin-bottom: 0.25rem;">May 2026 • State Junior Championship</div>
+                <p style="font-size: 0.82rem; color: var(--admin-text-muted); line-height: 1.5; margin: 0;">
+                  Earned first medal (Bronze) and achieved candidate master training track eligibility.
+                </p>
+              </div>
+
+              <!-- Node 4 -->
+              <div class="milestone-node done">
+                <div style="font-size: 0.92rem; font-weight: 800; color: var(--admin-success);">1685 Elo • Current FIDE Classical Standing</div>
+                <div style="font-size: 0.78rem; color: var(--admin-text-muted); margin-bottom: 0.25rem;">October 2026 • Official FIDE Rating List</div>
+                <p style="font-size: 0.82rem; color: var(--admin-text-muted); line-height: 1.5; margin: 0;">
+                  +55 Elo gained in recent Autumn tournament circuit with 71% overall win rate.
+                </p>
+              </div>
+
+              <!-- Node 5 (Future) -->
+              <div class="milestone-node">
+                <div style="font-size: 0.92rem; font-weight: 800; color: var(--admin-text);">1800 Elo • FIDE Candidate Master (Target)</div>
+                <div style="font-size: 0.78rem; color: var(--admin-gold); margin-bottom: 0.25rem;">Projected: December 2026 • Winter Invitational</div>
+                <p style="font-size: 0.82rem; color: var(--admin-text-muted); line-height: 1.5; margin: 0;">
+                  Upcoming test at the Winter GM Norm Invitational (Dec 12 - 16, 2026).
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    let ratingChartInstance = null;
+
+    const chartDatasets = {
+      classical: {
+        label: 'Classical Elo',
+        data: [1420, 1450, 1490, 1515, 1540, 1565, 1590, 1610, 1630, 1645, 1660, 1685],
+        borderColor: '#d4af37',
+        color: '#d4af37'
+      },
+      rapid: {
+        label: 'Rapid Elo',
+        data: [1450, 1480, 1520, 1560, 1595, 1625, 1660, 1685, 1705, 1720, 1730, 1740],
+        borderColor: '#38bdf8',
+        color: '#38bdf8'
+      },
+      blitz: {
+        label: 'Blitz Elo',
+        data: [1480, 1510, 1550, 1600, 1640, 1680, 1720, 1750, 1775, 1790, 1805, 1815],
+        borderColor: '#a855f7',
+        color: '#a855f7'
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStudentProfile();
+      initStudentRatingChart('classical');
+      lucide.createIcons();
+    });
+
+    function loadStudentProfile() {
+      const userJson = localStorage.getItem('checkmate_user');
+      let name = 'Alex Morgan';
+      if (userJson) {
+        try {
+          const user = JSON.parse(userJson);
+          if (user.name) name = user.name;
+        } catch (e) {}
+      }
+      const sidebarName = document.getElementById('studentSidebarName');
+      if (sidebarName) sidebarName.textContent = name;
+    }
+
+    function initStudentRatingChart(format) {
+      const canvas = document.getElementById('chartStudentRating');
+      if (!canvas || typeof Chart === 'undefined') return;
+
+      const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+      const textColor = isDark ? '#94a3b8' : '#64748b';
+      const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+
+      const ds = chartDatasets[format] || chartDatasets.classical;
+
+      if (ratingChartInstance) {
+        ratingChartInstance.destroy();
+      }
+
+      ratingChartInstance = new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+          datasets: [{
+            label: ds.label,
+            data: ds.data,
+            borderColor: ds.borderColor,
+            backgroundColor: ds.borderColor === '#d4af37' ? 'rgba(212, 175, 55, 0.12)' : (ds.borderColor === '#38bdf8' ? 'rgba(56, 189, 248, 0.12)' : 'rgba(168, 85, 247, 0.12)'),
+            fill: true,
+            tension: 0.35,
+            pointBackgroundColor: ds.borderColor,
+            pointBorderColor: isDark ? '#080b12' : '#ffffff',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => ` ${ds.label}: ${ctx.raw} Elo`
+              }
+            }
+          },
+          scales: {
+            y: {
+              min: 1350,
+              max: 1880,
+              grid: { color: gridColor },
+              ticks: { color: textColor }
+            },
+            x: {
+              grid: { color: gridColor },
+              ticks: { 
+                color: textColor,
+                autoSkip: true,
+                maxTicksLimit: 7,
+                maxRotation: 0
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function updateChartFormat(format) {
+      ['btnChartClassical', 'btnChartRapid', 'btnChartBlitz'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.style.borderColor = '';
+        }
+      });
+
+      const activeBtn = document.getElementById(`btnChart${format.charAt(0).toUpperCase() + format.slice(1)}`);
+      if (activeBtn) {
+        activeBtn.style.background = 'rgba(212, 175, 55, 0.2)';
+        activeBtn.style.color = 'var(--admin-gold)';
+        activeBtn.style.borderColor = 'var(--admin-gold)';
+      }
+
+      initStudentRatingChart(format);
+    }
+  </script>
+</body>
+</html>

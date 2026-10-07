@@ -90,25 +90,34 @@ function initAdminSidebar() {
     }
   });
 
-  // Sidebar item active highlight on click & hash change
+  // Sidebar item active highlight on click & pathname / hash sync
   const sidebarNavItems = document.querySelectorAll('.sidebar-nav .sidebar-item');
   sidebarNavItems.forEach(item => {
     const link = item.querySelector('a');
     if (!link) return;
     link.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
-      if (href && (href.startsWith('#') || href.includes('index.html'))) {
+      if (window.innerWidth <= 900) {
+        closeSidebar();
+      }
+      if (href && (href.startsWith('#') || href.endsWith('.html'))) {
         sidebarNavItems.forEach(i => i.classList.remove('active'));
         item.classList.add('active');
-        if (window.innerWidth <= 900) {
-          closeSidebar();
-        }
       }
     });
   });
 
-  // Sync active state from current hash
+  // Sync active state from current pathname and hash
   function syncActiveFromHash() {
+    const currentPath = window.location.pathname.split('/').pop();
+    if (currentPath && currentPath.endsWith('.html')) {
+      const pathLink = document.querySelector(`.sidebar-nav .sidebar-item a[href="${currentPath}"]`);
+      if (pathLink) {
+        sidebarNavItems.forEach(i => i.classList.remove('active'));
+        pathLink.closest('.sidebar-item')?.classList.add('active');
+        return;
+      }
+    }
     const hash = window.location.hash;
     if (hash) {
       const targetLink = document.querySelector(`.sidebar-nav .sidebar-item a[href="${hash}"]`);

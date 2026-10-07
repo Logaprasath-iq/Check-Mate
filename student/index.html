@@ -120,16 +120,16 @@
     <ul class="sidebar-nav">
       <li class="sidebar-label">Learning & Arena</li>
       <li class="sidebar-item active"><a href="index.html"><i data-lucide="layout-dashboard"></i> Overview</a></li>
-      <li class="sidebar-item"><a href="#live-room" onclick="showLiveRoomModal()"><i data-lucide="video"></i> Live Classes <span class="status-chip chip-danger" style="padding: 2px 6px; font-size: 9px; margin-left: auto;">LIVE</span></a></li>
-      <li class="sidebar-item"><a href="#curriculum"><i data-lucide="book-open"></i> Curriculum & Modules</a></li>
-      <li class="sidebar-item"><a href="#puzzles"><i data-lucide="crosshair"></i> Tactics & Puzzles</a></li>
-      <li class="sidebar-item"><a href="#tournaments"><i data-lucide="trophy"></i> My Tournaments</a></li>
-      <li class="sidebar-item"><a href="#analysis"><i data-lucide="cpu"></i> Game Analysis Engine</a></li>
+      <li class="sidebar-item"><a href="live-classes.html"><i data-lucide="video"></i> Live Classes <span class="status-chip chip-danger" style="padding: 2px 6px; font-size: 9px; margin-left: auto;">LIVE</span></a></li>
+      <li class="sidebar-item"><a href="curriculum.html"><i data-lucide="book-open"></i> Curriculum & Modules</a></li>
+      <li class="sidebar-item"><a href="puzzles.html"><i data-lucide="crosshair"></i> Tactics & Puzzles</a></li>
+      <li class="sidebar-item"><a href="tournaments.html"><i data-lucide="trophy"></i> My Tournaments</a></li>
+      <li class="sidebar-item"><a href="analysis.html"><i data-lucide="cpu"></i> Game Analysis Engine</a></li>
 
       <li class="sidebar-label">Mentorship & Records</li>
-      <li class="sidebar-item"><a href="#feedback"><i data-lucide="message-square"></i> Coach Feedback</a></li>
-      <li class="sidebar-item"><a href="#homework"><i data-lucide="clipboard-check"></i> Homework & Studies</a></li>
-      <li class="sidebar-item"><a href="#ratings"><i data-lucide="trending-up"></i> Rating Progression</a></li>
+      <li class="sidebar-item"><a href="feedback.html"><i data-lucide="message-square"></i> Coach Feedback</a></li>
+      <li class="sidebar-item"><a href="homework.html"><i data-lucide="clipboard-check"></i> Homework & Studies</a></li>
+      <li class="sidebar-item"><a href="ratings.html"><i data-lucide="trending-up"></i> Rating Progression</a></li>
 
       <li class="sidebar-label">Navigation</li>
       <li class="sidebar-item"><a href="../index.html"><i data-lucide="globe"></i> Public Website</a></li>
@@ -165,11 +165,11 @@
 
       <div class="topbar-right">
         <!-- Live Class Indicator -->
-        <button onclick="showLiveRoomModal()" class="status-chip chip-success topbar-live-chip" style="cursor: pointer; border: 1px solid rgba(16,185,129,0.4); display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <a href="live-classes.html" class="status-chip chip-success topbar-live-chip" style="border: 1px solid rgba(16,185,129,0.4); display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
           <span class="live-pulse"></span>
           <span class="live-chip-full">Live Room Open (Sicilian Workshop)</span>
           <span class="live-chip-short">Live Room</span>
-        </button>
+        </a>
 
         <!-- Theme Toggle -->
         <button class="topbar-action-btn admin-theme-toggle" title="Toggle Dark/Light Mode">
@@ -212,13 +212,13 @@
             Your next live interactive workshop with <strong>FM Arjun Mehta</strong> begins in <strong>45 minutes</strong>. Today's deep dive: <em>Navigating the 6.Bg5 Poisoned Pawn in the Najdorf</em>.
           </p>
           <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-            <button onclick="showLiveRoomModal()" class="btn-admin-gold" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.35rem;">
+            <a href="live-classes.html" class="btn-admin-gold" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.35rem; text-decoration: none;">
               <i data-lucide="video" style="width: 16px;"></i> JOIN LIVE ROOM
-            </button>
+            </a>
             <button onclick="openStudentProfileModal()" class="action-icon-btn" style="padding: 0.65rem 1.15rem; width: auto; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
               <i data-lucide="user" style="width: 16px;"></i> Edit Profile
             </button>
-            <a href="#puzzles" class="action-icon-btn" style="padding: 0.65rem 1.15rem; width: auto; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+            <a href="puzzles.html" class="action-icon-btn" style="padding: 0.65rem 1.15rem; width: auto; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
               <i data-lucide="crosshair" style="width: 16px;"></i> Daily Tactics Puzzle
             </a>
             <a href="../index.html" class="action-icon-btn" style="padding: 0.65rem 1.15rem; width: auto; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
@@ -292,7 +292,7 @@
                 <h2 class="admin-card-title">Elo Rating Progression (12 Months)</h2>
                 <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Demonstrated rating growth from Foundation to Elite Candidate Master</p>
               </div>
-              <span class="status-chip chip-gold">+265 Total Elo Gained</span>
+              <a href="ratings.html" class="status-chip chip-gold" style="text-decoration: none;">+265 Total Elo Gained &rarr;</a>
             </div>
             <div class="chart-container-box" style="height: 280px; position: relative; width: 100%; max-width: 100%; min-width: 0; overflow: hidden;">
               <canvas id="chartStudentRating"></canvas>
@@ -316,7 +316,7 @@
                 <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%;"></div></div>
                 <div class="course-card-footer" style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted); flex-wrap: wrap; gap: 0.35rem;">
                   <span style="word-break: break-word;">Current Unit: 6.Bg5 Complications & Counterplay</span>
-                  <a href="#live-room" onclick="showLiveRoomModal()" style="color: var(--admin-gold); font-weight: 600; white-space: nowrap;">Continue Lesson &rarr;</a>
+                  <a href="curriculum.html" style="color: var(--admin-gold); font-weight: 600; white-space: nowrap;">Continue Lesson &rarr;</a>
                 </div>
               </div>
 
@@ -329,7 +329,7 @@
                 <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 60%; background: #f59e0b;"></div></div>
                 <div class="course-card-footer" style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted); flex-wrap: wrap; gap: 0.35rem;">
                   <span style="word-break: break-word;">Current Unit: Queenside Infiltration on the c-file</span>
-                  <span style="color: var(--admin-text-muted); white-space: nowrap;">4 Lessons Remaining</span>
+                  <a href="curriculum.html" style="color: var(--admin-gold); font-weight: 600; white-space: nowrap;">Continue Lesson &rarr;</a>
                 </div>
               </div>
 
@@ -342,7 +342,7 @@
                 <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%; background: #10b981;"></div></div>
                 <div class="course-card-footer" style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--admin-text-muted); flex-wrap: wrap; gap: 0.35rem;">
                   <span style="word-break: break-word;">Completed on Oct 10, 2026 • Distinction</span>
-                  <a href="#" onclick="window.showCheckmateToast('Certificate downloaded: Rook Endgames', 'success'); return false;" style="color: var(--admin-success); font-weight: 600; white-space: nowrap;">Download Certificate</a>
+                  <a href="curriculum.html" style="color: var(--admin-success); font-weight: 600; white-space: nowrap;">Download Certificate</a>
                 </div>
               </div>
             </div>
@@ -352,9 +352,12 @@
           <div class="admin-card" id="analysis">
             <div class="admin-card-header">
               <h2 class="admin-card-title">Recent Tournament Games & PGN Analysis</h2>
-              <button class="btn-admin-gold" style="padding: 0.35rem 0.85rem; font-size: 0.75rem;" onclick="openStudentAddGameModal()">
-                <i data-lucide="plus" style="width: 13px;"></i> Import PGN / Add Game
-              </button>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <button class="btn-admin-gold" style="padding: 0.35rem 0.85rem; font-size: 0.75rem;" onclick="openStudentAddGameModal()">
+                  <i data-lucide="plus" style="width: 13px;"></i> Import PGN
+                </button>
+                <a href="analysis.html" class="action-icon-btn" style="width: auto; padding: 0.35rem 0.75rem; font-size: 0.75rem; text-decoration: none;">Engine Lab &rarr;</a>
+              </div>
             </div>
             <div class="table-responsive">
               <table class="admin-table" id="studentGamesTable">
@@ -440,9 +443,9 @@
                 <div style="font-size: 0.75rem; color: var(--admin-gold);">Lead Faculty • 24 Students Attending</div>
               </div>
             </div>
-            <button onclick="showLiveRoomModal()" class="btn-admin-gold" style="width: 100%; justify-content: center; padding: 0.75rem;">
+            <a href="live-classes.html" class="btn-admin-gold" style="width: 100%; justify-content: center; padding: 0.75rem; text-decoration: none;">
               <i data-lucide="video" style="width: 16px;"></i> JOIN LIVE CLASSROOM
-            </button>
+            </a>
           </div>
 
           <!-- Daily Tactics Puzzle -->
@@ -452,7 +455,7 @@
                 <h3 class="admin-card-title">Tactics Arena: Daily Puzzle</h3>
                 <p style="font-size: 0.78rem; color: var(--admin-text-muted);">Puzzle #1042 • Mate in 3 (White to Move)</p>
               </div>
-              <span class="status-chip chip-gold">1,820 Elo</span>
+              <a href="puzzles.html" class="status-chip chip-gold" style="text-decoration: none;">1,820 Elo &rarr;</a>
             </div>
 
             <!-- Mini Chess Board Visualization -->
@@ -483,9 +486,9 @@
               <button onclick="solvePuzzle()" class="btn-admin-gold" style="flex: 1; justify-content: center; padding: 0.65rem;">
                 <i data-lucide="check-circle" style="width: 15px;"></i> Verify Qxh7+
               </button>
-              <button onclick="showSolution()" class="action-icon-btn" title="View Full Solution" style="width: auto; padding: 0.65rem 1rem;">
-                Hint
-              </button>
+              <a href="puzzles.html" class="action-icon-btn" title="View Tactics Arena" style="width: auto; padding: 0.65rem 1rem; text-decoration: none;">
+                Arena &rarr;
+              </a>
             </div>
             <div id="puzzleFeedback" style="display: none; margin-top: 0.75rem; padding: 0.65rem; border-radius: var(--admin-radius); font-size: 0.82rem; text-align: center;"></div>
           </div>
@@ -498,7 +501,7 @@
                 <button onclick="openStudentAddHwModal()" class="btn-admin-gold" style="padding: 0.3rem 0.65rem; font-size: 0.72rem;">
                   <i data-lucide="plus" style="width: 13px;"></i> Add Task
                 </button>
-                <span class="status-chip chip-gold">FM Arjun</span>
+                <a href="feedback.html" style="font-size: 0.78rem; color: var(--admin-gold); font-weight: 700; text-decoration: none;">All Feedback &rarr;</a>
               </div>
             </div>
             <blockquote style="font-size: 0.85rem; color: var(--admin-text); font-style: italic; line-height: 1.6; border-left: 3px solid var(--admin-gold); padding-left: 0.85rem; margin-bottom: 1rem;">
@@ -553,7 +556,7 @@
                 <button onclick="openStudentRegisterTournamentModal()" class="btn-admin-gold" style="padding: 0.3rem 0.65rem; font-size: 0.72rem;">
                   <i data-lucide="plus" style="width: 13px;"></i> Register Event
                 </button>
-                <a href="../tournaments.html" style="font-size: 0.78rem; color: var(--admin-gold); font-weight: 700;">Calendar &rarr;</a>
+                <a href="tournaments.html" style="font-size: 0.78rem; color: var(--admin-gold); font-weight: 700; text-decoration: none;">All Events &rarr;</a>
               </div>
             </div>
             <div id="studentTournamentContainer" style="display: flex; flex-direction: column; gap: 0.75rem;">
@@ -1137,35 +1140,6 @@
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
     }
-
-    // Interactive Sidebar Active Item Highlighting
-    document.addEventListener('DOMContentLoaded', () => {
-      const sidebarItems = document.querySelectorAll('.sidebar-nav .sidebar-item');
-      sidebarItems.forEach(item => {
-        const link = item.querySelector('a');
-        if (!link) return;
-        link.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
-          if (href && (href.startsWith('#') || href.includes('index.html'))) {
-            sidebarItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-          }
-        });
-      });
-
-      function syncActiveSidebar() {
-        const hash = window.location.hash;
-        if (!hash) return;
-        const target = document.querySelector(`.sidebar-nav .sidebar-item a[href="${hash}"]`);
-        if (target) {
-          sidebarItems.forEach(i => i.classList.remove('active'));
-          target.closest('.sidebar-item')?.classList.add('active');
-        }
-      }
-
-      window.addEventListener('hashchange', syncActiveSidebar);
-      syncActiveSidebar();
-    });
   </script>
 </body>
 </html>

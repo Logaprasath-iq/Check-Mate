@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Tournaments – CHECKMATE Chess Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+
+  <style>
+    .chip-student {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .live-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .tourney-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+    .tourney-card {
+      background: var(--admin-card-bg);
+      border: 1px solid var(--admin-card-border);
+      border-radius: var(--admin-radius);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .tourney-card:hover {
+      border-color: var(--admin-gold);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar Navigation -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: auto;">
+        <span class="status-chip chip-student" style="font-size: 0.65rem;">STUDENT</span>
+        <button class="sidebar-close-btn" aria-label="Close Navigation" style="background: transparent; border: none; color: var(--admin-text-muted); cursor: pointer; padding: 4px; display: inline-flex; align-items: center; justify-content: center;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Learning & Arena</li>
+      <li class="sidebar-item"><a href="index.html"><i data-lucide="layout-dashboard"></i> Overview</a></li>
+      <li class="sidebar-item"><a href="live-classes.html"><i data-lucide="video"></i> Live Classes <span class="status-chip chip-danger" style="padding: 2px 6px; font-size: 9px; margin-left: auto;">LIVE</span></a></li>
+      <li class="sidebar-item"><a href="curriculum.html"><i data-lucide="book-open"></i> Curriculum & Modules</a></li>
+      <li class="sidebar-item"><a href="puzzles.html"><i data-lucide="crosshair"></i> Tactics & Puzzles</a></li>
+      <li class="sidebar-item active"><a href="tournaments.html"><i data-lucide="trophy"></i> My Tournaments</a></li>
+      <li class="sidebar-item"><a href="analysis.html"><i data-lucide="cpu"></i> Game Analysis Engine</a></li>
+
+      <li class="sidebar-label">Mentorship & Records</li>
+      <li class="sidebar-item"><a href="feedback.html"><i data-lucide="message-square"></i> Coach Feedback</a></li>
+      <li class="sidebar-item"><a href="homework.html"><i data-lucide="clipboard-check"></i> Homework & Studies</a></li>
+      <li class="sidebar-item"><a href="ratings.html"><i data-lucide="trending-up"></i> Rating Progression</a></li>
+
+      <li class="sidebar-label">Navigation</li>
+      <li class="sidebar-item"><a href="../index.html"><i data-lucide="globe"></i> Public Website</a></li>
+      <li class="sidebar-item"><a href="#" onclick="window.checkmateLogout(); return false;" style="color: var(--admin-danger);"><i data-lucide="log-out"></i> Log Out</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-3.jpg" alt="Student Avatar" class="user-avatar">
+        <div>
+          <div class="user-info-name" id="studentSidebarName">Alex Morgan</div>
+          <div class="user-info-role">FIDE: 1685 • Elite Track</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Exit to Public Website" style="color: var(--admin-text-muted);"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+  <!-- Main Content Layout -->
+  <div class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle" aria-label="Toggle Navigation"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search tournaments, pairings..." data-table-search>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Live Class Indicator -->
+        <a href="live-classes.html" class="status-chip chip-success topbar-live-chip" style="border: 1px solid rgba(16,185,129,0.4); display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <span class="live-pulse"></span>
+          <span class="live-chip-full">Live Room Open (Sicilian Workshop)</span>
+          <span class="live-chip-short">Live Room</span>
+        </a>
+
+        <!-- Theme Toggle -->
+        <button class="topbar-action-btn admin-theme-toggle" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun"></i>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR">
+          <i data-lucide="arrow-left-right"></i><span class="rtl-label">RTL</span>
+        </button>
+
+        <!-- Notifications -->
+        <button class="topbar-action-btn" title="Notifications" onclick="window.showCheckmateToast('Pairing posted for Round 1 of Sunday Blitz!', 'success')">
+          <i data-lucide="bell"></i>
+          <span class="badge-dot"></span>
+        </button>
+
+        <!-- Logout Button -->
+        <button class="topbar-action-btn" onclick="window.checkmateLogout()" title="Log Out" style="color: #ef4444;">
+          <i data-lucide="log-out"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="admin-content">
+      
+      <!-- Page Title Bar -->
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">MY TOURNAMENTS & EVENT CALENDAR</h1>
+          <p class="page-subheadline">Manage your active FIDE registrations, Swiss pairings, standing tables, and performance medals.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn-admin-gold" onclick="openStudentRegisterTournamentModal()">
+            <i data-lucide="plus" style="width: 16px;"></i> REGISTER EVENT
+          </button>
+          <a href="../tournaments.html" class="action-icon-btn" style="width: auto; padding: 0.65rem 1.15rem; font-weight: 600; text-decoration: none;">
+            <i data-lucide="calendar" style="width: 16px;"></i> Public Calendar
+          </a>
+        </div>
+      </div>
+
+      <!-- 4 Tournament Metric Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Active Registrations</span>
+            <div class="metric-icon-box icon-gold"><i data-lucide="ticket"></i></div>
+          </div>
+          <div class="metric-value">2 Events</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up"><i data-lucide="clock"></i> Next: Oct 18</span>
+            <span>Sunday Blitz GP</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Tournament Win Rate</span>
+            <div class="metric-icon-box icon-green"><i data-lucide="check-circle-2"></i></div>
+          </div>
+          <div class="metric-value">71.4%</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up"><i data-lucide="trending-up"></i> 18W • 4D • 6L</span>
+            <span>28 Official Games</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Medals & Trophies</span>
+            <div class="metric-icon-box icon-purple"><i data-lucide="award"></i></div>
+          </div>
+          <div class="metric-value">3 Titles</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up"><i data-lucide="trophy"></i> 1 Gold • 2 Silver</span>
+            <span>Zonal Finalist</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Performance Rating</span>
+            <div class="metric-icon-box icon-blue"><i data-lucide="bar-chart-2"></i></div>
+          </div>
+          <div class="metric-value">1,725 Elo</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">+40 Elo vs Baseline</span>
+            <span>Candidate Norm Track</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Currently Registered Tournaments -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Currently Registered Tournaments</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Confirmed participation entries with direct pairings and venue check-in.</p>
+          </div>
+          <button onclick="openStudentRegisterTournamentModal()" class="btn-admin-gold" style="padding: 0.35rem 0.85rem; font-size: 0.75rem;">
+            <i data-lucide="plus" style="width: 13px;"></i> Register Another
+          </button>
+        </div>
+
+        <div id="studentTournamentContainer" style="display: flex; flex-direction: column; gap: 0.85rem;">
+          <!-- Item 1 -->
+          <div class="admin-card tourney-item" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border); margin: 0; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.25rem;">
+                <span class="tourney-name" style="font-size: 1rem; font-weight: 700; color: var(--admin-text);">Sunday Blitz Grand Prix</span>
+                <span class="status-chip chip-gold">5+3 Blitz</span>
+              </div>
+              <div class="tourney-details" style="font-size: 0.82rem; color: var(--admin-text-muted);">
+                <i data-lucide="calendar" style="width: 14px; display: inline; vertical-align: middle;"></i> Oct 18, 2026 • 9 Rounds Swiss • ₹25,000 Prize Pool • Board 4 Seed
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span class="status-chip chip-success"><i data-lucide="check" style="width: 12px;"></i> Registered</span>
+              <button class="action-icon-btn" title="Withdraw / Cancel Registration" onclick="withdrawTournament(this)" style="color: var(--admin-danger);">
+                <i data-lucide="trash-2" style="width: 15px;"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="admin-card tourney-item" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border); margin: 0; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.25rem;">
+                <span class="tourney-name" style="font-size: 1rem; font-weight: 700; color: var(--admin-text);">National Junior Classical Open</span>
+                <span class="status-chip chip-purple">FIDE Rated 90+30</span>
+              </div>
+              <div class="tourney-details" style="font-size: 0.82rem; color: var(--admin-text-muted);">
+                <i data-lucide="calendar" style="width: 14px; display: inline; vertical-align: middle;"></i> Nov 04 - 08, 2026 • 7 Rounds FIDE Standard • Academy Delegation Team A
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span class="status-chip chip-gold"><i data-lucide="check" style="width: 12px;"></i> Confirmed</span>
+              <button class="action-icon-btn" title="Withdraw / Cancel Registration" onclick="withdrawTournament(this)" style="color: var(--admin-danger);">
+                <i data-lucide="trash-2" style="width: 15px;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Browse Upcoming Open Tournaments -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Available Upcoming Tournaments (Open for Student Registration)</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Join academy-sponsored championships with coach on-site preparation support.</p>
+          </div>
+        </div>
+
+        <div class="tourney-grid">
+          <!-- Card A -->
+          <div class="tourney-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <span class="status-chip chip-gold">Dec 12 - 16, 2026</span>
+                <span class="status-chip chip-purple">Classical</span>
+              </div>
+              <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--admin-text); margin-bottom: 0.4rem;">
+                Winter GM Norm Invitational
+              </h3>
+              <p style="font-size: 0.82rem; color: var(--admin-text-muted); line-height: 1.5; margin-bottom: 1rem;">
+                9 Rounds FIDE Classical. Open to rated players 1600+. Grandmaster mentoring during rest days.
+              </p>
+              <div style="font-size: 0.78rem; color: var(--admin-text-muted); margin-bottom: 1rem;">
+                <div><strong>Prize Pool:</strong> ₹1,00,000 Fund</div>
+                <div><strong>Venue:</strong> Checkmate Central Arena & Live Sync</div>
+              </div>
+            </div>
+            <button onclick="quickRegisterEvent('Winter GM Norm Invitational', 'Dec 12 - 16, 2026', 'FIDE Classical • ₹1,00,000 Fund')" class="btn-admin-gold" style="width: 100%; justify-content: center; padding: 0.65rem;">
+              <i data-lucide="plus-circle" style="width: 15px;"></i> Register Now
+            </button>
+          </div>
+
+          <!-- Card B -->
+          <div class="tourney-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <span class="status-chip chip-success">Every Saturday</span>
+                <span class="status-chip chip-blue">Rapid 15+10</span>
+              </div>
+              <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--admin-text); margin-bottom: 0.4rem;">
+                Academy Masters Rapid Arena
+              </h3>
+              <p style="font-size: 0.82rem; color: var(--admin-text-muted); line-height: 1.5; margin-bottom: 1rem;">
+                Weekly competitive arena for Checkmate students. Fast-paced rating tests and post-game engine reviews.
+              </p>
+              <div style="font-size: 0.78rem; color: var(--admin-text-muted); margin-bottom: 1rem;">
+                <div><strong>Prize Pool:</strong> ₹15,000 Fund + Academy Trophy</div>
+                <div><strong>Format:</strong> 6 Rounds Rapid Arena</div>
+              </div>
+            </div>
+            <button onclick="quickRegisterEvent('Academy Masters Rapid Arena', 'Every Saturday 4:00 PM', 'Rapid 15+10 • ₹15,000 Fund')" class="btn-admin-gold" style="width: 100%; justify-content: center; padding: 0.65rem;">
+              <i data-lucide="plus-circle" style="width: 15px;"></i> Register Now
+            </button>
+          </div>
+
+          <!-- Card C -->
+          <div class="tourney-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <span class="status-chip chip-warning">Jan 05 - 09, 2027</span>
+                <span class="status-chip chip-gold">National Event</span>
+              </div>
+              <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--admin-text); margin-bottom: 0.4rem;">
+                All-India Youth Championship
+              </h3>
+              <p style="font-size: 0.82rem; color: var(--admin-text-muted); line-height: 1.5; margin-bottom: 1rem;">
+                Sanctioned national qualifier event. Selected Checkmate participants receive full academy travel sponsorship.
+              </p>
+              <div style="font-size: 0.78rem; color: var(--admin-text-muted); margin-bottom: 1rem;">
+                <div><strong>Prize Pool:</strong> ₹2,50,000 + World Cup Qualifier</div>
+                <div><strong>Venue:</strong> New Delhi Convention Center</div>
+              </div>
+            </div>
+            <button onclick="quickRegisterEvent('All-India Youth Championship', 'Jan 05 - 09, 2027', 'National Qualifier • ₹2,50,000')" class="btn-admin-gold" style="width: 100%; justify-content: center; padding: 0.65rem;">
+              <i data-lucide="plus-circle" style="width: 15px;"></i> Register Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Past Tournament Performance & Crosstables -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Past Tournament Records & Official Results</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Verified match records, final standings, and FIDE rating changes.</p>
+          </div>
+          <button onclick="window.showCheckmateToast('Exporting official tournament dossier PDF...', 'success')" class="action-icon-btn" style="width: auto; padding: 0.4rem 0.85rem; font-size: 0.8rem;">
+            <i data-lucide="download" style="width: 14px;"></i> Export Report
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Tournament Name</th>
+                <th>Date</th>
+                <th>Format</th>
+                <th>Score</th>
+                <th>Standing</th>
+                <th>Performance</th>
+                <th>Elo Change</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Autumn Rapid Trophy 2026</strong></td>
+                <td>Oct 04, 2026</td>
+                <td><span class="status-chip chip-blue">Rapid</span></td>
+                <td><strong>6.5 / 8</strong></td>
+                <td><span class="status-chip chip-gold"><i data-lucide="award" style="width: 12px;"></i> 2nd (Silver)</span></td>
+                <td>1,745 Elo</td>
+                <td><strong style="color: var(--admin-success);">+24 Elo</strong></td>
+                <td>
+                  <button class="action-icon-btn" title="View Crosstable" onclick="window.showCheckmateToast('Crosstable: 6 Wins, 1 Draw, 1 Loss', 'success')"><i data-lucide="eye" style="width: 14px;"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>State Under-19 Zonal</strong></td>
+                <td>Sep 22, 2026</td>
+                <td><span class="status-chip chip-purple">Classical</span></td>
+                <td><strong>5.0 / 7</strong></td>
+                <td><span class="status-chip chip-warning">4th Place</span></td>
+                <td>1,710 Elo</td>
+                <td><strong style="color: var(--admin-success);">+18 Elo</strong></td>
+                <td>
+                  <button class="action-icon-btn" title="View Crosstable" onclick="window.showCheckmateToast('Crosstable: 4 Wins, 2 Draws, 1 Loss', 'success')"><i data-lucide="eye" style="width: 14px;"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Independence Cup Blitz</strong></td>
+                <td>Aug 15, 2026</td>
+                <td><span class="status-chip chip-gold">Blitz</span></td>
+                <td><strong>7.0 / 9</strong></td>
+                <td><span class="status-chip chip-success"><i data-lucide="crown" style="width: 12px;"></i> 1st (Gold)</span></td>
+                <td>1,790 Elo</td>
+                <td><strong style="color: var(--admin-success);">+32 Elo</strong></td>
+                <td>
+                  <button class="action-icon-btn" title="View Crosstable" onclick="window.showCheckmateToast('Crosstable: 7 Wins, 0 Draws, 2 Losses', 'success')"><i data-lucide="eye" style="width: 14px;"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Summer Junior Open</strong></td>
+                <td>Jul 11, 2026</td>
+                <td><span class="status-chip chip-purple">Classical</span></td>
+                <td><strong>4.5 / 7</strong></td>
+                <td><span class="status-chip chip-blue">8th Place</span></td>
+                <td>1,670 Elo</td>
+                <td><strong style="color: var(--admin-success);">+12 Elo</strong></td>
+                <td>
+                  <button class="action-icon-btn" title="View Crosstable" onclick="window.showCheckmateToast('Crosstable: 4 Wins, 1 Draw, 2 Losses', 'success')"><i data-lucide="eye" style="width: 14px;"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Register Tournament Modal -->
+  <div id="studentRegisterTourneyModal" class="admin-modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: var(--admin-card-bg, #0f172a); border: 1px solid var(--admin-gold, #d4af37); border-radius: 12px; max-width: 480px; width: 100%; padding: 2rem; box-shadow: 0 25px 60px rgba(0,0,0,0.6);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--admin-card-border, rgba(255,255,255,0.1)); padding-bottom: 0.75rem;">
+        <h3 style="font-family: 'Sora', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--admin-text, #fff); margin: 0;">REGISTER TOURNAMENT</h3>
+        <button onclick="closeStudentRegisterTournamentModal()" style="background: none; border: none; color: var(--admin-text-muted, #94a3b8); font-size: 1.75rem; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+      <form id="studentRegisterTourneyForm" onsubmit="saveStudentTournament(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Tournament Name</label>
+          <input type="text" id="tourneyNameInput" class="newsletter-input" placeholder="e.g. Winter Grandmaster Invitational" required>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Date & Schedule</label>
+          <input type="text" id="tourneyDateInput" class="newsletter-input" placeholder="e.g. Dec 12 - 15 • 9 Rounds" required>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Prize Fund / Format</label>
+          <input type="text" id="tourneyFormatInput" class="newsletter-input" placeholder="e.g. ₹50,000 Fund • FIDE Classical" required>
+        </div>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+          <button type="submit" class="btn-admin-gold" style="flex: 1; justify-content: center; padding: 0.75rem;">CONFIRM REGISTRATION</button>
+          <button type="button" onclick="closeStudentRegisterTournamentModal()" class="action-icon-btn" style="width: auto; padding: 0.75rem 1.25rem;">CANCEL</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStudentProfile();
+      lucide.createIcons();
+    });
+
+    function loadStudentProfile() {
+      const userJson = localStorage.getItem('checkmate_user');
+      let name = 'Alex Morgan';
+      if (userJson) {
+        try {
+          const user = JSON.parse(userJson);
+          if (user.name) name = user.name;
+        } catch (e) {}
+      }
+      const sidebarName = document.getElementById('studentSidebarName');
+      if (sidebarName) sidebarName.textContent = name;
+    }
+
+    function openStudentRegisterTournamentModal() {
+      const modal = document.getElementById('studentRegisterTourneyModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeStudentRegisterTournamentModal() {
+      const modal = document.getElementById('studentRegisterTourneyModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function saveStudentTournament(e) {
+      e.preventDefault();
+      const name = document.getElementById('tourneyNameInput').value.trim();
+      const date = document.getElementById('tourneyDateInput').value.trim();
+      const format = document.getElementById('tourneyFormatInput').value.trim();
+
+      addTournamentToList(name, date, format);
+
+      document.getElementById('studentRegisterTourneyForm').reset();
+      closeStudentRegisterTournamentModal();
+      if (window.showCheckmateToast) {
+        window.showCheckmateToast(`Successfully registered for "${name}"!`, 'success');
+      }
+    }
+
+    function quickRegisterEvent(name, date, format) {
+      addTournamentToList(name, date, format);
+      if (window.showCheckmateToast) {
+        window.showCheckmateToast(`Successfully registered for "${name}"!`, 'success');
+      }
+    }
+
+    function addTournamentToList(name, date, format) {
+      const container = document.getElementById('studentTournamentContainer');
+      if (!container) return;
+      const item = document.createElement('div');
+      item.className = 'admin-card tourney-item';
+      item.style.display = 'flex';
+      item.style.justifyContent = 'space-between';
+      item.style.alignItems = 'center';
+      item.style.padding = '1rem 1.25rem';
+      item.style.background = 'var(--admin-hover-bg)';
+      item.style.borderRadius = 'var(--admin-radius)';
+      item.style.border = '1px solid var(--admin-card-border)';
+      item.style.margin = '0';
+      item.style.flexWrap = 'wrap';
+      item.style.gap = '1rem';
+      item.innerHTML = `
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.25rem;">
+            <span class="tourney-name" style="font-size: 1rem; font-weight: 700; color: var(--admin-text);">${escapeHtml(name)}</span>
+            <span class="status-chip chip-gold">Confirmed</span>
+          </div>
+          <div class="tourney-details" style="font-size: 0.82rem; color: var(--admin-text-muted);">
+            <i data-lucide="calendar" style="width: 14px; display: inline; vertical-align: middle;"></i> ${escapeHtml(date)} • ${escapeHtml(format)}
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span class="status-chip chip-success"><i data-lucide="check" style="width: 12px;"></i> Registered</span>
+          <button class="action-icon-btn" title="Withdraw / Cancel Registration" onclick="withdrawTournament(this)" style="color: var(--admin-danger);">
+            <i data-lucide="trash-2" style="width: 15px;"></i>
+          </button>
+        </div>
+      `;
+      container.prepend(item);
+      item.style.backgroundColor = 'rgba(212, 175, 55, 0.25)';
+      setTimeout(() => { item.style.backgroundColor = ''; }, 1200);
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function withdrawTournament(btn) {
+      const item = btn.closest('.tourney-item');
+      if (!item) return;
+      const name = item.querySelector('.tourney-name')?.textContent || 'Tournament';
+      if (confirm(`Are you sure you want to withdraw registration from "${name}"?`)) {
+        item.style.transition = 'all 0.35s ease';
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(20px)';
+        setTimeout(() => item.remove(), 350);
+        if (window.showCheckmateToast) window.showCheckmateToast(`Withdrawn from "${name}"`, 'error');
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tactics & Puzzles – CHECKMATE Chess Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+
+  <style>
+    .chip-student {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .live-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .chessboard-preview {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 1;
+      border: 3px solid var(--admin-gold);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1.5rem auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+    .chess-sq {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      user-select: none;
+    }
+    .sq-light { background: #e6dfcf; color: #222; }
+    .sq-dark { background: #4a5568; color: #fff; }
+    .sq-highlight { background: rgba(212, 175, 55, 0.8) !important; color: #000 !important; }
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .theme-card {
+      background: var(--admin-card-bg);
+      border: 1px solid var(--admin-card-border);
+      border-radius: var(--admin-radius);
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .theme-card:hover {
+      border-color: var(--admin-gold);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar Navigation -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: auto;">
+        <span class="status-chip chip-student" style="font-size: 0.65rem;">STUDENT</span>
+        <button class="sidebar-close-btn" aria-label="Close Navigation" style="background: transparent; border: none; color: var(--admin-text-muted); cursor: pointer; padding: 4px; display: inline-flex; align-items: center; justify-content: center;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Learning & Arena</li>
+      <li class="sidebar-item"><a href="index.html"><i data-lucide="layout-dashboard"></i> Overview</a></li>
+      <li class="sidebar-item"><a href="live-classes.html"><i data-lucide="video"></i> Live Classes <span class="status-chip chip-danger" style="padding: 2px 6px; font-size: 9px; margin-left: auto;">LIVE</span></a></li>
+      <li class="sidebar-item"><a href="curriculum.html"><i data-lucide="book-open"></i> Curriculum & Modules</a></li>
+      <li class="sidebar-item active"><a href="puzzles.html"><i data-lucide="crosshair"></i> Tactics & Puzzles</a></li>
+      <li class="sidebar-item"><a href="tournaments.html"><i data-lucide="trophy"></i> My Tournaments</a></li>
+      <li class="sidebar-item"><a href="analysis.html"><i data-lucide="cpu"></i> Game Analysis Engine</a></li>
+
+      <li class="sidebar-label">Mentorship & Records</li>
+      <li class="sidebar-item"><a href="feedback.html"><i data-lucide="message-square"></i> Coach Feedback</a></li>
+      <li class="sidebar-item"><a href="homework.html"><i data-lucide="clipboard-check"></i> Homework & Studies</a></li>
+      <li class="sidebar-item"><a href="ratings.html"><i data-lucide="trending-up"></i> Rating Progression</a></li>
+
+      <li class="sidebar-label">Navigation</li>
+      <li class="sidebar-item"><a href="../index.html"><i data-lucide="globe"></i> Public Website</a></li>
+      <li class="sidebar-item"><a href="#" onclick="window.checkmateLogout(); return false;" style="color: var(--admin-danger);"><i data-lucide="log-out"></i> Log Out</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-3.jpg" alt="Student Avatar" class="user-avatar">
+        <div>
+          <div class="user-info-name" id="studentSidebarName">Alex Morgan</div>
+          <div class="user-info-role">FIDE: 1685 • Elite Track</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Exit to Public Website" style="color: var(--admin-text-muted);"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+  <!-- Main Content Layout -->
+  <div class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle" aria-label="Toggle Navigation"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search puzzle motifs, themes, ratings...">
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Live Class Indicator -->
+        <a href="live-classes.html" class="status-chip chip-success topbar-live-chip" style="border: 1px solid rgba(16,185,129,0.4); display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <span class="live-pulse"></span>
+          <span class="live-chip-full">Live Room Open (Sicilian Workshop)</span>
+          <span class="live-chip-short">Live Room</span>
+        </a>
+
+        <!-- Theme Toggle -->
+        <button class="topbar-action-btn admin-theme-toggle" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun"></i>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR">
+          <i data-lucide="arrow-left-right"></i><span class="rtl-label">RTL</span>
+        </button>
+
+        <!-- Notifications -->
+        <button class="topbar-action-btn" title="Notifications" onclick="window.showCheckmateToast('+12 Tactics Elo gained! Daily streak reached 12 days.', 'success')">
+          <i data-lucide="bell"></i>
+          <span class="badge-dot"></span>
+        </button>
+
+        <!-- Logout Button -->
+        <button class="topbar-action-btn" onclick="window.checkmateLogout()" title="Log Out" style="color: #ef4444;">
+          <i data-lucide="log-out"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="admin-content">
+      
+      <!-- Page Title Bar -->
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">TACTICS ARENA & DAILY PUZZLES</h1>
+          <p class="page-subheadline">Daily calculation training, pattern recognition drills, and mating sequence verification.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn-admin-gold" onclick="nextPuzzle()">
+            <i data-lucide="arrow-right" style="width: 16px;"></i> NEXT DAILY PUZZLE
+          </button>
+          <button class="action-icon-btn" onclick="window.showCheckmateToast('Puzzle Rush 3-minute mode starting...', 'info')" style="width: auto; padding: 0.65rem 1.15rem; font-weight: 600;">
+            <i data-lucide="zap" style="width: 16px;"></i> Puzzle Rush Mode
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Tactics Metric Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Tactics Elo Rating</span>
+            <div class="metric-icon-box icon-gold"><i data-lucide="crosshair"></i></div>
+          </div>
+          <div class="metric-value">1,820 Elo</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up"><i data-lucide="trending-up"></i> +12 Today</span>
+            <span>All-time high: 1,845</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Calculation Accuracy</span>
+            <div class="metric-icon-box icon-green"><i data-lucide="check-circle-2"></i></div>
+          </div>
+          <div class="metric-value">89.2%</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up"><i data-lucide="flame"></i> 12 Day Streak</span>
+            <span>184 Total Solved</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Weekly Solved Count</span>
+            <div class="metric-icon-box icon-blue"><i data-lucide="layers"></i></div>
+          </div>
+          <div class="metric-value">68 Puzzles</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">Target: 70 / Week</span>
+            <span>2 to Reach Goal</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Strongest Tactical Motif</span>
+            <div class="metric-icon-box icon-purple"><i data-lucide="shield"></i></div>
+          </div>
+          <div class="metric-value">Queen Sac & Deflection</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">96% Accuracy</span>
+            <span>GM Standard Motif</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Daily Tactics Puzzle Stage -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Featured Daily Tactics Challenge: Puzzle #1042</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">White to move • Mate in 3 Forced Sequence • Difficulty: 1,820 Elo</p>
+          </div>
+          <span class="status-chip chip-gold">1,820 Elo</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+          <!-- Chess Board -->
+          <div class="chessboard-preview" id="puzzleBoard">
+            <!-- Row 8 -->
+            <div class="chess-sq sq-light">♜</div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light">♚</div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark">♜</div>
+            <!-- Row 7 -->
+            <div class="chess-sq sq-dark">♟</div><div class="chess-sq sq-light">♟</div><div class="chess-sq sq-dark">♟</div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light">♟</div><div class="chess-sq sq-dark sq-highlight">♟</div><div class="chess-sq sq-light"></div>
+            <!-- Row 6 -->
+            <div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light">♞</div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div>
+            <!-- Row 5 -->
+            <div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light">♟</div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div>
+            <!-- Row 4 -->
+            <div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark">♙</div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div>
+            <!-- Row 3 -->
+            <div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark">♘</div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light">♖</div>
+            <!-- Row 2 -->
+            <div class="chess-sq sq-light">♙</div><div class="chess-sq sq-dark">♙</div><div class="chess-sq sq-light">♙</div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark">♙</div><div class="chess-sq sq-light">♙</div><div class="chess-sq sq-dark">♙</div>
+            <!-- Row 1 -->
+            <div class="chess-sq sq-dark">♖</div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark"></div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark">♔</div><div class="chess-sq sq-light"></div><div class="chess-sq sq-dark sq-highlight">♕</div><div class="chess-sq sq-light"></div>
+          </div>
+
+          <div style="font-weight: 700; font-size: 1rem; color: var(--admin-gold); margin-bottom: 1rem;">
+            Find the winning queen deflection sacrifice sequence!
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; max-width: 420px; width: 100%; justify-content: center; flex-wrap: wrap;">
+            <button onclick="solvePuzzle()" class="btn-admin-gold" style="flex: 1; min-width: 160px; justify-content: center; padding: 0.75rem;">
+              <i data-lucide="check-circle" style="width: 16px;"></i> Verify 1. Qxh7+!
+            </button>
+            <button onclick="showSolution()" class="action-icon-btn" style="width: auto; padding: 0.75rem 1.25rem;">
+              <i data-lucide="help-circle" style="width: 15px;"></i> Hint
+            </button>
+            <button onclick="nextPuzzle()" class="action-icon-btn" style="width: auto; padding: 0.75rem 1.25rem;">
+              Next Puzzle &rarr;
+            </button>
+          </div>
+
+          <div id="puzzleFeedback" style="display: none; margin-top: 1.25rem; max-width: 520px; width: 100%; padding: 1rem; border-radius: var(--admin-radius); font-size: 0.88rem; line-height: 1.6;"></div>
+        </div>
+      </div>
+
+      <!-- Section: Tactical Theme Training Packs -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Tactical Theme Training Packs</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Master specific tactical patterns through focused training modules.</p>
+          </div>
+        </div>
+
+        <div class="theme-grid">
+          <div class="theme-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span class="status-chip chip-gold">Theme 1</span>
+                <span style="font-size: 0.75rem; color: var(--admin-success); font-weight: 700;">94% Solved</span>
+              </div>
+              <h3 style="font-size: 1rem; font-weight: 800; color: var(--admin-text); margin-bottom: 0.35rem;">Absolute & Relative Pins</h3>
+              <p style="font-size: 0.8rem; color: var(--admin-text-muted); margin-bottom: 0.75rem;">48 Puzzles • Exploiting pinned pieces along ranks, files, and diagonals.</p>
+            </div>
+            <button onclick="window.showCheckmateToast('Opening Pin Drills Pack...', 'info')" class="btn-admin-gold" style="width: 100%; justify-content: center; padding: 0.5rem; font-size: 0.78rem;">Practice Pack</button>
+          </div>
+
+          <div class="theme-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span class="status-chip chip-blue">Theme 2</span>
+                <span style="font-size: 0.75rem; color: var(--admin-success); font-weight: 700;">88% Solved</span>
+              </div>
+              <h3 style="font-size: 1rem; font-weight: 800; color: var(--admin-text); margin-bottom: 0.35rem;">Royal Knight Forks</h3>
+              <p style="font-size: 0.8rem; color: var(--admin-text-muted); margin-bottom: 0.75rem;">60 Puzzles • Geometrical knight jump forks picking off heavy material.</p>
+            </div>
+            <button onclick="window.showCheckmateToast('Opening Knight Fork Drills...', 'info')" class="btn-admin-gold" style="width: 100%; justify-content: center; padding: 0.5rem; font-size: 0.78rem;">Practice Pack</button>
+          </div>
+
+          <div class="theme-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span class="status-chip chip-success">Theme 3</span>
+                <span style="font-size: 0.75rem; color: var(--admin-success); font-weight: 700;">100% Solved</span>
+              </div>
+              <h3 style="font-size: 1rem; font-weight: 800; color: var(--admin-text); margin-bottom: 0.35rem;">Back-Rank Mate Patterns</h3>
+              <p style="font-size: 0.8rem; color: var(--admin-text-muted); margin-bottom: 0.75rem;">36 Puzzles • Clearing 8th rank defenders and back-rank corridor mates.</p>
+            </div>
+            <button onclick="window.showCheckmateToast('Back-Rank Pack Mastered! Retraining unlocked.', 'success')" class="action-icon-btn" style="width: 100%; justify-content: center; padding: 0.5rem; font-size: 0.78rem;">Review Pack</button>
+          </div>
+
+          <div class="theme-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span class="status-chip chip-purple">Theme 4</span>
+                <span style="font-size: 0.75rem; color: #f59e0b; font-weight: 700;">75% Solved</span>
+              </div>
+              <h3 style="font-size: 1rem; font-weight: 800; color: var(--admin-text); margin-bottom: 0.35rem;">Deflection & Overloaded Defenders</h3>
+              <p style="font-size: 0.8rem; color: var(--admin-text-muted); margin-bottom: 0.75rem;">42 Puzzles • Luring key defensive guards away from critical squares.</p>
+            </div>
+            <button onclick="window.showCheckmateToast('Opening Deflection Drills...', 'info')" class="btn-admin-gold" style="width: 100%; justify-content: center; padding: 0.5rem; font-size: 0.78rem;">Practice Pack</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStudentProfile();
+      lucide.createIcons();
+    });
+
+    function loadStudentProfile() {
+      const userJson = localStorage.getItem('checkmate_user');
+      let name = 'Alex Morgan';
+      if (userJson) {
+        try {
+          const user = JSON.parse(userJson);
+          if (user.name) name = user.name;
+        } catch (e) {}
+      }
+      const sidebarName = document.getElementById('studentSidebarName');
+      if (sidebarName) sidebarName.textContent = name;
+    }
+
+    function solvePuzzle() {
+      const feedback = document.getElementById('puzzleFeedback');
+      feedback.style.display = 'block';
+      feedback.style.background = 'rgba(16, 185, 129, 0.15)';
+      feedback.style.color = '#10b981';
+      feedback.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+      feedback.innerHTML = '<strong>Brilliant! (1. Qxh7+! Kxh7 2. Rh3+ Kg8 3. Rh8#)</strong><br>Queen deflection mate verified. +12 Tactics Elo gained!';
+      if (window.showCheckmateToast) window.showCheckmateToast('+12 Tactics Elo gained! Puzzle #1042 Solved.', 'success');
+    }
+
+    function showSolution() {
+      const feedback = document.getElementById('puzzleFeedback');
+      feedback.style.display = 'block';
+      feedback.style.background = 'rgba(212, 175, 55, 0.12)';
+      feedback.style.color = 'var(--admin-gold)';
+      feedback.style.border = '1px solid rgba(212, 175, 55, 0.35)';
+      feedback.innerHTML = '<strong>Hint:</strong> The black king on g8 is trapped along the h-file once the h7 pawn is cleared. Look for a queen sacrifice followed by a rook checkmate.';
+    }
+
+    function nextPuzzle() {
+      const feedback = document.getElementById('puzzleFeedback');
+      feedback.style.display = 'none';
+      if (window.showCheckmateToast) window.showCheckmateToast('Loading next tactics challenge: Puzzle #1043 (1,835 Elo)...', 'info');
+    }
+  </script>
+</body>
+</html>

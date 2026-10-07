@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework & Studies – CHECKMATE Chess Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+
+  <style>
+    .chip-student {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .live-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .hw-item {
+      padding: 1.15rem 1.25rem;
+      background: var(--admin-card-bg);
+      border-radius: var(--admin-radius);
+      border: 1px solid var(--admin-card-border);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .hw-item:hover {
+      border-color: var(--admin-gold);
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar Navigation -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: auto;">
+        <span class="status-chip chip-student" style="font-size: 0.65rem;">STUDENT</span>
+        <button class="sidebar-close-btn" aria-label="Close Navigation" style="background: transparent; border: none; color: var(--admin-text-muted); cursor: pointer; padding: 4px; display: inline-flex; align-items: center; justify-content: center;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Learning & Arena</li>
+      <li class="sidebar-item"><a href="index.html"><i data-lucide="layout-dashboard"></i> Overview</a></li>
+      <li class="sidebar-item"><a href="live-classes.html"><i data-lucide="video"></i> Live Classes <span class="status-chip chip-danger" style="padding: 2px 6px; font-size: 9px; margin-left: auto;">LIVE</span></a></li>
+      <li class="sidebar-item"><a href="curriculum.html"><i data-lucide="book-open"></i> Curriculum & Modules</a></li>
+      <li class="sidebar-item"><a href="puzzles.html"><i data-lucide="crosshair"></i> Tactics & Puzzles</a></li>
+      <li class="sidebar-item"><a href="tournaments.html"><i data-lucide="trophy"></i> My Tournaments</a></li>
+      <li class="sidebar-item"><a href="analysis.html"><i data-lucide="cpu"></i> Game Analysis Engine</a></li>
+
+      <li class="sidebar-label">Mentorship & Records</li>
+      <li class="sidebar-item"><a href="feedback.html"><i data-lucide="message-square"></i> Coach Feedback</a></li>
+      <li class="sidebar-item active"><a href="homework.html"><i data-lucide="clipboard-check"></i> Homework & Studies</a></li>
+      <li class="sidebar-item"><a href="ratings.html"><i data-lucide="trending-up"></i> Rating Progression</a></li>
+
+      <li class="sidebar-label">Navigation</li>
+      <li class="sidebar-item"><a href="../index.html"><i data-lucide="globe"></i> Public Website</a></li>
+      <li class="sidebar-item"><a href="#" onclick="window.checkmateLogout(); return false;" style="color: var(--admin-danger);"><i data-lucide="log-out"></i> Log Out</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-3.jpg" alt="Student Avatar" class="user-avatar">
+        <div>
+          <div class="user-info-name" id="studentSidebarName">Alex Morgan</div>
+          <div class="user-info-role">FIDE: 1685 • Elite Track</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Exit to Public Website" style="color: var(--admin-text-muted);"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+  <!-- Main Content Layout -->
+  <div class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle" aria-label="Toggle Navigation"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search tasks, studies, deadlines...">
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Live Class Indicator -->
+        <a href="live-classes.html" class="status-chip chip-success topbar-live-chip" style="border: 1px solid rgba(16,185,129,0.4); display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <span class="live-pulse"></span>
+          <span class="live-chip-full">Live Room Open (Sicilian Workshop)</span>
+          <span class="live-chip-short">Live Room</span>
+        </a>
+
+        <!-- Theme Toggle -->
+        <button class="topbar-action-btn admin-theme-toggle" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun"></i>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR">
+          <i data-lucide="arrow-left-right"></i><span class="rtl-label">RTL</span>
+        </button>
+
+        <!-- Notifications -->
+        <button class="topbar-action-btn" title="Notifications" onclick="window.showCheckmateToast('Reminder: Dvoretsky endgame studies due in 2 days!', 'info')">
+          <i data-lucide="bell"></i>
+          <span class="badge-dot"></span>
+        </button>
+
+        <!-- Logout Button -->
+        <button class="topbar-action-btn" onclick="window.checkmateLogout()" title="Log Out" style="color: #ef4444;">
+          <i data-lucide="log-out"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="admin-content">
+      
+      <!-- Page Title Bar -->
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">HOMEWORK & ASSIGNED STUDIES</h1>
+          <p class="page-subheadline">Assigned grandmaster studies, practical endgame drills, and game analysis submissions.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn-admin-gold" onclick="openStudentAddHwModal()">
+            <i data-lucide="plus" style="width: 16px;"></i> ADD STUDY TASK
+          </button>
+          <button class="action-icon-btn" onclick="window.showCheckmateToast('All due homework studies marked as reviewed!', 'success')" style="width: auto; padding: 0.65rem 1.15rem; font-weight: 600;">
+            <i data-lucide="check-check" style="width: 16px;"></i> Mark All Done
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Homework Metric Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Active Studies Due</span>
+            <div class="metric-icon-box icon-gold"><i data-lucide="clock"></i></div>
+          </div>
+          <div class="metric-value">2 Tasks Due</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">Next: In 2 Days</span>
+            <span>Dvoretsky Endgames</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Monthly Completion Rate</span>
+            <div class="metric-icon-box icon-green"><i data-lucide="check-circle-2"></i></div>
+          </div>
+          <div class="metric-value">95.2%</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up"><i data-lucide="award"></i> 18 / 19 Completed</span>
+            <span>Academy Honor Roll</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Average Homework Grade</span>
+            <div class="metric-icon-box icon-blue"><i data-lucide="star"></i></div>
+          </div>
+          <div class="metric-value">A (96%)</div>
+          <div class="metric-footer">
+            <span>Evaluated by FM Arjun</span>
+            <span>High Rigor</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Total Hours Studied</span>
+            <div class="metric-icon-box icon-purple"><i data-lucide="book-open"></i></div>
+          </div>
+          <div class="metric-value">46 Hours</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">+8.5 hrs this week</span>
+            <span>Target: 10 hrs / week</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Active Assigned Studies List -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Pending & In-Progress Assigned Studies</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Check off completed tasks to notify your coach and update your academic score.</p>
+          </div>
+          <button onclick="openStudentAddHwModal()" class="btn-admin-gold" style="padding: 0.35rem 0.85rem; font-size: 0.75rem;">
+            <i data-lucide="plus" style="width: 13px;"></i> Add New Study
+          </button>
+        </div>
+
+        <div id="studentHomeworkContainer" style="display: flex; flex-direction: column; gap: 1rem;">
+          <!-- Item 1 -->
+          <div class="admin-card hw-item" style="margin: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <input type="checkbox" class="hw-checkbox" style="width: 18px; height: 18px; accent-color: var(--admin-gold); cursor: pointer;" onchange="toggleHomeworkItem(this)">
+                <span class="hw-title" style="font-size: 0.95rem; font-weight: 700; color: var(--admin-text);">Solve 15 Dvoretsky Rook Endgames Studies</span>
+              </div>
+              <div class="action-btns-group">
+                <button class="action-icon-btn" title="Edit Task" onclick="editHomeworkItem(this)"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                <button class="action-icon-btn" title="Delete Task" onclick="deleteHomeworkItem(this)"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--admin-text-muted); padding-left: 2rem; flex-wrap: wrap; gap: 0.5rem;">
+              <span class="hw-due"><i data-lucide="calendar" style="width: 13px; display: inline;"></i> Due: In 2 days (Oct 09)</span>
+              <span class="hw-progress status-chip chip-warning" style="font-size: 0.72rem;">11 / 15 Solved</span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="admin-card hw-item" style="margin: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <input type="checkbox" class="hw-checkbox" style="width: 18px; height: 18px; accent-color: var(--admin-gold); cursor: pointer;" onchange="toggleHomeworkItem(this)">
+                <span class="hw-title" style="font-size: 0.95rem; font-weight: 700; color: var(--admin-text);">Analyze Round 3 Loss in King's Indian vs Daniel Ross</span>
+              </div>
+              <div class="action-btns-group">
+                <button class="action-icon-btn" title="Edit Task" onclick="editHomeworkItem(this)"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                <button class="action-icon-btn" title="Delete Task" onclick="deleteHomeworkItem(this)"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--admin-text-muted); padding-left: 2rem; flex-wrap: wrap; gap: 0.5rem;">
+              <span class="hw-due"><i data-lucide="calendar" style="width: 13px; display: inline;"></i> Due: Tomorrow 20:00</span>
+              <span class="hw-progress status-chip chip-gold" style="font-size: 0.72rem;">In Progress</span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="admin-card hw-item" style="margin: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <input type="checkbox" class="hw-checkbox" style="width: 18px; height: 18px; accent-color: var(--admin-gold); cursor: pointer;" onchange="toggleHomeworkItem(this)">
+                <span class="hw-title" style="font-size: 0.95rem; font-weight: 700; color: var(--admin-text);">Review 10 Grandmaster Sicilian Games from Tata Steel 2026</span>
+              </div>
+              <div class="action-btns-group">
+                <button class="action-icon-btn" title="Edit Task" onclick="editHomeworkItem(this)"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                <button class="action-icon-btn" title="Delete Task" onclick="deleteHomeworkItem(this)"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--admin-text-muted); padding-left: 2rem; flex-wrap: wrap; gap: 0.5rem;">
+              <span class="hw-due"><i data-lucide="calendar" style="width: 13px; display: inline;"></i> Due: In 4 days</span>
+              <span class="hw-progress status-chip chip-blue" style="font-size: 0.72rem;">4 / 10 Reviewed</span>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="admin-card hw-item" style="margin: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <input type="checkbox" class="hw-checkbox" style="width: 18px; height: 18px; accent-color: var(--admin-gold); cursor: pointer;" onchange="toggleHomeworkItem(this)">
+                <span class="hw-title" style="font-size: 0.95rem; font-weight: 700; color: var(--admin-text);">Memorize 15 Moves of the Open Catalan Repertoire Tree</span>
+              </div>
+              <div class="action-btns-group">
+                <button class="action-icon-btn" title="Edit Task" onclick="editHomeworkItem(this)"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+                <button class="action-icon-btn" title="Delete Task" onclick="deleteHomeworkItem(this)"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--admin-text-muted); padding-left: 2rem; flex-wrap: wrap; gap: 0.5rem;">
+              <span class="hw-due"><i data-lucide="calendar" style="width: 13px; display: inline;"></i> Due: Sunday 18:00</span>
+              <span class="hw-progress status-chip chip-purple" style="font-size: 0.72rem;">Pending</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Completed Studies History -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Completed Studies & Coach Grades</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Verified study completions reviewed by academy coaches.</p>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Completed Study</th>
+                <th>Completed Date</th>
+                <th>Grade</th>
+                <th>Coach Feedback</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>20 Philidor Position Rook Defense Drills</strong></td>
+                <td>Oct 02, 2026</td>
+                <td><strong style="color: var(--admin-success);">100%</strong></td>
+                <td>FM Arjun: "Flawless third-rank defense demonstrated."</td>
+                <td><span class="status-chip chip-success">Approved</span></td>
+              </tr>
+              <tr>
+                <td><strong>Najdorf 6.Be2 Positional Analysis Workbook</strong></td>
+                <td>Sep 25, 2026</td>
+                <td><strong style="color: var(--admin-success);">92%</strong></td>
+                <td>IM Elena: "Good understanding of d5 backward pawn dynamics."</td>
+                <td><span class="status-chip chip-success">Approved</span></td>
+              </tr>
+              <tr>
+                <td><strong>Minority Attack Pawn Structure Drills</strong></td>
+                <td>Sep 18, 2026</td>
+                <td><strong style="color: var(--admin-gold);">95%</strong></td>
+                <td>FM Arjun: "Solid c-file outpost knight play."</td>
+                <td><span class="status-chip chip-success">Approved</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Add Homework Modal -->
+  <div id="studentAddHwModal" class="admin-modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: var(--admin-card-bg, #0f172a); border: 1px solid var(--admin-gold, #d4af37); border-radius: 12px; max-width: 480px; width: 100%; padding: 2rem; box-shadow: 0 25px 60px rgba(0,0,0,0.6);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--admin-card-border, rgba(255,255,255,0.1)); padding-bottom: 0.75rem;">
+        <h3 style="font-family: 'Sora', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--admin-text, #fff); margin: 0;">ADD STUDY TASK</h3>
+        <button onclick="closeStudentAddHwModal()" style="background: none; border: none; color: var(--admin-text-muted, #94a3b8); font-size: 1.75rem; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+      <form id="studentAddHwForm" onsubmit="saveStudentHomework(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Task Description</label>
+          <input type="text" id="hwTitleInput" class="newsletter-input" placeholder="e.g. Master 10 Philidor Position Tests" required>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Due Date</label>
+            <input type="text" id="hwDueInput" class="newsletter-input" placeholder="e.g. Due in 3 days" required>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Initial Progress</label>
+            <input type="text" id="hwProgressInput" class="newsletter-input" placeholder="e.g. 0 / 10 Solved" required>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+          <button type="submit" class="btn-admin-gold" style="flex: 1; justify-content: center; padding: 0.75rem;">ADD TASK</button>
+          <button type="button" onclick="closeStudentAddHwModal()" class="action-icon-btn" style="width: auto; padding: 0.75rem 1.25rem;">CANCEL</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStudentProfile();
+      lucide.createIcons();
+    });
+
+    function loadStudentProfile() {
+      const userJson = localStorage.getItem('checkmate_user');
+      let name = 'Alex Morgan';
+      if (userJson) {
+        try {
+          const user = JSON.parse(userJson);
+          if (user.name) name = user.name;
+        } catch (e) {}
+      }
+      const sidebarName = document.getElementById('studentSidebarName');
+      if (sidebarName) sidebarName.textContent = name;
+    }
+
+    function openStudentAddHwModal() {
+      const modal = document.getElementById('studentAddHwModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeStudentAddHwModal() {
+      const modal = document.getElementById('studentAddHwModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function saveStudentHomework(e) {
+      e.preventDefault();
+      const title = document.getElementById('hwTitleInput').value.trim();
+      const due = document.getElementById('hwDueInput').value.trim();
+      const prog = document.getElementById('hwProgressInput').value.trim();
+
+      const container = document.getElementById('studentHomeworkContainer');
+      if (container) {
+        const item = document.createElement('div');
+        item.className = 'admin-card hw-item';
+        item.style.margin = '0';
+        item.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <input type="checkbox" class="hw-checkbox" style="width: 18px; height: 18px; accent-color: var(--admin-gold); cursor: pointer;" onchange="toggleHomeworkItem(this)">
+              <span class="hw-title" style="font-size: 0.95rem; font-weight: 700; color: var(--admin-text);">${escapeHtml(title)}</span>
+            </div>
+            <div class="action-btns-group">
+              <button class="action-icon-btn" title="Edit Task" onclick="editHomeworkItem(this)"><i data-lucide="edit-3" style="width: 14px;"></i></button>
+              <button class="action-icon-btn" title="Delete Task" onclick="deleteHomeworkItem(this)"><i data-lucide="trash-2" style="width: 14px;"></i></button>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--admin-text-muted); padding-left: 2rem; flex-wrap: wrap; gap: 0.5rem;">
+            <span class="hw-due"><i data-lucide="calendar" style="width: 13px; display: inline;"></i> ${escapeHtml(due)}</span>
+            <span class="hw-progress status-chip chip-warning" style="font-size: 0.72rem;">${escapeHtml(prog)}</span>
+          </div>
+        `;
+        container.prepend(item);
+        item.style.backgroundColor = 'rgba(212, 175, 55, 0.25)';
+        setTimeout(() => { item.style.backgroundColor = ''; }, 1200);
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      document.getElementById('studentAddHwForm').reset();
+      closeStudentAddHwModal();
+      if (window.showCheckmateToast) {
+        window.showCheckmateToast('Study task added to your plan!', 'success');
+      }
+    }
+
+    function toggleHomeworkItem(chk) {
+      const item = chk.closest('.hw-item');
+      if (!item) return;
+      const title = item.querySelector('.hw-title');
+      const chip = item.querySelector('.hw-progress');
+      if (chk.checked) {
+        if (title) title.style.textDecoration = 'line-through';
+        if (title) title.style.opacity = '0.6';
+        if (chip) {
+          chip.className = 'hw-progress status-chip chip-success';
+          chip.textContent = 'Completed';
+        }
+        if (window.showCheckmateToast) window.showCheckmateToast('Task completed! Great job.', 'success');
+      } else {
+        if (title) title.style.textDecoration = 'none';
+        if (title) title.style.opacity = '1';
+        if (chip) {
+          chip.className = 'hw-progress status-chip chip-warning';
+          chip.textContent = 'In Progress';
+        }
+      }
+    }
+
+    function editHomeworkItem(btn) {
+      const item = btn.closest('.hw-item');
+      if (!item) return;
+      const titleEl = item.querySelector('.hw-title');
+      const currentTitle = titleEl ? titleEl.textContent : '';
+      const newTitle = prompt('Edit Study Task Description:', currentTitle);
+      if (newTitle && newTitle.trim()) {
+        titleEl.textContent = newTitle.trim();
+        if (window.showCheckmateToast) window.showCheckmateToast('Task updated successfully!', 'success');
+      }
+    }
+
+    function deleteHomeworkItem(btn) {
+      const item = btn.closest('.hw-item');
+      if (!item) return;
+      if (confirm('Delete this assigned study task?')) {
+        item.style.transition = 'all 0.35s ease';
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(20px)';
+        setTimeout(() => item.remove(), 350);
+        if (window.showCheckmateToast) window.showCheckmateToast('Task removed', 'error');
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>

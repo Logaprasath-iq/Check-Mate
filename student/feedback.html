@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coach Feedback & Mentorship – CHECKMATE Chess Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png">
+
+  <style>
+    .chip-student {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .live-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .progress-bar-bg {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    [data-theme="light"] .progress-bar-bg {
+      background: rgba(0, 0, 0, 0.08);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--admin-gold);
+      border-radius: 999px;
+      transition: width 0.6s ease;
+    }
+    .coach-feedback-card {
+      background: var(--admin-card-bg);
+      border: 1px solid var(--admin-card-border);
+      border-radius: var(--admin-radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--admin-gold);
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar Navigation -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="admin-logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
+        <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
+      </a>
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: auto;">
+        <span class="status-chip chip-student" style="font-size: 0.65rem;">STUDENT</span>
+        <button class="sidebar-close-btn" aria-label="Close Navigation" style="background: transparent; border: none; color: var(--admin-text-muted); cursor: pointer; padding: 4px; display: inline-flex; align-items: center; justify-content: center;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-label">Learning & Arena</li>
+      <li class="sidebar-item"><a href="index.html"><i data-lucide="layout-dashboard"></i> Overview</a></li>
+      <li class="sidebar-item"><a href="live-classes.html"><i data-lucide="video"></i> Live Classes <span class="status-chip chip-danger" style="padding: 2px 6px; font-size: 9px; margin-left: auto;">LIVE</span></a></li>
+      <li class="sidebar-item"><a href="curriculum.html"><i data-lucide="book-open"></i> Curriculum & Modules</a></li>
+      <li class="sidebar-item"><a href="puzzles.html"><i data-lucide="crosshair"></i> Tactics & Puzzles</a></li>
+      <li class="sidebar-item"><a href="tournaments.html"><i data-lucide="trophy"></i> My Tournaments</a></li>
+      <li class="sidebar-item"><a href="analysis.html"><i data-lucide="cpu"></i> Game Analysis Engine</a></li>
+
+      <li class="sidebar-label">Mentorship & Records</li>
+      <li class="sidebar-item active"><a href="feedback.html"><i data-lucide="message-square"></i> Coach Feedback</a></li>
+      <li class="sidebar-item"><a href="homework.html"><i data-lucide="clipboard-check"></i> Homework & Studies</a></li>
+      <li class="sidebar-item"><a href="ratings.html"><i data-lucide="trending-up"></i> Rating Progression</a></li>
+
+      <li class="sidebar-label">Navigation</li>
+      <li class="sidebar-item"><a href="../index.html"><i data-lucide="globe"></i> Public Website</a></li>
+      <li class="sidebar-item"><a href="#" onclick="window.checkmateLogout(); return false;" style="color: var(--admin-danger);"><i data-lucide="log-out"></i> Log Out</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <img src="../assets/images/coach-3.jpg" alt="Student Avatar" class="user-avatar">
+        <div>
+          <div class="user-info-name" id="studentSidebarName">Alex Morgan</div>
+          <div class="user-info-role">FIDE: 1685 • Elite Track</div>
+        </div>
+      </div>
+      <a href="../index.html" title="Exit to Public Website" style="color: var(--admin-text-muted);"><i data-lucide="external-link" style="width: 18px;"></i></a>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+  <!-- Main Content Layout -->
+  <div class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="topbar-toggle" aria-label="Toggle Navigation"><i data-lucide="menu"></i></button>
+        <div class="admin-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search feedback, coach notes, assessments...">
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Live Class Indicator -->
+        <a href="live-classes.html" class="status-chip chip-success topbar-live-chip" style="border: 1px solid rgba(16,185,129,0.4); display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <span class="live-pulse"></span>
+          <span class="live-chip-full">Live Room Open (Sicilian Workshop)</span>
+          <span class="live-chip-short">Live Room</span>
+        </a>
+
+        <!-- Theme Toggle -->
+        <button class="topbar-action-btn admin-theme-toggle" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun"></i>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button class="topbar-action-btn admin-rtl-toggle" title="Toggle RTL / LTR" aria-label="Toggle RTL / LTR">
+          <i data-lucide="arrow-left-right"></i><span class="rtl-label">RTL</span>
+        </button>
+
+        <!-- Notifications -->
+        <button class="topbar-action-btn" title="Notifications" onclick="window.showCheckmateToast('Coach Arjun: Your Round 4 game analysis is ready!', 'success')">
+          <i data-lucide="bell"></i>
+          <span class="badge-dot"></span>
+        </button>
+
+        <!-- Logout Button -->
+        <button class="topbar-action-btn" onclick="window.checkmateLogout()" title="Log Out" style="color: #ef4444;">
+          <i data-lucide="log-out"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="admin-content">
+      
+      <!-- Page Title Bar -->
+      <div class="page-title-bar">
+        <div>
+          <h1 class="page-headline">COACH FEEDBACK & MENTOR ASSESSMENTS</h1>
+          <p class="page-subheadline">Detailed one-on-one grandmaster game diagnostics, tactical performance ratings, and action plans.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn-admin-gold" onclick="openRequestReviewModal()">
+            <i data-lucide="send" style="width: 16px;"></i> REQUEST 1-ON-1 REVIEW
+          </button>
+          <button class="action-icon-btn" onclick="window.showCheckmateToast('Downloading Student Performance Dossier PDF...', 'success')" style="width: auto; padding: 0.65rem 1.15rem; font-weight: 600;">
+            <i data-lucide="file-text" style="width: 16px;"></i> Download PDF Dossier
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Feedback Metric Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Lead Mentor</span>
+            <div class="metric-icon-box icon-gold"><i data-lucide="award"></i></div>
+          </div>
+          <div class="metric-value">FM Arjun Mehta</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up">FIDE 2380 • Senior Coach</span>
+            <span>Weekly Sparring</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Overall Assessment Grade</span>
+            <div class="metric-icon-box icon-green"><i data-lucide="check-circle-2"></i></div>
+          </div>
+          <div class="metric-value">A+ (94%)</div>
+          <div class="metric-footer">
+            <span class="metric-trend trend-up"><i data-lucide="trending-up"></i> Candidate Master Standard</span>
+            <span>Exceptional Focus</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Latest Diagnostic</span>
+            <div class="metric-icon-box icon-blue"><i data-lucide="calendar"></i></div>
+          </div>
+          <div class="metric-value">Oct 06, 2026</div>
+          <div class="metric-footer">
+            <span>Post-Round 4 Najdorf Review</span>
+            <span>Verified 1-0 Win</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Pending Action Items</span>
+            <div class="metric-icon-box icon-purple"><i data-lucide="clipboard-list"></i></div>
+          </div>
+          <div class="metric-value">2 Assigned</div>
+          <div class="metric-footer">
+            <a href="homework.html" style="color: var(--admin-gold); font-weight: 600; text-decoration: none;">View Homework &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Latest Coach Assessment Highlights -->
+      <div class="coach-feedback-card" style="margin-top: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <img src="../assets/images/coach-2.jpg" alt="FM Arjun Mehta" style="width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--admin-gold);">
+            <div>
+              <div style="font-size: 1.15rem; font-weight: 800; color: var(--admin-text);">FM Arjun Mehta • Lead Faculty Assessment</div>
+              <div style="font-size: 0.8rem; color: var(--admin-gold); font-weight: 600;">Evaluation on Round 4 Game vs NM Marcus Chen (Oct 06, 2026)</div>
+            </div>
+          </div>
+          <span class="status-chip chip-gold">Verified Masterclass Review</span>
+        </div>
+
+        <blockquote style="font-size: 0.95rem; color: var(--admin-text); font-style: italic; line-height: 1.7; border-left: 3px solid var(--admin-gold); padding-left: 1.25rem; margin-bottom: 1.25rem; background: var(--admin-hover-bg); padding: 1rem 1.25rem; border-radius: 6px;">
+          "Alex, your transition into the endgame in Round 4 was masterclass-grade. Be mindful not to rush moves when down under 1 minute. Focus on the f4 pawn break timing in the Sicilian Najdorf, and your instinct to trade the dark-squared bishops at Move 19 was strategically sound. Excellent deflection mate execution (22. Qxh7+!)."
+        </blockquote>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+          <div style="padding: 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius);">
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--admin-success); margin-bottom: 0.35rem;"><i data-lucide="check" style="width: 14px; display: inline;"></i> Key Strengths Demonstrated</div>
+            <ul style="font-size: 0.82rem; color: var(--admin-text-muted); line-height: 1.6; margin: 0; padding-left: 1.2rem;">
+              <li>Flawless queenside piece coordination in Najdorf lines</li>
+              <li>Calculated tactical deflection queen sacrifice (Accuracy: 94.2%)</li>
+              <li>Positional outpost occupation for the c3 knight</li>
+            </ul>
+          </div>
+          <div style="padding: 1rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius);">
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--admin-warning); margin-bottom: 0.35rem;"><i data-lucide="alert-circle" style="width: 14px; display: inline;"></i> Priority Focus Areas for Next Session</div>
+            <ul style="font-size: 0.82rem; color: var(--admin-text-muted); line-height: 1.6; margin: 0; padding-left: 1.2rem;">
+              <li>Time expenditure: spent 11 minutes on standard Move 7 book move</li>
+              <li>Lucena & Philidor rook endgame conversion speed</li>
+              <li>Avoid premature King push before prophylactic h3/g3 moves</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Skill Dimensions Progress Radar -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Comprehensive Chess Skill Diagnostics</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Quarterly assessment across 5 core competitive disciplines.</p>
+          </div>
+          <span class="status-chip chip-gold">Quarter 4 Status</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <!-- Skill 1 -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--admin-text);">
+              <span>Tactical Vision & Calculation Depth</span>
+              <span style="color: var(--admin-gold);">95% (Candidate Master)</span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 95%;"></div></div>
+            <div style="font-size: 0.78rem; color: var(--admin-text-muted);">Exceptional calculation of 4-move forcing sequences and deflection forks.</div>
+          </div>
+
+          <!-- Skill 2 -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--admin-text);">
+              <span>Opening Repertoire Mastery</span>
+              <span style="color: var(--admin-gold);">92% (Advanced)</span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 92%;"></div></div>
+            <div style="font-size: 0.78rem; color: var(--admin-text-muted);">Deep preparation in Sicilian Najdorf and King's Indian Classical setups.</div>
+          </div>
+
+          <!-- Skill 3 -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--admin-text);">
+              <span>Middlegame Strategy & Pawn Structures</span>
+              <span style="color: var(--admin-gold);">88% (Proficient)</span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 88%;"></div></div>
+            <div style="font-size: 0.78rem; color: var(--admin-text-muted);">Solid grasp of minority attacks in the Carlsbad structure; practice open f-file play.</div>
+          </div>
+
+          <!-- Skill 4 -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--admin-text);">
+              <span>Endgame Technique (Rook & Minor Pieces)</span>
+              <span style="color: #f59e0b;">82% (Needs Practice)</span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 82%; background: #f59e0b;"></div></div>
+            <div style="font-size: 0.78rem; color: var(--admin-text-muted);">15 assigned Dvoretsky endgame studies in progress. Lucena bridge technique is mastered.</div>
+          </div>
+
+          <!-- Skill 5 -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--admin-text);">
+              <span>Time Management & Tournament Psychology</span>
+              <span style="color: #f59e0b;">78% (Developmental)</span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 78%; background: #f59e0b;"></div></div>
+            <div style="font-size: 0.78rem; color: var(--admin-text-muted);">Recommended: Blitz sparring drills to build speed confidence in time scrambles.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Past Feedback Log Archive -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Past Feedback Archive & Coaching Logs</h2>
+            <p style="font-size: 0.8rem; color: var(--admin-text-muted);">Historical logs from all Checkmate faculty mentoring sessions.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <!-- Log 1 -->
+          <div style="padding: 1.25rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 0.65rem;">
+                <img src="../assets/images/coach-1.jpg" alt="IM Elena" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                <span style="font-weight: 700; color: var(--admin-text); font-size: 0.92rem;">IM Elena Rostova</span>
+                <span class="status-chip chip-blue" style="font-size: 0.65rem;">Rapid Sparring Diagnostic</span>
+              </div>
+              <span style="font-size: 0.78rem; color: var(--admin-text-muted);">Sep 28, 2026</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--admin-text-muted); line-height: 1.6; margin: 0;">
+              "Great recovery after early positional pressure in Game 2. Your d5 pawn break came at the exact psychological moment. Watch out for bishop pair dominance in open diagonal scenarios."
+            </p>
+          </div>
+
+          <!-- Log 2 -->
+          <div style="padding: 1.25rem; background: var(--admin-hover-bg); border-radius: var(--admin-radius); border: 1px solid var(--admin-card-border);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 0.65rem;">
+                <img src="../assets/images/coach-2.jpg" alt="FM Arjun" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                <span style="font-weight: 700; color: var(--admin-text); font-size: 0.92rem;">FM Arjun Mehta</span>
+                <span class="status-chip chip-purple" style="font-size: 0.65rem;">Classical Tournament Prep</span>
+              </div>
+              <span style="font-size: 0.78rem; color: var(--admin-text-muted);">Sep 15, 2026</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--admin-text-muted); line-height: 1.6; margin: 0;">
+              "Preparation for State Zonal: Alex has successfully committed 14 variations of the King's Indian Mar del Plata line. Solid defense against 9.b4 bayonet attack confirmed."
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Request 1-on-1 Review Modal -->
+  <div id="requestReviewModal" class="admin-modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: var(--admin-card-bg, #0f172a); border: 1px solid var(--admin-gold, #d4af37); border-radius: 12px; max-width: 500px; width: 100%; padding: 2rem; box-shadow: 0 25px 60px rgba(0,0,0,0.6);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--admin-card-border, rgba(255,255,255,0.1)); padding-bottom: 0.75rem;">
+        <h3 style="font-family: 'Sora', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--admin-text, #fff); margin: 0;">REQUEST 1-ON-1 COACH REVIEW</h3>
+        <button onclick="closeRequestReviewModal()" style="background: none; border: none; color: var(--admin-text-muted, #94a3b8); font-size: 1.75rem; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+      <form id="requestReviewForm" onsubmit="submitReviewRequest(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Select Coach</label>
+          <select id="reviewCoachSelect" class="newsletter-input">
+            <option value="FM Arjun Mehta">FM Arjun Mehta (Lead Mentor)</option>
+            <option value="IM Elena Rostova">IM Elena Rostova (Opening Specialist)</option>
+            <option value="GM Vladimir Petrov">GM Vladimir Petrov (Grandmaster Guest)</option>
+          </select>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Game Reference / Tournament Name</label>
+          <input type="text" id="reviewGameRef" class="newsletter-input" placeholder="e.g. Round 4 Sunday Blitz vs Daniel Ross" required>
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--admin-text-muted, #94a3b8); margin-bottom: 0.35rem;">Specific Question or Areas to Analyze</label>
+          <textarea id="reviewQuestions" class="newsletter-input" style="height: 80px; resize: none;" placeholder="e.g. What was the critical mistake on Move 24? Could I have held the rook endgame?" required></textarea>
+        </div>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+          <button type="submit" class="btn-admin-gold" style="flex: 1; justify-content: center; padding: 0.75rem;">SUBMIT REQUEST</button>
+          <button type="button" onclick="closeRequestReviewModal()" class="action-icon-btn" style="width: auto; padding: 0.75rem 1.25rem;">CANCEL</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStudentProfile();
+      lucide.createIcons();
+    });
+
+    function loadStudentProfile() {
+      const userJson = localStorage.getItem('checkmate_user');
+      let name = 'Alex Morgan';
+      if (userJson) {
+        try {
+          const user = JSON.parse(userJson);
+          if (user.name) name = user.name;
+        } catch (e) {}
+      }
+      const sidebarName = document.getElementById('studentSidebarName');
+      if (sidebarName) sidebarName.textContent = name;
+    }
+
+    function openRequestReviewModal() {
+      const modal = document.getElementById('requestReviewModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeRequestReviewModal() {
+      const modal = document.getElementById('requestReviewModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function submitReviewRequest(e) {
+      e.preventDefault();
+      const coach = document.getElementById('reviewCoachSelect').value;
+      const gameRef = document.getElementById('reviewGameRef').value;
+      closeRequestReviewModal();
+      document.getElementById('requestReviewForm').reset();
+      if (window.showCheckmateToast) {
+        window.showCheckmateToast(`Review request for "${gameRef}" sent to ${coach}!`, 'success');
+      }
+    }
+  </script>
+</body>
+</html>
