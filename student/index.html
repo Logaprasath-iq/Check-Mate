@@ -111,7 +111,10 @@
         <img src="../assets/images/logo-icon.png" alt="Logo" style="height: 36px; width: auto; object-fit: contain;">
         <img src="../assets/images/logo-text.png" alt="CHECKMATE" style="height: 24px; width: auto; object-fit: contain;">
       </a>
-      <span class="status-chip chip-student" style="font-size: 0.65rem;">STUDENT</span>
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: auto;">
+        <span class="status-chip chip-student" style="font-size: 0.65rem;">STUDENT</span>
+        <button class="sidebar-close-btn" aria-label="Close Navigation" style="background: transparent; border: none; color: var(--admin-text-muted); cursor: pointer; padding: 4px; display: inline-flex; align-items: center; justify-content: center;"><i data-lucide="x" style="width: 18px; height: 18px;"></i></button>
+      </div>
     </div>
 
     <ul class="sidebar-nav">
@@ -144,6 +147,9 @@
       <a href="../index.html" title="Exit to Public Website" style="color: var(--admin-text-muted);"><i data-lucide="external-link" style="width: 18px;"></i></a>
     </div>
   </aside>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
 
   <!-- Main Content Layout -->
   <div class="admin-main">
@@ -413,7 +419,7 @@
         </div>
 
         <!-- Right: Daily Puzzle, Next Live Class, Coach Notes -->
-        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; width: 100%; max-width: 100%;">
           
           <!-- Next Live Class Card -->
           <div class="admin-card" style="border-left: 4px solid var(--admin-success);">

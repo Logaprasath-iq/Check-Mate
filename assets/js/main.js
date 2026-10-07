@@ -551,7 +551,7 @@ window.showCheckmateToast = function(msg, type = 'success') {
   }, 3500);
 };
 
-/* Newsletter Form Handler (clears email input & shows toast exactly once) */
+/* Newsletter Form Handler (clears email input & shows toast with strict email validation) */
 function initNewsletter() {
   document.querySelectorAll('.newsletter-form').forEach(form => {
     form.onsubmit = function(e) {
@@ -560,12 +560,125 @@ function initNewsletter() {
         e.stopPropagation();
       }
       const input = form.querySelector('input[type="email"], .newsletter-input');
+      const val = input ? input.value.trim() : '';
+      if (!window.checkmateValidateEmail(val)) {
+        window.showCheckmateToast('Please enter a valid email address (e.g. name@domain.com).', 'error');
+        if (input) input.focus();
+        return false;
+      }
       if (input) input.value = '';
       form.reset();
       window.showCheckmateToast('Subscribed to academy newsletter!', 'success');
       return false;
     };
   });
+}
+
+/* ------------------------------------------------------------
+   Validation Helpers (Name, Email, Phone)
+   ------------------------------------------------------------ */
+window.checkmateValidateName = function(name) {
+  if (!name || typeof name !== 'string') return false;
+  const trimmed = name.trim();
+  // Name must only have letters and spaces, at least 2 characters, no numbers or symbols
+  return /^[A-Za-z\s]{2,50}$/.test(trimmed) && /[A-Za-z]{2,}/.test(trimmed);
+};
+
+window.checkmateValidateEmail = function(email) {
+  if (!email || typeof email !== 'string') return false;
+  const trimmed = email.trim();
+  // Strict email format: name@domain.tld with at least 2-letter TLD
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(trimmed);
+};
+
+window.checkmateValidatePhone = function(phone) {
+  if (!phone || typeof phone !== 'string') return false;
+  const trimmed = phone.trim();
+  // Reject any letters
+  if (/[a-zA-Z]/.test(trimmed)) return false;
+  const digits = trimmed.replace(/\D/g, '');
+  return digits.length >= 7 && digits.length <= 15;
+};
+
+/* ------------------------------------------------------------
+   Interactive Blog Pagination (Item 11)
+   ------------------------------------------------------------ */
+function initBlogPagination() {
+  const paginationContainer = document.querySelector('.blog-pagination, #blog-pagination');
+  if (!paginationContainer) return;
+
+  let currentPage = 1;
+  const totalPages = 3;
+
+  const updatePaginationUI = (newPage) => {
+    currentPage = newPage;
+    const pageButtons = paginationContainer.querySelectorAll('.page-num[data-page]');
+    pageButtons.forEach(btn => {
+      const p = parseInt(btn.getAttribute('data-page'), 10);
+      if (p === currentPage) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    // Animate blog cards
+    const blogCards = document.querySelectorAll('.blog-grid .blog-card');
+    blogCards.forEach((card, idx) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(12px)';
+      setTimeout(() => {
+        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, idx * 45);
+    });
+
+    const grid = document.querySelector('.blog-grid');
+    if (grid) {
+      grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    window.showCheckmateToast(`Viewing Page ${currentPage} of ${totalPages}`, 'success');
+  };
+
+  paginationContainer.addEventListener('click', (e) => {
+    const target = e.target.closest('.page-num');
+    if (!target) return;
+    e.preventDefault();
+
+    if (target.classList.contains('page-prev')) {
+      if (currentPage > 1) {
+        updatePaginationUI(currentPage - 1);
+      } else {
+        window.showCheckmateToast('You are on the first page', 'warning');
+      }
+      return;
+    }
+
+    if (target.classList.contains('page-next')) {
+      if (currentPage < totalPages) {
+        updatePaginationUI(currentPage + 1);
+      } else {
+        window.showCheckmateToast('You are on the last page', 'warning');
+      }
+      return;
+    }
+
+    const pageAttr = target.getAttribute('data-page');
+    if (pageAttr) {
+      const pageNum = parseInt(pageAttr, 10);
+      if (!isNaN(pageNum) && pageNum !== currentPage) {
+        updatePaginationUI(pageNum);
+      }
+    }
+  });
+}
+
+// Call in DOM ready
+if (document.readyState !== 'loading') {
+  initBlogPagination();
+} else {
+  document.addEventListener('DOMContentLoaded', initBlogPagination);
 }
 
 /* ------------------------------------------------------------
@@ -669,10 +782,11 @@ function initPhoneInputs() {
     });
   };
 
-  document.querySelectorAll('input[type="tel"], #reg-phone, #contact-phone').forEach(bindPhone);
+  document.querySelectorAll('input[type="tel"], #reg-phone, #contact-phone, #trial-phone, input[name="phone"]').forEach(bindPhone);
 }
 
 // Fallback execution if script runs after DOM is ready
 if (document.readyState !== 'loading') {
   initPhoneInputs();
 }
+

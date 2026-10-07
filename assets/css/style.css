@@ -158,14 +158,14 @@ button, input, select, textarea {
   margin-bottom: 1.5rem;
 }
 
-/* Consistent Layout Container (Uniform Left and Right Padding across Site) */
+/* Consistent Layout Container (Uniform Left and Right Padding across Site - Item 2) */
 .site-container {
   width: 100%;
-  max-width: 100%;
+  max-width: 1360px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1.25rem, 3vw, 3rem);
-  padding-right: clamp(1.25rem, 3vw, 3rem);
+  padding-left: clamp(1.25rem, 3.5vw, 3rem);
+  padding-right: clamp(1.25rem, 3.5vw, 3rem);
   box-sizing: border-box;
 }
 
@@ -173,10 +173,29 @@ button, input, select, textarea {
 .site-header .site-container,
 .site-footer .site-container {
   width: 100%;
-  max-width: 100%;
-  padding-left: clamp(1.25rem, 3vw, 3rem);
-  padding-right: clamp(1.25rem, 3vw, 3rem);
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 3.5vw, 3rem);
+  padding-right: clamp(1.25rem, 3.5vw, 3rem);
   box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .site-container,
+  .site-header .site-container,
+  .site-footer .site-container {
+    padding-left: clamp(1rem, 3vw, 1.5rem);
+    padding-right: clamp(1rem, 3vw, 1.5rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .site-container,
+  .site-footer .site-container {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
 }
 
 /* Section Spacing */
@@ -3529,12 +3548,12 @@ select option:checked {
   }
 }
 
-/* Home 2 Digital Board - Full Size Display */
+/* Home 2 Digital Board - Full Size Display (Item 5) */
 .hero-digital {
   min-height: 100vh;
   min-height: 100dvh;
-  padding-top: clamp(4.8rem, 8.5vh, 6.5rem);
-  padding-bottom: clamp(1.5rem, 3.5vh, 3.5rem);
+  padding-top: clamp(5.5rem, 9.5vh, 7.5rem);
+  padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
   background: radial-gradient(circle at 75% 30%, rgba(26, 42, 74, 0.4) 0%, #080b12 70%);
   position: relative;
   overflow: hidden;
@@ -3543,7 +3562,7 @@ select option:checked {
 .digital-hero-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 3.5rem;
+  gap: clamp(2rem, 4vw, 3.5rem);
   align-items: center;
 }
 
@@ -3551,10 +3570,13 @@ select option:checked {
   background: rgba(14, 20, 34, 0.88);
   border: 1px solid var(--border-gold);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
   backdrop-filter: blur(20px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px var(--gold-glow);
   position: relative;
+  margin: 1.5rem auto 0;
+  max-width: 580px;
+  box-sizing: border-box;
 }
 
 .digital-board-header {
@@ -5654,6 +5676,318 @@ select optgroup {
   color: #1e293b !important;
 }
 
+/* ============================================================
+   Programs Syllabus Accordion Modules (Item 9)
+   ============================================================ */
+.accordion-item .accordion-body {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
 
+.accordion-item.active .accordion-body {
+  display: block;
+  max-height: 600px;
+}
 
+.accordion-item .accordion-header i,
+.accordion-item .accordion-header svg {
+  transition: transform 0.3s ease;
+}
 
+.accordion-item.active .accordion-header i,
+.accordion-item.active .accordion-header svg {
+  transform: rotate(180deg);
+}
+
+/* ============================================================
+   Fix 360px Header & Hamburger Cutoff (Item 13)
+   ============================================================ */
+@media (max-width: 480px) {
+  .site-header .site-container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  .site-logo {
+    gap: 0.35rem !important;
+    max-width: 155px !important;
+    overflow: hidden !important;
+  }
+  .site-logo-img {
+    height: 32px !important;
+    max-width: 34px !important;
+    flex-shrink: 0 !important;
+  }
+  .site-brand-img {
+    height: 24px !important;
+    max-width: 105px !important;
+    flex-shrink: 1 !important;
+  }
+  .nav-actions {
+    gap: 0.3rem !important;
+    flex-shrink: 0 !important;
+  }
+  .tool-btn {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    padding: 0 !important;
+  }
+  .tool-btn.rtl-toggle-btn {
+    min-width: 44px !important;
+    height: 34px !important;
+    padding: 0 6px !important;
+  }
+  .tool-btn.rtl-toggle-btn .rtl-label {
+    font-size: 0.72rem !important;
+  }
+  .nav-toggle {
+    width: 34px !important;
+    height: 34px !important;
+    padding: 0.2rem !important;
+    flex-shrink: 0 !important;
+  }
+  .nav-toggle span {
+    width: 20px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-header .site-container {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  .site-brand-img {
+    max-width: 85px !important;
+    height: 22px !important;
+  }
+  .site-logo-img {
+    height: 30px !important;
+    max-width: 32px !important;
+  }
+  .nav-actions {
+    gap: 0.25rem !important;
+  }
+  .tool-btn.rtl-toggle-btn {
+    min-width: 38px !important;
+    padding: 0 4px !important;
+  }
+  .tool-btn.rtl-toggle-btn .rtl-label {
+    font-size: 0.68rem !important;
+  }
+}
+
+/* ============================================================
+   Remove Login CTA at 360px and 768px (Item 14)
+   ============================================================ */
+@media (max-width: 768px) {
+  .btn-login,
+  .mobile-nav-actions .btn-login,
+  .nav-actions .btn-login {
+    display: none !important;
+  }
+}
+
+/* ============================================================
+   Home 2 Hero NEXT-GEN Badge Responsiveness (Item 15)
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero-eyebrow {
+    font-size: 0.7rem !important;
+    letter-spacing: 0.05em !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    text-align: center !important;
+    line-height: 1.4 !important;
+    padding: 0.35rem 0.75rem !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-eyebrow {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.03em !important;
+    padding: 0.3rem 0.65rem !important;
+  }
+}
+
+/* ============================================================
+   About Section Central Training Contrast Fix (Item 16)
+   ============================================================ */
+.genesis-img-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(5, 7, 14, 0.96) 0%, rgba(5, 7, 14, 0.85) 65%, transparent 100%) !important;
+  padding: clamp(1rem, 3vw, 1.5rem) !important;
+  color: #ffffff !important;
+  box-sizing: border-box !important;
+}
+
+.genesis-caption-title {
+  font-family: 'Sora', sans-serif !important;
+  font-weight: 800 !important;
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem) !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95) !important;
+  margin-bottom: 0.25rem !important;
+}
+
+[data-theme="light"] .genesis-caption-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95) !important;
+}
+
+/* ============================================================
+   Trajectory Timeline Styles (Item 17 & 19)
+   ============================================================ */
+.trajectory-timeline {
+  position: relative;
+  max-width: 840px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.timeline-center-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: var(--border-gold);
+  transform: translateX(-50%);
+}
+
+.timeline-row {
+  display: flex;
+  padding: 1.5rem 0;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.timeline-left {
+  justify-content: flex-start;
+}
+
+.timeline-left .timeline-card {
+  margin-right: 2rem;
+}
+
+.timeline-right {
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.timeline-right .timeline-card {
+  margin-left: 2rem;
+}
+
+.timeline-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.timeline-card-highlight {
+  border-color: var(--gold-primary);
+  box-shadow: var(--shadow-gold);
+}
+
+.timeline-year {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  margin-bottom: 0.25rem;
+}
+
+.timeline-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.timeline-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  .trajectory-timeline {
+    padding-left: 1.25rem;
+    padding-right: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .timeline-center-line {
+    left: 0;
+    transform: none;
+  }
+  .timeline-row {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 0 1.5rem 0 !important;
+    display: block !important;
+  }
+  .timeline-left .timeline-card,
+  .timeline-right .timeline-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    padding: 1.25rem 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .trajectory-timeline {
+    padding-left: 0.75rem;
+  }
+  .timeline-card {
+    padding: 1.15rem 0.85rem !important;
+  }
+}
+
+/* ============================================================
+   About Page 360px Container & Grid Fixes (Item 19)
+   ============================================================ */
+@media (max-width: 600px) {
+  .genesis-grid,
+  .pedagogy-grid,
+  .facilities-grid,
+  .regimen-grid,
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+    width: 100% !important;
+  }
+  .genesis-story,
+  .pedagogy-card,
+  .facility-card,
+  .regimen-card,
+  .feature-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+  .about-stats-band {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .genesis-quote-card {
+    padding: 1.25rem 1rem !important;
+  }
+}

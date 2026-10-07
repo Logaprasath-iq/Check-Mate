@@ -80,6 +80,49 @@ body.admin-body {
   overflow-y: auto;
 }
 
+/* Sidebar Overlay for Mobile */
+.admin-sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.admin-sidebar-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Desktop Sidebar Collapse */
+body.sidebar-collapsed .admin-sidebar {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+body.sidebar-collapsed[dir="rtl"] .admin-sidebar {
+  transform: translateX(100%);
+}
+
+body.sidebar-collapsed .admin-main {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  transition: margin 0.3s ease;
+}
+
+.sidebar-close-btn {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .sidebar-close-btn {
+    display: inline-flex !important;
+  }
+}
+
 .sidebar-header {
   height: var(--admin-header-height);
   display: flex;
@@ -793,7 +836,8 @@ body.admin-body {
     margin-left: 0 !important;
     margin-right: 0 !important;
     width: 100% !important;
-    max-width: 100vw !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     overflow-x: hidden !important;
   }
 }
@@ -939,14 +983,14 @@ body.admin-body {
   /* Prevent page horizontal stretching */
   .admin-main {
     width: 100% !important;
-    max-width: 100vw !important;
+    max-width: 100% !important;
     overflow-x: hidden !important;
     box-sizing: border-box !important;
   }
   .admin-content {
     width: 100% !important;
     max-width: 100% !important;
-    padding: 0.85rem 0.65rem !important;
+    padding: 0.85rem 0.85rem !important;
     box-sizing: border-box !important;
     min-width: 0 !important;
     overflow-x: hidden !important;
@@ -1058,7 +1102,7 @@ body.admin-body {
 
 @media (max-width: 380px) {
   .admin-topbar {
-    padding: 0 0.5rem !important;
+    padding: 0 0.65rem !important;
     gap: 0.25rem !important;
     height: 56px !important;
   }
@@ -1087,7 +1131,7 @@ body.admin-body {
     height: 32px !important;
   }
   .admin-content {
-    padding: 0.65rem 0.5rem !important;
+    padding: 0.65rem 0.65rem !important;
   }
   .student-banner {
     padding: 0.85rem 0.65rem !important;

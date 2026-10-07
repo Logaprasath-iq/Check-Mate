@@ -48,13 +48,15 @@
       <form onsubmit="handleRegisterSubmit(event)" style="display: flex; flex-direction: column; gap: 1.25rem;">
         <div>
           <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Full Name *</label>
-          <input type="text" id="reg-name" class="newsletter-input" placeholder="e.g. Priya Sundaram" required>
+          <input type="text" id="reg-name" class="newsletter-input" placeholder="e.g. Priya Sundaram" required
+                 pattern="[A-Za-z\s]{2,50}" minlength="2" title="Please enter a valid full name with letters only (at least 2 characters)">
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
           <div>
             <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Email Address *</label>
-            <input type="email" id="reg-email" class="newsletter-input" placeholder="priya@example.com" required>
+            <input type="email" id="reg-email" class="newsletter-input" placeholder="priya@example.com" required
+                   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address with a domain (e.g. priya@example.com)">
           </div>
           <div>
             <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Phone / WhatsApp *</label>
@@ -109,6 +111,23 @@
 
     function handleRegisterSubmit(e) {
       e.preventDefault();
+
+      const nameEl = document.getElementById('reg-name');
+      const nameVal = nameEl ? nameEl.value.trim() : '';
+      if (!window.checkmateValidateName(nameVal)) {
+        window.showCheckmateToast('Please enter a valid full name (letters and spaces only, at least 2 characters).', 'error');
+        nameEl.focus();
+        return;
+      }
+
+      const emailEl = document.getElementById('reg-email');
+      const emailVal = emailEl ? emailEl.value.trim() : '';
+      if (!window.checkmateValidateEmail(emailVal)) {
+        window.showCheckmateToast('Please enter a valid email address with a domain (e.g. priya@example.com).', 'error');
+        emailEl.focus();
+        return;
+      }
+
       const p1 = document.getElementById('reg-pass').value;
       const p2 = document.getElementById('reg-pass-confirm').value;
       if (p1 !== p2) {
@@ -118,25 +137,21 @@
 
       const phoneEl = document.getElementById('reg-phone');
       const phoneVal = phoneEl ? phoneEl.value.trim() : '';
-      const phoneDigits = phoneVal.replace(/\D/g, '');
       if (/[a-zA-Z]/.test(phoneVal)) {
         window.showCheckmateToast('Phone number cannot contain alphabets! Numbers only.', 'error');
         phoneEl.focus();
         return;
       }
-      if (phoneDigits.length < 7 || phoneDigits.length > 15) {
-        window.showCheckmateToast('Please enter a valid phone number (7 to 15 digits).', 'error');
+      if (!window.checkmateValidatePhone(phoneVal)) {
+        window.showCheckmateToast('Please enter a valid phone number (7 to 15 digits, numbers only).', 'error');
         phoneEl.focus();
         return;
       }
 
-      const name = document.getElementById('reg-name').value || 'Student Member';
-      const email = document.getElementById('reg-email').value || 'student@checkmate.academy';
-
-      const user = { name, role: 'student', email, phone: phoneVal };
+      const user = { name: nameVal, role: 'student', email: emailVal, phone: phoneVal };
       localStorage.setItem('checkmate_user', JSON.stringify(user));
 
-      window.showCheckmateToast(`Account created! Welcome to the Academy, ${name}.`, 'success');
+      window.showCheckmateToast(`Account created! Welcome to the Academy, ${nameVal}.`, 'success');
       setTimeout(() => {
         window.location.href = 'student/index.html';
       }, 1200);

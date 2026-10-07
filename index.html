@@ -57,8 +57,8 @@
               HOME <i data-lucide="chevron-down" class="dropdown-chevron"></i>
             </a>
             <ul class="nav-dropdown-menu">
-              <li><a href="index.html" class="nav-dropdown-link active"><i data-lucide="crown" style="width: 15px;"></i> Home 1 – Elite Academy</a></li>
-              <li><a href="home-2.html" class="nav-dropdown-link "><i data-lucide="cpu" style="width: 15px;"></i> Home 2 – EdTech & AI Platform</a></li>
+              <li><a href="index.html" class="nav-dropdown-link active">Home 1 – Elite Academy</a></li>
+              <li><a href="home-2.html" class="nav-dropdown-link ">Home 2 – EdTech & AI Platform</a></li>
             </ul>
           </li>
           <li><a href="about.html" class="nav-link">ABOUT</a></li>
@@ -117,8 +117,8 @@
             <button class="mobile-submenu-toggle" aria-label="Toggle Home Submenu" type="button"><i data-lucide="chevron-down"></i></button>
           </div>
           <ul class="mobile-submenu">
-            <li><a href="index.html" class="mobile-submenu-link active"><i data-lucide="crown" style="width: 14px;"></i> Home 1 – Elite Academy</a></li>
-            <li><a href="home-2.html" class="mobile-submenu-link "><i data-lucide="cpu" style="width: 14px;"></i> Home 2 – EdTech & AI Platform</a></li>
+            <li><a href="index.html" class="mobile-submenu-link active">Home 1 – Elite Academy</a></li>
+            <li><a href="home-2.html" class="mobile-submenu-link ">Home 2 – EdTech & AI Platform</a></li>
           </ul>
         </li>
         <li><a href="about.html" class="mobile-nav-link">ABOUT <i data-lucide="chevron-right"></i></a></li>
@@ -132,7 +132,6 @@
       </ul>
     </div>
     <div class="mobile-nav-actions">
-      <a href="login.html" class="btn-login" style="text-align: center;">LOGIN</a>
       <a href="register.html" class="btn-join" style="justify-content: center;">JOIN NOW</a>
     </div>
   </div>
@@ -1170,19 +1169,24 @@
                 <!-- Full Name -->
                 <div class="trial-form-group">
                   <label for="trial-name" class="trial-label">Student Full Name *</label>
-                  <input type="text" id="trial-name" class="trial-input" placeholder="e.g. Liam Smith" required>
+                  <input type="text" id="trial-name" class="trial-input" placeholder="e.g. Liam Smith" required
+                         pattern="[A-Za-z\s]{2,50}" minlength="2" title="Please enter a valid full name (letters only, at least 2 characters)">
                 </div>
 
                 <!-- Phone Number (Restricted to digits only) -->
                 <div class="trial-form-group">
                   <label for="trial-phone" class="trial-label">Contact Phone *</label>
-                  <input type="tel" id="trial-phone" class="trial-input" placeholder="+1 (555) 000-0000" required>
+                  <input type="tel" id="trial-phone" class="trial-input" placeholder="+1 (555) 000-0000" required
+                         inputmode="tel" autocomplete="tel" pattern="^\+?[0-9\s\-()]{7,20}$"
+                         title="Please enter a valid phone number with digits only (no alphabets)"
+                         oninput="this.value = this.value.replace(/[^0-9+\s\-()]/g, '').replace(/(?!^)\+/g, '')">
                 </div>
 
                 <!-- Email -->
                 <div class="trial-form-group full-width">
                   <label for="trial-email" class="trial-label">Email Address *</label>
-                  <input type="email" id="trial-email" class="trial-input" placeholder="student@example.com" required>
+                  <input type="email" id="trial-email" class="trial-input" placeholder="student@example.com" required
+                         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address with a domain (e.g. student@example.com)">
                 </div>
 
                 <!-- Age Group -->
@@ -1701,8 +1705,8 @@
       <div class="footer-bottom">
         <div>&copy; 2026 CHECKMATE. All Rights Reserved. Master the Game.</div>
         <div class="footer-bottom-links">
-          <a href="about.html" class="footer-link">Privacy Policy</a>
-          <a href="about.html" class="footer-link">Terms & Conditions</a>
+          <a href="privacy.html" class="footer-link">Privacy Policy</a>
+          <a href="terms.html" class="footer-link">Terms & Conditions</a>
         </div>
       </div>
     </div>
@@ -1762,14 +1766,40 @@
 
     // Trial Booking Form Handler
     function handleTrialBooking(form) {
-      const name = form.querySelector('#trial-name').value.trim();
-      const phone = form.querySelector('#trial-phone').value.trim();
-      const email = form.querySelector('#trial-email').value.trim();
+      const nameEl = form.querySelector('#trial-name');
+      const name = nameEl ? nameEl.value.trim() : '';
+      if (!window.checkmateValidateName(name)) {
+        window.showCheckmateToast('Please enter a valid student full name (letters only, at least 2 characters).', 'error');
+        nameEl.focus();
+        return;
+      }
+
+      const emailEl = form.querySelector('#trial-email');
+      const email = emailEl ? emailEl.value.trim() : '';
+      if (!window.checkmateValidateEmail(email)) {
+        window.showCheckmateToast('Please enter a valid email address with a domain (e.g. name@domain.com).', 'error');
+        emailEl.focus();
+        return;
+      }
+
+      const phoneEl = form.querySelector('#trial-phone');
+      const phone = phoneEl ? phoneEl.value.trim() : '';
+      if (/[a-zA-Z]/.test(phone)) {
+        window.showCheckmateToast('Phone number cannot contain alphabets! Numbers only.', 'error');
+        phoneEl.focus();
+        return;
+      }
+      if (!window.checkmateValidatePhone(phone)) {
+        window.showCheckmateToast('Please enter a valid phone number (7 to 15 digits).', 'error');
+        phoneEl.focus();
+        return;
+      }
+
       const ageGroup = form.querySelector('#trial-age-group').value;
       const level = form.querySelector('#trial-level').value;
 
-      if (!name || !phone || !email || !ageGroup || !level) {
-        alert('Please fill in all required fields.');
+      if (!ageGroup || !level) {
+        window.showCheckmateToast('Please select age category and current chess level.', 'error');
         return;
       }
 
@@ -1780,6 +1810,7 @@
         successBox.style.display = 'block';
         lucide.createIcons();
       }
+      window.showCheckmateToast(`Diagnostic session requested for ${name}! Our coordinator will reach out shortly.`, 'success');
     }
   </script>
 </body>

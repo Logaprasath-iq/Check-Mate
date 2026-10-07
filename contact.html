@@ -42,8 +42,8 @@
               HOME <i data-lucide="chevron-down" class="dropdown-chevron"></i>
             </a>
             <ul class="nav-dropdown-menu">
-              <li><a href="index.html" class="nav-dropdown-link "><i data-lucide="crown" style="width: 15px;"></i> Home 1 – Elite Academy</a></li>
-              <li><a href="home-2.html" class="nav-dropdown-link "><i data-lucide="cpu" style="width: 15px;"></i> Home 2 – EdTech & AI Platform</a></li>
+              <li><a href="index.html" class="nav-dropdown-link ">Home 1 – Elite Academy</a></li>
+              <li><a href="home-2.html" class="nav-dropdown-link ">Home 2 – EdTech & AI Platform</a></li>
             </ul>
           </li>
           <li><a href="about.html" class="nav-link">ABOUT</a></li>
@@ -82,8 +82,8 @@
             <button class="mobile-submenu-toggle" aria-label="Toggle Home Submenu" type="button"><i data-lucide="chevron-down"></i></button>
           </div>
           <ul class="mobile-submenu">
-            <li><a href="index.html" class="mobile-submenu-link "><i data-lucide="crown" style="width: 14px;"></i> Home 1 – Elite Academy</a></li>
-            <li><a href="home-2.html" class="mobile-submenu-link "><i data-lucide="cpu" style="width: 14px;"></i> Home 2 – EdTech & AI Platform</a></li>
+            <li><a href="index.html" class="mobile-submenu-link ">Home 1 – Elite Academy</a></li>
+            <li><a href="home-2.html" class="mobile-submenu-link ">Home 2 – EdTech & AI Platform</a></li>
           </ul>
         </li>
         <li><a href="about.html" class="mobile-nav-link">ABOUT <i data-lucide="chevron-right"></i></a></li>
@@ -97,7 +97,6 @@
       </ul>
     </div>
     <div class="mobile-nav-actions">
-      <a href="login.html" class="btn-login" style="text-align:center;">LOGIN</a>
       <a href="register.html" class="btn-join" style="justify-content:center;">JOIN NOW</a>
     </div>
   </div>
@@ -165,11 +164,13 @@
               <div class="contact-form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
                 <div>
                   <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Full Name *</label>
-                  <input type="text" id="contact-name" class="newsletter-input" placeholder="e.g. Arjun Mehta" required>
+                  <input type="text" id="contact-name" class="newsletter-input" placeholder="e.g. Arjun Mehta" required
+                         pattern="[A-Za-z\s]{2,50}" minlength="2" title="Please enter a valid full name with letters only (at least 2 characters)">
                 </div>
                 <div>
                   <label style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--text-secondary);">Email Address *</label>
-                  <input type="email" id="contact-email" class="newsletter-input" placeholder="e.g. arjun@gmail.com" required>
+                  <input type="email" id="contact-email" class="newsletter-input" placeholder="e.g. arjun@gmail.com" required
+                         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address with a domain (e.g. name@domain.com)">
                 </div>
               </div>
 
@@ -333,8 +334,8 @@
       <div class="footer-bottom">
         <div>&copy; 2026 CHECKMATE. All Rights Reserved. Master the Game.</div>
         <div class="footer-bottom-links">
-          <a href="about.html" class="footer-link">Privacy Policy</a>
-          <a href="about.html" class="footer-link">Terms & Conditions</a>
+          <a href="privacy.html" class="footer-link">Privacy Policy</a>
+          <a href="terms.html" class="footer-link">Terms & Conditions</a>
         </div>
       </div>
     </div>
@@ -346,23 +347,37 @@
 
     function handleContactSubmit(e) {
       e.preventDefault();
+
+      const nameEl = document.getElementById('contact-name');
+      const nameVal = nameEl ? nameEl.value.trim() : '';
+      if (!window.checkmateValidateName(nameVal)) {
+        window.showCheckmateToast('Please enter a valid full name (letters and spaces only, at least 2 characters).', 'error');
+        nameEl.focus();
+        return;
+      }
+
+      const emailEl = document.getElementById('contact-email');
+      const emailVal = emailEl ? emailEl.value.trim() : '';
+      if (!window.checkmateValidateEmail(emailVal)) {
+        window.showCheckmateToast('Please enter a valid email address with a domain (e.g. arjun@gmail.com).', 'error');
+        emailEl.focus();
+        return;
+      }
+
       const phoneEl = document.getElementById('contact-phone');
       const phoneVal = phoneEl ? phoneEl.value.trim() : '';
-      const phoneDigits = phoneVal.replace(/\D/g, '');
-
       if (/[a-zA-Z]/.test(phoneVal)) {
         window.showCheckmateToast('Phone number cannot contain alphabets! Numbers only.', 'error');
         phoneEl.focus();
         return;
       }
-      if (phoneDigits.length < 7 || phoneDigits.length > 15) {
-        window.showCheckmateToast('Please enter a valid phone number (7 to 15 digits).', 'error');
+      if (!window.checkmateValidatePhone(phoneVal)) {
+        window.showCheckmateToast('Please enter a valid phone number (7 to 15 digits, numbers only).', 'error');
         phoneEl.focus();
         return;
       }
 
-      const name = document.getElementById('contact-name').value;
-      window.showCheckmateToast(`Thank you, ${name}! Your inquiry has been dispatched to admissions. We will call you within 4 hours.`, 'success');
+      window.showCheckmateToast(`Thank you, ${nameVal}! Your inquiry has been dispatched to admissions. We will call you within 4 hours.`, 'success');
       document.getElementById('contact-form').reset();
     }
   </script>
