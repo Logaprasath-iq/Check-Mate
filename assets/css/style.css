@@ -366,8 +366,8 @@ button, input, select, textarea {
     max-width: 44px;
   }
   .site-brand-img {
-    height: 32px;
-    max-width: 145px;
+    height: 34px;
+    max-width: 155px;
   }
 }
 
@@ -3505,35 +3505,38 @@ select option:checked {
 
 /* Footer Bottom Bar & Distinct Separation Line */
 .footer-bottom,
+.footer-bottom-bar,
 [data-theme="light"] .footer-bottom,
+[data-theme="light"] .footer-bottom-bar,
 .site-footer .footer-bottom,
-[data-theme="light"] .site-footer .footer-bottom {
+.site-footer .footer-bottom-bar,
+[data-theme="light"] .site-footer .footer-bottom,
+[data-theme="light"] .site-footer .footer-bottom-bar {
   border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
   padding-top: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
   font-size: 0.82rem;
-  flex-wrap: wrap;
+  width: 100% !important;
+  margin: 0 auto !important;
   gap: 1rem;
   color: #94a3b8 !important;
 }
 
+.footer-bottom > div,
+.footer-bottom-bar > div,
+.footer-copyright {
+  text-align: center !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
 .footer-bottom-links,
 [data-theme="light"] .footer-bottom-links {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.footer-bottom-links a,
-[data-theme="light"] .footer-bottom-links a {
-  color: #94a3b8 !important;
-  transition: var(--transition);
-}
-
-.footer-bottom-links a:hover,
-[data-theme="light"] .footer-bottom-links a:hover {
-  color: var(--gold-primary) !important;
+  display: none !important;
 }
 
 @media (max-width: 1024px) {
@@ -4913,7 +4916,8 @@ select optgroup {
 }
 
 [data-theme="light"] .accreditation-img-overlay {
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.2) 60%, transparent 100%) !important;
+  display: none !important;
+  background: transparent !important;
 }
 
 [data-theme="light"] .accreditation-badge {
@@ -5706,26 +5710,28 @@ select optgroup {
    ============================================================ */
 @media (max-width: 480px) {
   .site-header .site-container {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+    box-sizing: border-box !important;
   }
   .site-logo {
-    gap: 0.35rem !important;
-    max-width: 155px !important;
-    overflow: hidden !important;
+    gap: 0.4rem !important;
+    max-width: none !important;
+    overflow: visible !important;
   }
   .site-logo-img {
-    height: 32px !important;
-    max-width: 34px !important;
+    height: 34px !important;
+    max-width: 38px !important;
     flex-shrink: 0 !important;
   }
   .site-brand-img {
-    height: 24px !important;
-    max-width: 105px !important;
-    flex-shrink: 1 !important;
+    height: 28px !important;
+    max-width: 130px !important;
+    flex-shrink: 0 !important;
+    display: block !important;
   }
   .nav-actions {
-    gap: 0.3rem !important;
+    gap: 0.35rem !important;
     flex-shrink: 0 !important;
   }
   .tool-btn {
@@ -5733,14 +5739,29 @@ select optgroup {
     height: 34px !important;
     min-width: 34px !important;
     padding: 0 !important;
+    border-radius: 8px !important;
+    flex-shrink: 0 !important;
   }
   .tool-btn.rtl-toggle-btn {
-    min-width: 44px !important;
+    width: auto !important;
+    min-width: 46px !important;
     height: 34px !important;
-    padding: 0 6px !important;
+    padding: 0 7px !important;
+    gap: 4px !important;
+    border-radius: 9999px !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .tool-btn.rtl-toggle-btn svg,
+  .tool-btn.rtl-toggle-btn i {
+    width: 14px !important;
+    height: 14px !important;
+    flex-shrink: 0 !important;
   }
   .tool-btn.rtl-toggle-btn .rtl-label {
     font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
   }
   .nav-toggle {
     width: 34px !important;
@@ -5757,24 +5778,54 @@ select optgroup {
   .site-header .site-container {
     padding-left: 0.5rem !important;
     padding-right: 0.5rem !important;
+    box-sizing: border-box !important;
   }
-  .site-brand-img {
-    max-width: 85px !important;
-    height: 22px !important;
+  .site-logo {
+    gap: 0.35rem !important;
+    max-width: none !important;
+    overflow: visible !important;
   }
   .site-logo-img {
-    height: 30px !important;
-    max-width: 32px !important;
+    height: 32px !important;
+    max-width: 34px !important;
+    flex-shrink: 0 !important;
+  }
+  .site-brand-img {
+    height: 26px !important;
+    max-width: 120px !important;
+    flex-shrink: 0 !important;
+    display: block !important;
   }
   .nav-actions {
-    gap: 0.25rem !important;
+    gap: 0.3rem !important;
+    flex-shrink: 0 !important;
+  }
+  .tool-btn {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
   }
   .tool-btn.rtl-toggle-btn {
-    min-width: 38px !important;
-    padding: 0 4px !important;
+    width: auto !important;
+    min-width: 44px !important;
+    height: 32px !important;
+    padding: 0 6px !important;
+    gap: 3px !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+  }
+  .tool-btn.rtl-toggle-btn svg,
+  .tool-btn.rtl-toggle-btn i {
+    width: 13px !important;
+    height: 13px !important;
   }
   .tool-btn.rtl-toggle-btn .rtl-label {
-    font-size: 0.68rem !important;
+    font-size: 0.7rem !important;
+    font-weight: 800 !important;
+  }
+  .nav-toggle {
+    width: 32px !important;
+    height: 32px !important;
   }
 }
 
